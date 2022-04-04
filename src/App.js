@@ -1,20 +1,30 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { RequireAuth } from './components/Auth/RequireAuth'
+import { AuthProvider } from './context/auth.context'
 import { DashboardHomePage } from './pages/Dashboard/Home'
+import { CreateEventPage } from './pages/Events/CreateEvent'
+import { GetAllEventsPage } from './pages/Events/GetAllEvents'
+import { UpdateEventPage } from './pages/Events/UpdateEvent'
 import { Layout } from './pages/Layout'
 import { LoginPage } from './pages/Login'
+import { NotFound } from './pages/NotFound'
+import { ProfilePage } from './pages/Profile'
+import { RegisterPage } from './pages/Register'
 
-function App () {
+export const App = () => {
   return (
     <>
-      <Layout>
-        <h1>Router</h1>
+      <AuthProvider>
         <Routes>
-          <Route element={<Layout />}>
-            <Route path="/login" element={<LoginPage />} />
+          <Route path='/' element={<Layout />}>
+            <Route index element={<GetAllEventsPage/>} />
+            <Route path="crear-evento" element={<CreateEventPage />} />
+            <Route path="actualizar-evento" element={<UpdateEventPage />} />
+            <Route path="mi-perfil" element={<ProfilePage />} />
             <Route
-              path="/dashboard"
+              path="dashboard"
               element={
                 <RequireAuth>
                   <DashboardHomePage />
@@ -22,10 +32,11 @@ function App () {
               }
             />
           </Route>
+          <Route path="iniciar-sesion" element={<LoginPage />} />
+          <Route path="registrarse" element={<RegisterPage />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
-      </Layout>
+      </AuthProvider>
     </>
   )
 }
-
-export default App

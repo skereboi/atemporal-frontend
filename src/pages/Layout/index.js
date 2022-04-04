@@ -1,15 +1,17 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { Outlet } from 'react-router-dom'
 import { Navbar } from '../../components/Navbar'
 
-export const Layout = ({ children }) => {
+export const Layout = () => {
   return (
     <>
       <Navbar />
-      {children}
+      <div className="container">
+        <Outlet />
+      </div>
     </>
   )
 }
-Layout.propTypes = {
-  children: PropTypes.element
-}
+// Layout.propTypes = {
+//   children: PropTypes.element
+// }
