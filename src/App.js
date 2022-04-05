@@ -31,9 +31,9 @@ export const App = () => {
                 </RequireAuth>
               }
             />
+            <Route path="iniciar-sesion" element={<LoginPage />} />
+            <Route path="registrarse" element={<RegisterPage />} />
           </Route>
-          <Route path="iniciar-sesion" element={<LoginPage />} />
-          <Route path="registrarse" element={<RegisterPage />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
