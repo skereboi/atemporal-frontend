@@ -67,35 +67,17 @@ export const LoginPage = () => {
             </form>
             <a href="#" className="btn btn-link btn-lg w-100">Recuperar contraseña</a>
             <hr className="my-4" />
-            <h6 className="text-center mb-4">Iniciar sesión con red social</h6>
-            <div className="row row-cols-1 row-cols-sm-2">
-              <div className="col mb-3">
-                <a href="#" className="btn btn-icon btn-secondary btn-google btn-lg w-100">
-                  <i className="bx bxl-google fs-xl me-2" />
-                  Google
-                </a>
-              </div>
-              <div className="col mb-3">
-                <a href="#" className="btn btn-icon btn-secondary btn-facebook btn-lg w-100">
-                  <i className="bx bxl-facebook fs-xl me-2" />
-                  Facebook
-                </a>
-              </div>
-            </div>
+
           </div>
           <div className="w-100 align-self-end">
             <p className="fs-xs text-center text-xl-start pb-2 mb-0">
               © Todos los derechos reservados. Atemporal Group</p>
           </div>
         </div>
-        {/* Background */}
-        <div className="position-absolute top-0 end-0 w-50 h-100 bg-position-center bg-repeat-0 bg-size-cover d-none d-xl-block" style={{ backgroundImage: 'url(assets/img/account/signin-bg.jpg)' }} />
+
       </section>
-      {/* Back to top button */}
-      <a href="#top" className="btn-scroll-top" data-scroll>
-        <span className="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
-        <i className="btn-scroll-top-icon bx bx-chevron-up" />
-      </a>
+      {/* Background */}
+      <div className="position-absolute top-0 end-0 w-50 h-100 bg-position-center bg-repeat-0 bg-size-cover d-none d-xl-block" style={{ backgroundImage: 'url(assets/img/home/bg2.jpg)' }} />
     </div>
 
   )

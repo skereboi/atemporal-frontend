@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import { RequireAuth } from './components/Auth/RequireAuth'
 import { AuthProvider } from './context/auth.context'
 import { DashboardHomePage } from './pages/Dashboard/Home'
 import { CreateEventPage } from './pages/Events/CreateEvent'
 import { GetAllEventsPage } from './pages/Events/GetAllEvents'
 import { UpdateEventPage } from './pages/Events/UpdateEvent'
+import { Home } from './pages/Home'
 import { Layout } from './pages/Layout'
 import { LoginPage } from './pages/Login'
 import { NotFound } from './pages/NotFound'
@@ -15,11 +16,12 @@ import { RegisterPage } from './pages/Register'
 
 export const App = () => {
   return (
-    <>
+    <BrowserRouter>
       <AuthProvider>
         <Routes>
           <Route path='/' element={<Layout />}>
-            <Route index element={<GetAllEventsPage/>} />
+            <Route index element={<Home/>} />
+            <Route path='eventos' element={<GetAllEventsPage/>} />
             <Route path="crear-evento" element={<CreateEventPage />} />
             <Route path="actualizar-evento" element={<UpdateEventPage />} />
             <Route path="mi-perfil" element={<ProfilePage />} />
@@ -37,6 +39,6 @@ export const App = () => {
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
-    </>
+    </BrowserRouter>
   )
 }
