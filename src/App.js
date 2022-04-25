@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
-import { RequireAuth } from './components/Auth/RequireAuth'
+import { AuthGuard } from './components/Auth/AuthGuard'
 import { AuthProvider } from './context/auth.context'
+import { GeneralProvider } from './context/general.context'
+import { useAuth } from './hooks/useAuth'
 import { DashboardHomePage } from './pages/Dashboard/Home'
 import { CreateEventPage } from './pages/Events/CreateEvent'
 import { GetAllEventsPage } from './pages/Events/GetAllEvents'
@@ -10,35 +12,55 @@ import { UpdateEventPage } from './pages/Events/UpdateEvent'
 import { Home } from './pages/Home'
 import { Layout } from './pages/Layout'
 import { LoginPage } from './pages/Login'
-import { NotFound } from './pages/NotFound'
+import { NotFoundPage } from './pages/NotFound'
 import { ProfilePage } from './pages/Profile'
 import { RegisterPage } from './pages/Register'
+import { initAxiosInterceptors } from './services/auth.service'
 
-export const App = () => {
+initAxiosInterceptors()
+
+// eslint-disable-next-line react/display-name
+export default () => (
+  <GeneralProvider>
+    <AuthProvider>
+      <App/>
+
+    </AuthProvider>
+  </GeneralProvider>
+)
+
+const App = () => {
+  const { user } = useAuth()
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route index element={<Home/>} />
-            <Route path='eventos' element={<GetAllEventsPage/>} />
-            <Route path="crear-evento" element={<CreateEventPage />} />
-            <Route path="actualizar-evento" element={<UpdateEventPage />} />
-            <Route path="mi-perfil" element={<ProfilePage />} />
-            <Route
-              path="dashboard"
-              element={
-                <RequireAuth>
-                  <DashboardHomePage />
-                </RequireAuth>
-              }
-            />
-            <Route path="iniciar-sesion" element={<LoginPage />} />
+      <Routes>
+        <Route path='/'>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path='iniciar-sesion' element={<LoginPage />} />
             <Route path="registrarse" element={<RegisterPage />} />
+            <Route path='eventos' element={<GetAllEventsPage />} />
+            {/* Private routes general user */}
+            <Route element={<AuthGuard typeUser='general' />}>
+              <Route path="crear-evento" element={<CreateEventPage />} />
+              <Route path="actualizar-evento" element={<UpdateEventPage />} />
+              <Route path="mi-perfil" element={<ProfilePage />} />
+            </Route>
+            {/* Private routes admin */}
+            <Route path='dashboard' element={<AuthGuard typeUser='admin' />}>
+              <Route index element={<DashboardHomePage />} />
+              <Route path='eventos' element={<GetAllEventsPage />} />
+              <Route path="crear-evento" element={<CreateEventPage />} />
+              <Route path="actualizar-evento" element={<UpdateEventPage />} />
+              <Route path="mi-perfil" element={<ProfilePage />} />
+            </Route>
           </Route>
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
-      </AuthProvider>
+          <Route path='*' element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+      {
+        JSON.stringify(user)
+      }
     </BrowserRouter>
   )
 }

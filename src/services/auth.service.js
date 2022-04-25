@@ -1,20 +1,22 @@
 /* eslint-disable camelcase */
 import Axios from 'axios'
 
-export const loginService = async (correo_electronico, password) => {
-  const { data } = await Axios.post('/auth/login/', {
-    correo_electronico,
-    password
-  })
-  return data.response
+export const createAccount = async (account) => {
+  const { data } = await Axios.post('http://localhost:4000/register', account)
+  return data
+}
+
+export const loginService = async (credentials) => {
+  const { data } = await Axios.post('http://localhost:4000/login/', credentials)
+  return data
 }
 export const whoIamService = async (token) => {
-  const { data } = await Axios.post('/auth/me/', token, {
+  const { data } = await Axios.get('http://localhost:4000/usuarios/me', {
     headers: { Authorization: `Bearer ${token}` }
   })
-  return data.response
+  return data
 }
-export const initInterceptors = () => {
+export const initAxiosInterceptors = () => {
   Axios.interceptors.request.use(function (config) {
     const token = localStorage.getItem('TOKEN_ATEMPORAL')
 

@@ -1,27 +1,61 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { schemaRegister } from './schemaRegister'
+import { useGeneralApp } from '../../hooks/useGeneralApp'
+import { useAuth } from '../../hooks/useAuth'
+import { TypeUser } from '../../components/Auth/TypeUser'
 
 export const RegisterPage = () => {
+  const { setErrorMessage } = useGeneralApp()
+  const navigate = useNavigate()
+
+  const { registerAccount } = useAuth()
+  const initialState = {
+    nombre: 'Daniel',
+    email: 'danielcu@gmail.com',
+    celular: '4421290231',
+    password: 'bandabanda',
+    confirmPassword: 'bandabanda'
+  }
+
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schemaRegister)
+    resolver: yupResolver(schemaRegister),
+    defaultValues: initialState
   })
 
-  const onSubmit = (data) => {
-    alert('send')
-    console.log(data)
+  const onSubmit = async (data) => {
+    const { nombre, email, celular, password } = data
+    const account = {
+      nombre,
+      email,
+      celular,
+      password
+    }
+
+    try {
+      await registerAccount(account)
+      navigate('/dashboard', { replace: true })
+    } catch (error) {
+      console.log(error.response.data.msg)
+      if (error.response.data.msg[0].type) {
+        setErrorMessage('Revisa tu correo')
+      } else {
+        setErrorMessage(error.response.data.msg)
+      }
+    }
   }
 
   return (
     <>
+      <TypeUser />
       {/* Page content */}
       <div className="container d-flex flex-wrap justify-content-center justify-content-xl-start pt-5">
         <div className="w-100 align-self-end pt-1 pt-md-4 pb-4" style={{ maxWidth: 526 }}>
           <h1 className="text-center text-xl-start">Crear cuenta</h1>
-          <p className="text-center text-xl-start pb-3 mb-3">¿Ya tienes una cuenta?<Link to="/iniciar-sesion">Inicia sesión aqui.</Link></p>
+          <p className="text-center text-xl-start pb-3 mb-3">¿Ya tienes una cuenta?<Link to="/iniciar-sesion"> Inicia sesión aqui.</Link></p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
               <div className="col-sm-6">

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/react-in-jsx-scope */
 import { createContext, useEffect, useReducer } from 'react'
-import { whoIamService, loginService } from './../services/auth.service'
+import { whoIamService, loginService, createAccount } from './../services/auth.service'
 
 const initialState = {
   isAuthenticated: false,
@@ -12,7 +12,7 @@ const initialState = {
 const handlers = {
   INITIALIZE: (state, action) => {
     const { isAuthenticated, user } = action.payload
-
+    console.log(isAuthenticated)
     return {
       ...state,
       isAuthenticated,
@@ -33,7 +33,7 @@ const handlers = {
     isAuthenticated: false,
     user: null
   }),
-  REGISTER: (state, action) => {
+  REGISTERED: (state, action) => {
     const { user } = action.payload
     return {
       ...state,
@@ -57,27 +57,27 @@ const reducer = (state, action) => (handlers[action.type]
 export const AuthContext = createContext({
   ...initialState,
   login: () => Promise.resolve(),
-  logout: () => Promise.resolve()
+  logout: () => Promise.resolve(),
+  registerAccount: () => Promise.resolve()
 })
 
 export const AuthProvider = (props) => {
-  const { children } = props
   const [state, dispatch] = useReducer(reducer, initialState)
+  const { children } = props
 
   useEffect(() => {
     const initialize = async () => {
       try {
-        const token = window.localStorage.getItem('TOKEN_ISABEL')
+        const token = window.localStorage.getItem('TOKEN_ATEMPORAL')
 
         if (token) {
           try {
             const user = await whoIamService(token)
-            // console.log('DISPATCH INITIALIZE TOKEN', user)
             dispatch({
               type: 'INITIALIZE',
               payload: {
                 isAuthenticated: true,
-                user
+                user: { ...user }
               }
             })
           } catch (error) {
@@ -89,10 +89,9 @@ export const AuthProvider = (props) => {
                 user: null
               }
             })
-            window.localStorage.removeItem('TOKEN_ISABEL')
+            window.localStorage.removeItem('TOKEN_ATEMPORAL')
           }
         } else {
-          // console.log('DISPATCH INITIALIZE NOT TOKEN')
           dispatch({
             type: 'INITIALIZE',
             payload: {
@@ -109,16 +108,16 @@ export const AuthProvider = (props) => {
             user: null
           }
         })
-        window.localStorage.removeItem('TOKEN_ISABEL')
+        window.localStorage.removeItem('TOKEN_ATEMPORAL')
       }
     }
     initialize()
   }, [])
 
-  const login = async ({ correo_electronico, password }) => {
-    const token = await loginService(correo_electronico, password)
+  const login = async (credentials) => {
+    const { token } = await loginService(credentials)
     const user = await whoIamService(token)
-    localStorage.setItem('TOKEN_ISABEL', token)
+    localStorage.setItem('TOKEN_ATEMPORAL', token)
     dispatch({
       type: 'LOGIN',
       payload: {
@@ -127,13 +126,26 @@ export const AuthProvider = (props) => {
     })
   }
 
+  const registerAccount = async (account) => {
+    const { token } = await createAccount(account)
+    const user = await whoIamService(token)
+    localStorage.setItem('TOKEN_ATEMPORAL', token)
+    console.log(user)
+    dispatch({
+      type: 'REGISTERED',
+      payload: {
+        user: { ...user }
+      }
+    })
+  }
+
   const logout = async () => {
-    localStorage.removeItem('TOKEN_ISABEL')
+    localStorage.removeItem('TOKEN_ATEMPORAL')
     dispatch({ type: 'LOGOUT' })
   }
 
   const updateUserContext = async () => {
-    const user = await whoIamService(localStorage.getItem('TOKEN_ISABEL'))
+    const user = await whoIamService(localStorage.getItem('TOKEN_ATEMPORAL'))
     dispatch({
       type: 'UPDATE_USER',
       payload: {
@@ -146,7 +158,8 @@ export const AuthProvider = (props) => {
     ...state,
     login,
     logout,
-    updateUserContext
+    updateUserContext,
+    registerAccount
   }
 
   return (
