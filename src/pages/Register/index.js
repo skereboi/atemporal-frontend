@@ -9,8 +9,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { TypeUser } from '../../components/Auth/TypeUser'
 
 export const RegisterPage = () => {
-  const { setErrorMessage } = useGeneralApp()
-  const navigate = useNavigate()
+  const { setErrorMessage, isLoading, setIsLoading } = useGeneralApp()
 
   const { registerAccount } = useAuth()
   const initialState = {
@@ -27,6 +26,7 @@ export const RegisterPage = () => {
   })
 
   const onSubmit = async (data) => {
+    setIsLoading(true)
     const { nombre, email, celular, password } = data
     const account = {
       nombre,
@@ -37,7 +37,7 @@ export const RegisterPage = () => {
 
     try {
       await registerAccount(account)
-      navigate('/dashboard', { replace: true })
+      setIsLoading(false)
     } catch (error) {
       console.log(error.response.data.msg)
       if (error.response.data.msg[0].type) {
@@ -46,6 +46,7 @@ export const RegisterPage = () => {
         setErrorMessage(error.response.data.msg)
       }
     }
+    setIsLoading(false)
   }
 
   return (
@@ -114,7 +115,7 @@ export const RegisterPage = () => {
                 </div>
               </div>
             </div>
-            <button type="submit" className="btn btn-primary shadow-primary btn-lg w-100">Crear cuenta</button>
+            <button type="submit" className="btn btn-primary shadow-primary btn-lg w-100" disabled={isLoading}>Crear cuenta</button>
           </form>
         </div>
         {/* Background */}

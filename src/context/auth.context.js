@@ -130,11 +130,10 @@ export const AuthProvider = (props) => {
     const { token } = await createAccount(account)
     const user = await whoIamService(token)
     localStorage.setItem('TOKEN_ATEMPORAL', token)
-    console.log(user)
     dispatch({
       type: 'REGISTERED',
       payload: {
-        user: { ...user }
+        user
       }
     })
   }

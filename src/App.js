@@ -14,6 +14,7 @@ import { Layout } from './pages/Layout'
 import { LoginPage } from './pages/Login'
 import { NotFoundPage } from './pages/NotFound'
 import { ProfilePage } from './pages/Profile'
+import { RecoverPasswordPage } from './pages/RecoverPassword'
 import { RegisterPage } from './pages/Register'
 import { initAxiosInterceptors } from './services/auth.service'
 
@@ -24,7 +25,6 @@ export default () => (
   <GeneralProvider>
     <AuthProvider>
       <App/>
-
     </AuthProvider>
   </GeneralProvider>
 )
@@ -35,10 +35,12 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/'>
+          {/* Public routes */}
           <Route element={<Layout />}>
             <Route index element={<Home />} />
             <Route path='iniciar-sesion' element={<LoginPage />} />
             <Route path="registrarse" element={<RegisterPage />} />
+            <Route path="recuperar-password" element={<RecoverPasswordPage />} />
             <Route path='eventos' element={<GetAllEventsPage />} />
             {/* Private routes general user */}
             <Route element={<AuthGuard typeUser='general' />}>

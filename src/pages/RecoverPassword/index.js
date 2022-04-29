@@ -6,23 +6,21 @@ import { Link } from 'react-router-dom'
 import { TypeUser } from '../../components/Auth/TypeUser'
 import { useAuth } from '../../hooks/useAuth'
 import { useGeneralApp } from '../../hooks/useGeneralApp'
-import { schemaLogin } from './schemaLogin'
+import { recoverPasswordSchema } from './schemaRecoverPassword'
 
-export const LoginPage = () => {
+export const RecoverPasswordPage = () => {
   const { setErrorMessage, isLoading, setIsLoading } = useGeneralApp()
 
   const { login } = useAuth()
   const generalState = {
-    email: 'danielcu@gmail.com',
-    password: 'bandabanda'
+    email: 'danielcu@gmail.com'
   }
   const adminState = {
-    email: 'daniel@admin.com',
-    password: 'password'
+    email: 'daniel@admin.com'
   }
 
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schemaLogin),
+    resolver: yupResolver(recoverPasswordSchema),
     defaultValues: adminState
   })
 
@@ -33,60 +31,51 @@ export const LoginPage = () => {
       email,
       password
     }
-
-    try {
-      await login(account)
+    alert('Conexion backend xD')
+    setTimeout(() => {
       setIsLoading(false)
-    } catch (error) {
-      console.log(error.response.data.msg)
-      console.log(error.status)
-      if (!error.response) {
-        setErrorMessage('⚠️ Servicios desconectados, estamos en mantenimiento ⚠️')
-      }
-      if (error.response.data.msg[0].type) {
-        setErrorMessage('Revisa tu correo')
-      } else {
-        setErrorMessage(error.response.data.msg)
-      }
-      setIsLoading(false)
-    }
+    }, 500)
+    // try {
+    //   await login(account)
+    //   setIsLoading(false)
+    // } catch (error) {
+    //   console.log(error.response.data.msg)
+    //   console.log(error.status)
+    //   if (!error.response) {
+    //     setErrorMessage('⚠️ Servicios desconectados, estamos en mantenimiento ⚠️')
+    //   }
+    //   if (error.response.data.msg[0].type) {
+    //     setErrorMessage('Revisa tu correo')
+    //   } else {
+    //     setErrorMessage(error.response.data.msg)
+    //   }
+    //   setIsLoading(false)
+    // }
   }
 
   return (
     <>
       {/* Page content */}
-      <TypeUser/>
+      <TypeUser />
       <div className="container d-flex flex-wrap justify-content-center align-items-center justify-content-xl-start pt-5">
         <div className="w-100 align-self-end pt-1 pt-md-4 pb-4" style={{ maxWidth: 527 }}>
-          <h1 className="text-center text-xl-start">Iniciar sesión</h1>
-          <p className="text-center text-xl-start pb-3 mb-3">¿No tienes una cuenta?<Link to="/registrarse"> Crea tu cuenta aqui.</Link></p>
+          <h1 className="text-center text-xl-start">Recupera tu contraseña</h1>
+          <p className="text-center text-xl-start pb-3 mb-3">¿Recordaste tu contraseña?<Link to="/iniciar-sesion"> Inicia sesión.</Link></p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
-
               <div className="col-12">
                 <div className="position-relative mb-4">
-                  <label htmlFor="email" className="form-label fs-base">Correo electrónico</label>
+                  <label htmlFor="email" className="form-label fs-base">Ingresa el correo electrónico</label>
+                  <p>Si existe tu cuenta te llegará un correo con un enlace de recuperación.</p>
                   <input type="email" id="email" className="form-control form-control-lg" {...register('email')} autoComplete="off" />
                   <div>
                     {errors.email?.message}
                   </div>
                 </div>
               </div>
-
-              <div className="col-12 mb-4">
-                <label htmlFor="password" className="form-label fs-base">Contraseña</label>
-                <div className="password-toggle">
-                  <input type="password" id="password" className="form-control form-control-lg" {...register('password')} autoComplete="off" />
-                  <div>
-                    {errors.password?.message}
-                  </div>
-                </div>
-              </div>
             </div>
-
-            <button type="submit" className="btn btn-primary shadow-primary btn-lg w-100" disabled={isLoading}>Iniciar sesión</button>
+            <button type="submit" className="btn btn-primary shadow-primary btn-lg w-100" disabled={isLoading}>Recuperar contraseña</button>
           </form>
-          <p className="text-center text-xl-start pt-4 mb-3">Recuperar contraseña <Link to="/recuperar-password"> Ingresa aqui.</Link></p>
 
         </div>
         {/* Background */}
