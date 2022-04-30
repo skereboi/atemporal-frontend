@@ -16,6 +16,23 @@ export const whoIamService = async (token) => {
   })
   return data
 }
+
+export const authService = {
+  recoverPassword: async (email) => {
+    const { data } = await Axios.post('http://localhost:4000/recuperar-password', { email })
+    return data
+  },
+  changePassword: async (password, token) => {
+    const instance = Axios.create({
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    const { data } = await instance.put('http://localhost:4000/cambiar-password', { password })
+    return data
+  }
+}
+
 export const initAxiosInterceptors = () => {
   Axios.interceptors.request.use(function (config) {
     const token = localStorage.getItem('TOKEN_ATEMPORAL')

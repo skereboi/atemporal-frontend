@@ -17,7 +17,7 @@ export const LoginPage = () => {
     password: 'bandabanda'
   }
   const adminState = {
-    email: 'daniel@admin.com',
+    email: 'danielcu@alternet.com.mx',
     password: 'password'
   }
 

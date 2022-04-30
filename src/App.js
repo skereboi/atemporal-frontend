@@ -5,6 +5,7 @@ import { AuthGuard } from './components/Auth/AuthGuard'
 import { AuthProvider } from './context/auth.context'
 import { GeneralProvider } from './context/general.context'
 import { useAuth } from './hooks/useAuth'
+import { ChangePasswordPage } from './pages/ChangePassword'
 import { DashboardHomePage } from './pages/Dashboard/Home'
 import { CreateEventPage } from './pages/Events/CreateEvent'
 import { GetAllEventsPage } from './pages/Events/GetAllEvents'
@@ -41,6 +42,7 @@ const App = () => {
             <Route path='iniciar-sesion' element={<LoginPage />} />
             <Route path="registrarse" element={<RegisterPage />} />
             <Route path="recuperar-password" element={<RecoverPasswordPage />} />
+            <Route path="cambiar-password/:idCode" element={<ChangePasswordPage />} />
             <Route path='eventos' element={<GetAllEventsPage />} />
             {/* Private routes general user */}
             <Route element={<AuthGuard typeUser='general' />}>
