@@ -9,6 +9,7 @@ import { ChangePasswordPage } from './pages/ChangePassword'
 import { DashboardHomePage } from './pages/Dashboard/Home'
 import { CreateEventPage } from './pages/Events/CreateEvent'
 import { GetAllEventsPage } from './pages/Events/GetAllEvents'
+import { GetOneEventPage } from './pages/Events/GetOneEvent'
 import { UpdateEventPage } from './pages/Events/UpdateEvent'
 import { Home } from './pages/Home'
 import { Layout } from './pages/Layout'
@@ -44,6 +45,7 @@ const App = () => {
             <Route path="recuperar-password" element={<RecoverPasswordPage />} />
             <Route path="cambiar-password/:idCode" element={<ChangePasswordPage />} />
             <Route path='eventos' element={<GetAllEventsPage />} />
+            <Route path='eventos/:idEvento' element={<GetOneEventPage />} />
             {/* Private routes general user */}
             <Route element={<AuthGuard typeUser='general' />}>
               <Route path="crear-evento" element={<CreateEventPage />} />
