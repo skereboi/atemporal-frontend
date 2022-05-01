@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { ErrorHandler } from '../../components/Alerts/ErrorHandler'
+import { Footer } from '../../components/Footer'
 import { Navbar } from '../../components/Navbar'
 import { useGeneralApp } from '../../hooks/useGeneralApp'
 
@@ -13,6 +14,7 @@ export const Layout = () => {
         errorMessage && (<ErrorHandler message={errorMessage}/>)
       }
       <Outlet />
+      <Footer/>
     </>
   )
 }

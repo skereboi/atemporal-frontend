@@ -13,17 +13,17 @@ export const LoginPage = () => {
 
   const { login } = useAuth()
   const generalState = {
-    email: 'danielcu@gmail.com',
-    password: 'bandabanda'
+    email: 'danielcu.sanchez@gmail.com',
+    password: 'general1234'
   }
   const adminState = {
     email: 'danielcu@alternet.com.mx',
-    password: 'password'
+    password: 'admin1234'
   }
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schemaLogin),
-    defaultValues: adminState
+    defaultValues: generalState
   })
 
   const onSubmit = async (data) => {

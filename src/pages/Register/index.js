@@ -14,10 +14,10 @@ export const RegisterPage = () => {
   const { registerAccount } = useAuth()
   const initialState = {
     nombre: 'Daniel',
-    email: 'danielcu@gmail.com',
+    email: 'danielcu.sanchez@gmail.com',
     celular: '4421290231',
-    password: 'bandabanda',
-    confirmPassword: 'bandabanda'
+    password: 'general1234',
+    confirmPassword: 'general1234'
   }
 
   const { register, handleSubmit, formState: { errors } } = useForm({

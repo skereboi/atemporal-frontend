@@ -5,7 +5,7 @@ import { useAuth } from '../../hooks/useAuth'
 export const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth()
   return (
-    <header className="header navbar navbar-expand-lg navbar-light position-absolute navbar-sticky">
+    <header className="header navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div className="container px-3">
         <Link to="/" className="navbar-brand pe-3">
           Atemporal

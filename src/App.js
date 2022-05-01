@@ -15,9 +15,11 @@ import { Home } from './pages/Home'
 import { Layout } from './pages/Layout'
 import { LoginPage } from './pages/Login'
 import { NotFoundPage } from './pages/NotFound'
+import { NoticePrivacyPage } from './pages/NoticePrivacy'
 import { ProfilePage } from './pages/Profile'
 import { RecoverPasswordPage } from './pages/RecoverPassword'
 import { RegisterPage } from './pages/Register'
+import { TermsConditionsPage } from './pages/TermsConditions'
 import { initAxiosInterceptors } from './services/auth.service'
 
 initAxiosInterceptors()
@@ -40,6 +42,8 @@ const App = () => {
           {/* Public routes */}
           <Route element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path='aviso-privacidad' element={<NoticePrivacyPage />} />
+            <Route path='terminos-condiciones' element={<TermsConditionsPage />} />
             <Route path='iniciar-sesion' element={<LoginPage />} />
             <Route path="registrarse" element={<RegisterPage />} />
             <Route path="recuperar-password" element={<RecoverPasswordPage />} />
@@ -64,9 +68,6 @@ const App = () => {
           <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>
-      {
-        JSON.stringify(user)
-      }
     </BrowserRouter>
   )
 }

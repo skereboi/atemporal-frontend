@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import HowItWorks from '../../components/Home/HowItWorks'
 import { data } from '../../data'
 
@@ -16,7 +17,7 @@ export const Home = () => {
               <h1 className="display-3 mb-4">Somos <span className="text-primary">la comunidad</span> más grande de eventos en Querétaro</h1>
               <p className="fs-lg mb-5">Encuentra el evento de tu preferencia</p>
               {/* Desktop form */}
-              <form className="d-none d-sm-flex mb-5">
+              {/* <form className="d-none d-sm-flex mb-5">
                 <div className="input-group d-block d-sm-flex input-group-lg me-3">
                   <input type="text" className="form-control w-50" placeholder="Buscar eventos..." />
                   <select className="form-select w-50">
@@ -28,19 +29,8 @@ export const Home = () => {
                 <button type="submit" className="btn btn-icon btn-primary btn-lg">
                   <i className="bx bx-search" />
                 </button>
-              </form>
-              {/* Mobile form */}
-              <form className="d-sm-none mb-5">
-                <input type="text" className="form-control form-control-lg mb-2" placeholder="Buscar eventos..." />
-                <select className="form-select w-50">
-                  <option value selected disabled>Categorias</option>
-                  <option value="Culturales">Culturales</option>
-                  <option value="Danza">Danza</option>
-                </select>
-                <button type="submit" className="btn btn-icon btn-primary btn-lg w-100 d-sm-none">
-                  <i className="bx bx-search" />
-                </button>
-              </form>
+              </form> */}
+              <Link to="/eventos" className='btn btn-primary'>Ver eventos</Link>
 
             </div>
             <div className="col-lg-7">

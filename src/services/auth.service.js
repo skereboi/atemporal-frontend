@@ -11,7 +11,7 @@ export const loginService = async (credentials) => {
   return data
 }
 export const whoIamService = async (token) => {
-  const { data } = await Axios.get('http://localhost:4000/usuarios/me', {
+  const { data } = await Axios.get('http://localhost:4000/api/usuarios/me', {
     headers: { Authorization: `Bearer ${token}` }
   })
   return data
