@@ -1,10 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 export const AccountDetail = () => {
   return (
     <>
       {/* Account details */}
       <div className="ps-md-3 ps-lg-0 mt-md-2 py-md-4">
-
         <h1 className="h2 pt-xl-1 pb-3">Detalle de cuenta</h1>
         {/* Basic info */}
         <h2 className="h5 text-primary mb-4">Información</h2>
@@ -29,9 +29,14 @@ export const AccountDetail = () => {
             <button type="submit" className="btn btn-primary">Guardar cambios</button>
           </div>
         </form>
-
+        {/* Change password account */}
+        <div className="form-password mb-4">
+          <h2 className="h5 text-primary pt-1 pt-lg-3 mt-4">Seguridad</h2>
+          <Link to="cambiar-password" className='text-dark text-left'>Cambiar contraseña</Link>
+        </div>
+        <hr />
         {/* Delete account */}
-        <h2 className="h5 text-primary pt-1 pt-lg-3 mt-4">Eliminar cuenta</h2>
+        <h2 className="h5 text-primary pt-4 pt-lg-3 mt-4">Eliminar cuenta</h2>
         <p>Al eliminar tu cuenta, este proceso es irreversible.</p>
         <div className="form-check mb-4">
           <input type="checkbox" id="delete-account" className="form-check-input" />

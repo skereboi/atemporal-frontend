@@ -23,6 +23,7 @@ import { RecoverPasswordPage } from './pages/RecoverPassword'
 import { RegisterPage } from './pages/Register'
 import { TermsConditionsPage } from './pages/TermsConditions'
 import { initAxiosInterceptors } from './services/auth.service'
+import { AccountPassword } from './pages/Account/AccountPassword'
 
 initAxiosInterceptors()
 
@@ -57,6 +58,7 @@ const App = () => {
               <Route path="actualizar-evento" element={<UpdateEventPage />} />
               <Route path="mi-cuenta" element={<AccountLayout />}>
                 <Route index element={<AccountDetail/>}/>
+                <Route path='cambiar-password' element={<AccountPassword/>}/>
                 <Route path='metodos-pago' element={<AccountPayment/>}/>
                 <Route path='eventos' element={<AccountEvents/>}/>
               </Route>

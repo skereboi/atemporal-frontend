@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import logo from '../../assets/footer/logo.png'
 
 export const Footer = () => {
   return (
@@ -8,7 +9,7 @@ export const Footer = () => {
         <div className="row pb-5">
           <div className="col-lg-4 col-md-6">
             <div className="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
-              <img src="assets/img/footer/logo.png" width={47} alt="Atemporal" />
+              <img src={logo} width={47} alt="Atemporal" />
               Atemporal
             </div>
             <p className="fs-sm pb-lg-3 mb-4">Somos una plataforma de eventos enfocada en Querétaro.</p>
