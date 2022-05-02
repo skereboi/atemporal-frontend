@@ -28,7 +28,11 @@ export const AccounteMenu = () => {
             <div id="account-menu" className="list-group list-group-flush collapse d-md-block">
               <Link to="/mi-cuenta" className="list-group-item list-group-item-action d-flex align-items-center ">
                 <i className="bx bx-cog fs-xl opacity-60 me-2" />
-                Detalle de cuenta
+                Datos de cuenta
+              </Link>
+              <Link to="cambiar-password" className="list-group-item list-group-item-action d-flex align-items-center">
+                <i className="bx bx-credit-card-front fs-xl opacity-60 me-2" />
+                Seguridad
               </Link>
               <Link to="eventos" className="list-group-item list-group-item-action d-flex align-items-center">
                 <i className="bx bx-credit-card-front fs-xl opacity-60 me-2" />
