@@ -3,7 +3,7 @@ import { CardEvent } from '../../../components/CardEvent'
 import { CategoryFinder } from '../../../components/CategoryFinder'
 import { eventService } from '../../../services/event.service'
 
-export const GetAllEventsPage = () => {
+export const EventDiscoverPage = () => {
   const [events, setEvents] = useState([])
   useEffect(() => {
     const getEvents = async () => {

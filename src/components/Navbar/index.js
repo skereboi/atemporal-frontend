@@ -20,12 +20,13 @@ export const Navbar = () => {
 }
 
 const Profile = (props) => {
-  const { nombre, logout } = props
+  const { nombre } = props
   return (
     <>
       <div>
-        <span className='text-light p-4'>{nombre}</span>
-        <button className='btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex' onClick={() => logout()}>Cerrar sesión</button>
+        <Link to="/eventos" className='text-light p-4'>Eventos</Link>
+        <Link to="/crear-evento" className='text-light p-4'>Crear evento</Link>
+        <Link to="/mi-cuenta" className='btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex'>{nombre}</Link>
      </div>
     </>
   )

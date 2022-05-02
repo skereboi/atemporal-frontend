@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-import { Navigate, useLocation } from 'react-router-dom'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { LoginPage } from '../../pages/Login'
 
 export const AuthGuard = (props) => {
-  const { children, typeUser } = props
+  const { typeUser } = props
   const auth = useAuth()
   const location = useLocation()
   const [requestedLocation, setRequestedLocation] = useState(null)
@@ -29,7 +29,7 @@ export const AuthGuard = (props) => {
   console.log(typeUser, '😀')
   console.log(auth.user.typeUser === typeUser)
   if (auth.user.typeUser === typeUser) {
-    return <>{ children }</>
+    return <Outlet/>
   } else {
     return <Navigate to="/permisos" />
   }
