@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import { MenuAuthenticated } from '../MenuAuthenticated'
 
 export const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth()
@@ -11,24 +12,11 @@ export const Navbar = () => {
           Atemporal
         </Link>
         {
-          !isAuthenticated ? (<PublicButtons />) : <Profile {...user} logout={logout}/>
+          !isAuthenticated ? (<PublicButtons />) : <MenuAuthenticated {...user} logout={logout}/>
         }
       </div>
     </header>
 
-  )
-}
-
-const Profile = (props) => {
-  const { nombre } = props
-  return (
-    <>
-      <div>
-        <Link to="/eventos" className='text-light p-4'>Eventos</Link>
-        <Link to="/crear-evento" className='text-light p-4'>Crear evento</Link>
-        <Link to="/mi-cuenta" className='btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex'>{nombre}</Link>
-     </div>
-    </>
   )
 }
 

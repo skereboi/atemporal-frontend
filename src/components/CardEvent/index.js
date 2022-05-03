@@ -5,7 +5,6 @@ import './style.scss'
 export const CardEvent = (props) => {
   return (
     <div className="col pb-3">
-
       <div className="card">
         <img src={props.foto_evento} className="card-img-top card-event" alt={props.nombre_evento} />
         <div className="card-body">
