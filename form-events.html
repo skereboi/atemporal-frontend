@@ -1,0 +1,43 @@
+<form name="subida-eventos" type="POST">
+    Nombre del evento:
+      <input type="text" name="nombreEvent"/>  <br/><br/>
+    Nombre del organizador:
+      <input type="text" name="nombreOrg"/>  <br/><br/>
+    Celular del organizador:
+      <input type="tel" name="cel1"/>  <br/><br/>
+    Celular del organizador secundario:
+      <input type="tel" name="cel2"/>  <br/><br/>
+    Fecha del evento:
+      <input type="date" name="fecha"/>  <br/><br/>
+    Hora de inicio:
+      <input type="time" name="hInicial"/>  <br/><br/>
+    Hora de termino del evento:
+      <input type="time" name="hFinal"/>  <br/><br/>
+    Dirección del evento:
+      <input type="text" name="direcc"/>  <br/><br/>
+    Ubicación del evento:
+      <input type="tet" name="ubicacion"/>  <br/><br/>
+    Descripción del evento:
+      <textarea name="desc"> </textarea> <br/><br/>
+    Url del evento (Opcional):
+      <input type="text" name="url"/>  <br/><br/>
+    Tipo de cobro 
+      <select name="cobro">
+        <option value="efectivo" selected>Efectivo</option>
+        <option value="tarjeta">Tarjeta</option>
+      </select><br><br>
+    Foto del evento:
+        <input type="file" name="imagen" />  <br/><br/>
+    Archivo del itinerario:
+        <input type="file" name="itinerario" />  <br/><br/>
+    Estado del evento: 
+        <select name="cobro">
+          <option value="eActivo" selected>Activo</option>
+          <option value="eInactivo">Inactivo</option>
+        </select><br><br>
+        ¿Deseas añadir un tipo de boleto?
+    <button class="enlace" role="link" onclick="form-boletos.html">Añadir</button><br><br>
+      
+      <input type="submit" value="Enviar ahora"/>
+      
+    </form>
