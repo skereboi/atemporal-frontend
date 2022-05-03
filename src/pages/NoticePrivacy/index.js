@@ -1,6 +1,8 @@
 import React from 'react'
+import { useScrollToTop } from '../../hooks/useScrollToTop'
 
 export const NoticePrivacyPage = () => {
+  useScrollToTop()
   return (
     <section className="container mb-5 pt-4 pb-2 py-mg-4">
       <div className="row gy-4">

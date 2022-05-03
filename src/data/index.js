@@ -68,5 +68,35 @@ export const data = {
         }
       ]
     }
+  },
+  menuEvent: {
+    title: 'Crear evento',
+    subtitle: 'Publica tu evento gratis',
+    steps: [
+      {
+        id: 1,
+        title: 'Datos del organizador',
+        pathname: '/crear-evento',
+        link: ''
+      },
+      {
+        id: 2,
+        title: 'Datos del evento',
+        pathname: '/crear-evento/informacion-evento',
+        link: 'informacion-evento'
+      },
+      {
+        id: 3,
+        title: 'Boletos del evento',
+        pathname: '/crear-evento/informacion-boletos',
+        link: 'informacion-boletos'
+      },
+      {
+        id: 4,
+        title: 'Resumen',
+        pathname: '/crear-evento/resumen',
+        link: 'resumen'
+      }
+    ]
   }
 }

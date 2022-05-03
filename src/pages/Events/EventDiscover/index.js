@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { CardEvent } from '../../../components/CardEvent'
 import { CategoryFinder } from '../../../components/CategoryFinder'
+import { CardEvent } from '../../../components/Events/CardEvent'
 import { eventService } from '../../../services/event.service'
 
 export const EventDiscoverPage = () => {
