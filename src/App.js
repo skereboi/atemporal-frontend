@@ -55,7 +55,10 @@ const App = () => {
             {/* Private routes general user */}
             <Route element={<AuthGuard typeUser='general' />}>
               <Route path="crear-evento" element={<CreateEventPage />} />
-              <Route path="actualizar-evento" element={<UpdateEventPage />} />
+              <Route path="mis-eventos" element={<AccountLayout />}>
+                <Route index element={<AccountDetail/>}/>
+                <Route path="actualizar-evento" element={<UpdateEventPage />} />
+              </Route>
               <Route path="mi-cuenta" element={<AccountLayout />}>
                 <Route index element={<AccountDetail/>}/>
                 <Route path='cambiar-password' element={<AccountPassword/>}/>
