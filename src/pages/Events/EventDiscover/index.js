@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { CategoryFinder } from '../../../components/CategoryFinder'
+import { CategoryDropdown } from '../../../components/CategoryDropdown'
+import { TextFinder } from '../../../components/TextFinder'
 import { CardEvent } from '../../../components/Events/CardEvent'
 import { eventService } from '../../../services/event.service'
 
@@ -27,7 +28,12 @@ export const EventDiscoverPage = () => {
             <div className="col-lg-5 col-md-4">
               <h1 className="mb-2 mb-md-0">Descubre eventos</h1>
             </div>
-            <CategoryFinder/>
+            <div className="col-lg-7 col-md-8">
+             <form className="row gy-2">
+            <CategoryDropdown/>
+            <TextFinder/>
+            </form>
+            </div>
           </div>
           {/* Blog grid */}
           <div className="row row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-md-4 gy-2">
