@@ -1,10 +1,79 @@
 import * as yup from 'yup'
 
-export const schemaEvent = yup.object({
-  nombre: yup.string().required('El nombre es requerido'),
-  celular: yup.string().max(10).min(10).required(),
-  email: yup.string().email().required('El email es requerido'),
-  password: yup.string().min(8, 'Minimo 8 caracteres').required('La contraseña es requerida'),
-  confirmPassword: yup.string().oneOf([yup.ref('password')], 'Las contraseñas no coinciden'),
-  terminos: yup.boolean().oneOf([true], 'Debes aceptar los términos y condiciones')
+export const SchemaOrganizer = yup.object({
+  nombre_organizador:
+    yup.string()
+      .required('Campo obligatorio'),
+  celular_principal:
+    yup.string()
+      .max(10, 'Máximo 10 digitos')
+      .min(10, 'Ingresa un número válido a 10 digitos')
+      .required('Campo obligatorio'),
+  celular_secundario:
+    yup.string()
+      .max(10, 'Máximo 10 digitos')
+      .min(10, 'Ingresa un número válido a 10 digitos')
+      .required('Campo obligatorio')
+})
+
+export const SchemaEvent = yup.object({
+  nombre_evento:
+    yup.string()
+      .required('Campo obligatorio'),
+  hora_final:
+    yup.string()
+      .length(5)
+      .matches(/(\d){2}:(\d){2}/, 'La hora debe contener este formato "00:00"')
+      .required('Campo obligatorio'),
+  hora_inicio:
+    yup.string()
+      .length(5)
+      .matches(/(\d){2}:(\d){2}/, 'La hora debe contener este formato "00:00"')
+      .required('Campo obligatorio'),
+  fecha_evento:
+    yup.date()
+      .required('Campo obligatorio'),
+  lugar:
+    yup.string()
+      .required('Campo obligatorio'),
+  ubicacion_maps:
+    yup.string(),
+  foto_evento:
+    yup.string()
+      .required('Campo obligatorio'),
+  direccion:
+    yup.string().required('Campo obligatorio'),
+  url_video:
+    yup.string().required('Campo obligatorio'),
+  itinerario_evento:
+    yup.string(),
+  categorias:
+    yup.array()
+      .required('Campo obligatorio')
+})
+
+export const SchemaTickets = yup.object({
+  tipo_cobro: yup.string().required('Campo obligatorio'),
+  metodos_pago: yup.array().required('Campo obligatorio'),
+  boletos: yup
+    .array()
+    .of(
+      yup.object({
+        nombre:
+          yup.string()
+            .required('Campo obligatorio'),
+        cantidad:
+          yup.number()
+            .required('Campo obligatorio'),
+        precio:
+          yup.string()
+            .required('Campo obligatorio')
+      }))
+    .required('Campo obligatorio')
+})
+
+export const SummaryTicket = yup.object({
+  acepto_terminos:
+    yup.boolean()
+      .oneOf([true], 'Debes aceptar los términos y condiciones')
 })
