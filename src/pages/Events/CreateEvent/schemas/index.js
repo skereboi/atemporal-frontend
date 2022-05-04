@@ -49,12 +49,22 @@ export const SchemaEvent = yup.object({
     yup.string(),
   categorias:
     yup.array()
-      .required('Campo obligatorio')
+      .of(yup.object({
+        id: yup.number().required('Campo inválido')
+      }))
+      .required('Campo obligatorio') // Ejemplo categorias [{id: 1}, {id: 2}, {id: 10}]
 })
 
 export const SchemaTickets = yup.object({
-  tipo_cobro: yup.string().required('Campo obligatorio'),
-  metodos_pago: yup.array().required('Campo obligatorio'),
+  tipo_cobro:
+    yup.string()
+      .required('Campo obligatorio'),
+  metodos_pago:
+    yup.array()
+      .of(yup.object({
+        id: yup.number().required('Campo inválido')
+      })),
+  // Ejemplo metodo de pago [{id: 1}, {id: 2}, {id: 10}]
   boletos: yup
     .array()
     .of(
