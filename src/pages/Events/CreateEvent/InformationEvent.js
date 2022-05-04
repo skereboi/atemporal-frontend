@@ -19,19 +19,18 @@ export const InformationEvent = () => {
 
   return (
     <>
-      <h1 className="h2 pt-xl-1 pb-3">Información del organizador</h1>
+      <h1 className="h2 pt-xl-1 pb-3">Información del evento</h1>
       {/* Basic info */}
-      <h2 className="h5 text-primary mb-4">Datos del organizador</h2>
+      <h2 className="h5 text-primary mb-4">Datos del evento</h2>
       <form className="needs-validation border-bottom pb-3 pb-lg-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="row pb-2">
           <div className="col-sm-12 mb-4">
-            <label htmlFor="fn" className="form-label fs-base">Nombre del organizador</label>
+            <label htmlFor="fn" className="form-label fs-base">Nombre del evento</label>
             <input type="text"
               id="fn" className="form-control form-control-lg"
-              {...register('nombre_organizador')}
+              {...register('nombre_evento')}
             />
-            {errors.nombre_organizador && (<AlertErrorForm messageError={errors.nombre_organizador.message} />)}
-
+            {errors.nombre_evento && (<AlertErrorForm messageError={errors.nombre_evento.message} />)}
           </div>
           <div className="col-sm-6 mb-4">
             <label htmlFor="sn" className="form-label fs-base">Celular principal</label>
