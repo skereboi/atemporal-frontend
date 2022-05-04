@@ -22,7 +22,7 @@ export const RecoverPasswordPage = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(recoverPasswordSchema),
-    defaultValues: adminState
+    defaultValues: generalState
   })
 
   const onSubmit = async (data) => {

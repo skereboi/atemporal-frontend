@@ -4,8 +4,10 @@ import { ErrorHandler } from '../../components/Alerts/ErrorHandler'
 import { Footer } from '../../components/Footer'
 import { Navbar } from '../../components/Navbar'
 import { useGeneralApp } from '../../hooks/useGeneralApp'
+import { useScrollToTop } from '../../hooks/useScrollToTop'
 
 export const Layout = () => {
+  useScrollToTop()
   const { errorMessage } = useGeneralApp()
   return (
     <>

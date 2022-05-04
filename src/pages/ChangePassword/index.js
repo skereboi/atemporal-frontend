@@ -16,7 +16,8 @@ export const ChangePasswordPage = () => {
   console.log(idCode, 'use PARAMS')
 
   const generalState = {
-    password: '12345678'
+    password: 'general1234',
+    confirmPassword: 'general1234'
   }
   const adminState = {
     password: 'admin1234',
@@ -25,7 +26,7 @@ export const ChangePasswordPage = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schemaChangePassword),
-    defaultValues: adminState
+    defaultValues: generalState
   })
 
   const onSubmit = async (data) => {

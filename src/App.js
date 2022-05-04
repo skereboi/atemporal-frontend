@@ -10,7 +10,6 @@ import { AccountLayout } from './pages/Account/AccountLayout'
 import { AccountPayment } from './pages/Account/AccountPayments'
 import { ChangePasswordPage } from './pages/ChangePassword'
 import { DashboardHomePage } from './pages/Dashboard/Home'
-import { CreateEventPage } from './pages/Events/CreateEvent'
 import { EventDiscoverPage } from './pages/Events/EventDiscover'
 import { EventDetail } from './pages/Events/EventDetail'
 import { UpdateEventPage } from './pages/Events/UpdateEvent'
@@ -24,14 +23,23 @@ import { RegisterPage } from './pages/Register'
 import { TermsConditionsPage } from './pages/TermsConditions'
 import { initAxiosInterceptors } from './services/auth.service'
 import { AccountPassword } from './pages/Account/AccountPassword'
+import { EventLayout } from './pages/Events/EventLayout'
+import { InformationEvent } from './pages/Events/CreateEvent/InformationEvent'
+import { StateMachineProvider, createStore } from 'little-state-machine'
+import { InformationOrganizer } from './pages/Events/CreateEvent/InformationOrganizer'
+import { InformationTickets } from './pages/Events/CreateEvent/InformationTickets'
+import { InformationSummary } from './pages/Events/CreateEvent/InformationSummary'
 
 initAxiosInterceptors()
+createStore({})
 
 // eslint-disable-next-line react/display-name
 export default () => (
   <GeneralProvider>
     <AuthProvider>
-      <App/>
+      <StateMachineProvider>
+        <App/>
+      </StateMachineProvider>
     </AuthProvider>
   </GeneralProvider>
 )
@@ -54,7 +62,12 @@ const App = () => {
             <Route path='eventos/:idEvento' element={<EventDetail />} />
             {/* Private routes general user */}
             <Route element={<AuthGuard typeUser='general' />}>
-              <Route path="crear-evento" element={<CreateEventPage />} />
+              <Route path="crear-evento" element={<EventLayout />}>
+                <Route index element={<InformationOrganizer />} />
+                <Route path='informacion-evento' element={<InformationEvent />} />
+                <Route path='informacion-boletos' element={<InformationTickets />} />
+                <Route path='resumen' element={<InformationSummary />} />
+              </Route>
               <Route path="mis-eventos" element={<AccountLayout />}>
                 <Route index element={<AccountDetail/>}/>
                 <Route path="actualizar-evento" element={<UpdateEventPage />} />
@@ -70,8 +83,12 @@ const App = () => {
             <Route path='dashboard' element={<AuthGuard typeUser='admin' />}>
               <Route index element={<DashboardHomePage />} />
               <Route path='eventos' element={<EventDiscoverPage />} />
-              <Route path="crear-evento" element={<CreateEventPage />} />
               <Route path="actualizar-evento" element={<UpdateEventPage />} />
+              <Route path="mi-cuenta" element={<AccountLayout />}>
+                <Route index element={<AccountDetail />} />
+                <Route path='cambiar-password' element={<AccountPassword />} />
+                <Route path='eventos' element={<AccountEvents />} />
+              </Route>
             </Route>
           </Route>
           <Route path='recurso-no-encontrado' element={<NotFoundPage />} />
