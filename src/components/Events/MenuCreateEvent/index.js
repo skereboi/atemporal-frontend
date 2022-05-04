@@ -32,7 +32,7 @@ const MenuLink = (props) => {
     <Link to={props.link}
       className={`list-group-item list-group-item-action d-flex align-items-center my-2 ${pathname === props.pathname ? 'active' : ''}`}
     >
-      <i className="bx bx-cog fs-xl opacity-60 me-2" />
+      <i className={`${props.icon} fs-xl opacity-60 me-2`} />
       {props.title}
     </Link>
   )

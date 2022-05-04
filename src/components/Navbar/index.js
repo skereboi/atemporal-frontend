@@ -28,7 +28,6 @@ const PublicButtons = () => {
         <span className="navbar-toggler-icon" />
       </button>
       <Link to={location.pathname === '/iniciar-sesion' ? 'registrarse' : 'iniciar-sesion'} className="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex">
-        <i className="bx bx-cart fs-5 lh-1 me-1" />
         {location.pathname === '/iniciar-sesion' ? 'Registrarse' : 'Iniciar sesión'}
       </Link>
 

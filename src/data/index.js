@@ -77,25 +77,56 @@ export const data = {
         id: 1,
         title: 'Datos del organizador',
         pathname: '/crear-evento',
-        link: ''
+        link: '',
+        icon: 'bx bxs-user-circle'
       },
       {
         id: 2,
         title: 'Datos del evento',
         pathname: '/crear-evento/informacion-evento',
-        link: 'informacion-evento'
+        link: 'informacion-evento',
+        icon: 'bx bx-calendar-event'
       },
       {
         id: 3,
         title: 'Boletos del evento',
         pathname: '/crear-evento/informacion-boletos',
-        link: 'informacion-boletos'
+        link: 'informacion-boletos',
+        icon: 'bx bxs-credit-card'
       },
       {
         id: 4,
         title: 'Resumen',
         pathname: '/crear-evento/resumen',
-        link: 'resumen'
+        link: 'resumen',
+        icon: 'bx bx-check'
+      }
+    ]
+  },
+  menuAccount: {
+    title: 'Información de cuenta',
+    subtitle: 'Detalles',
+    options: [
+      {
+        id: 1,
+        title: 'Datos de cuenta',
+        pathname: '/mi-cuenta',
+        link: '',
+        icon: 'bx bxs-user-detail'
+      },
+      {
+        id: 2,
+        title: 'Seguridad',
+        pathname: 'cambiar-password',
+        link: 'cambiar-password',
+        icon: 'bx bx-key'
+      },
+      {
+        id: 3,
+        title: 'Mis eventos',
+        pathname: 'eventos',
+        link: 'eventos',
+        icon: 'bx bx-party'
       }
     ]
   }
