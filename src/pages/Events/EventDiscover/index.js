@@ -17,6 +17,17 @@ export const EventDiscoverPage = () => {
     }
 
     getEvents()
+
+    const getEventsByCategory = async (id) => {
+      try {
+        const dbEvents = await eventService.getEventsByCategory(id)
+        setEvents(dbEvents) // Nuevo set?
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    getEventsByCategory()
   }, [])
 
   return (

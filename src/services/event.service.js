@@ -9,5 +9,9 @@ export const eventService = {
   getOneEvent: async (id) => {
     const { data } = await Axios.get(`http://localhost:4000/eventos/${id}`)
     return data
+  },
+  getAllEventsByCategory: async (id) => {
+    const { data } = await Axios.get(`http://localhost:4000/eventos/${id}`)
+    return data
   }
 }

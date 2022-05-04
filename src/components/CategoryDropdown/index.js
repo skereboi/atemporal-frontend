@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from 'react'
 // Para hacer el dropdoen dinamico se usara el servicio de Categorias
 import { categoryService } from '../../services/category.service'
+// import { EventDiscoverPage } from '../../pages/Events/EventDiscover'
 
+// Genera N Opciones de Categorias depeniendo del Sser
 const CategoryOption = (props) => {
   return (
     <option value="props.id_categoria">{props.nombre}</option>
@@ -20,6 +22,7 @@ export const CategoryDropdown = () => {
         // Esperar a resolver la peticion para avanzar
         const dbCateogires = await categoryService.getAllCategories()
         setCategories(dbCateogires)
+        // id={parseInt(value)}
       } catch (error) {
         console.log(error)
       }
@@ -33,7 +36,7 @@ export const CategoryDropdown = () => {
         {/* Page content */}
         <div className="col-lg-5 col-sm-6">
           <div className="d-flex align-items-center">
-            <select className="form-select">
+            <select onChange={() => console.log('A')} className="form-select">
               {/* ALL CATEGORIES  */}
               <option>Todas las categorias...</option>
               {
