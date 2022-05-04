@@ -15,7 +15,6 @@ export const EventDiscoverPage = () => {
         console.log(error)
       }
     }
-
     getEvents()
 
     const getEventsByCategory = async (id) => {
@@ -40,7 +39,7 @@ export const EventDiscoverPage = () => {
               <h1 className="mb-2 mb-md-0">Descubre eventos</h1>
             </div>
             <div className="col-lg-7 col-md-8">
-             <form className="row gy-2">
+          <form className="row gy-2">
             <CategoryDropdown/>
             <TextFinder/>
             </form>

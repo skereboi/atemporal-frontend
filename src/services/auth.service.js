@@ -1,17 +1,18 @@
 /* eslint-disable camelcase */
 import Axios from 'axios'
+import globalConfig from '../config'
 
 export const createAccount = async (account) => {
-  const { data } = await Axios.post('http://localhost:4000/register', account)
+  const { data } = await Axios.post(`${globalConfig.url}/register`, account)
   return data
 }
 
 export const loginService = async (credentials) => {
-  const { data } = await Axios.post('http://localhost:4000/login/', credentials)
+  const { data } = await Axios.post(`${globalConfig.url}/login`, credentials)
   return data
 }
 export const whoIamService = async (token) => {
-  const { data } = await Axios.get('http://localhost:4000/api/usuarios/me', {
+  const { data } = await Axios.get(`${globalConfig.url}/api/usuarios/me`, {
     headers: { Authorization: `Bearer ${token}` }
   })
   return data
@@ -19,7 +20,7 @@ export const whoIamService = async (token) => {
 
 export const authService = {
   recoverPassword: async (email) => {
-    const { data } = await Axios.post('http://localhost:4000/recuperar-password', { email })
+    const { data } = await Axios.post(`${globalConfig.url}/recuperar-password`, { email })
     return data
   },
   changePassword: async (password, token) => {
@@ -28,7 +29,8 @@ export const authService = {
         Authorization: `Bearer ${token}`
       }
     })
-    const { data } = await instance.put('http://localhost:4000/cambiar-password', { password })
+
+    const { data } = await instance.put(`${globalConfig.url}/cambiar-password`, { password })
     return data
   }
 }

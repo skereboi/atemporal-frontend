@@ -84,6 +84,11 @@ const App = () => {
               <Route index element={<DashboardHomePage />} />
               <Route path='eventos' element={<EventDiscoverPage />} />
               <Route path="actualizar-evento" element={<UpdateEventPage />} />
+              <Route path="mi-cuenta" element={<AccountLayout />}>
+                <Route index element={<AccountDetail />} />
+                <Route path='cambiar-password' element={<AccountPassword />} />
+                <Route path='eventos' element={<AccountEvents />} />
+              </Route>
             </Route>
           </Route>
           <Route path='recurso-no-encontrado' element={<NotFoundPage />} />
