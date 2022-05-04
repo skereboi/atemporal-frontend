@@ -38,10 +38,13 @@ export const AccounteMenu = () => {
                 <i className="bx bx-credit-card-front fs-xl opacity-60 me-2" />
                 Mis eventos
               </Link>
-              <Link to="metodos-pago" className="list-group-item list-group-item-action d-flex align-items-center">
-                <i className="bx bx-credit-card-front fs-xl opacity-60 me-2" />
-                Métodos de pago
-              </Link>
+              {
+                user.typeUser === 'general' && (<Link to="metodos-pago" className="list-group-item list-group-item-action d-flex align-items-center">
+                  <i className="bx bx-credit-card-front fs-xl opacity-60 me-2" />
+                  Métodos de pago
+                </Link>)
+              }
+
               <button onClick={() => logout()} className="list-group-item list-group-item-action d-flex align-items-center">
                 <i className="bx bx-log-out fs-xl opacity-60 me-2" />
                 Cerrar sesión
