@@ -20,7 +20,7 @@ export const SchemaEvent = yup.object({
   nombre_evento:
     yup.string()
       .required('Campo obligatorio'),
-  direccion:
+  descripcion:
     yup.string()
       .required('Campo obligatorio'),
   hora_final:
