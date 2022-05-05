@@ -26,7 +26,7 @@ export const ChangePasswordPage = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schemaChangePassword),
-    defaultValues: generalState
+    defaultValues: adminState
   })
 
   const onSubmit = async (data) => {
