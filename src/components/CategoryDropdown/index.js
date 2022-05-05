@@ -7,24 +7,16 @@ import { categoryService } from '../../services/category.service'
 // Genera N Opciones de Categorias depeniendo del Sser
 const CategoryOption = (props) => {
   return (
-    <option value="props.id_categoria">{props.nombre}</option>
+    <option value={props.id_categoria}>{props.nombre}</option>
   )
 }
 
 export const CategoryDropdown = () => {
   // Se usara el Estado
   const [categories, setCategories] = useState([])
-  const [idCategorySelected, setIdCategorySelected] = useState({
-    id_categoria: ''
-  })
+
   const handlerChange = (e) => {
-    setIdCategorySelected({
-      ...idCategorySelected,
-      [e.target.value]:
-        e.target.value === 'id_categoria'
-          ? Number(e.target.value)
-          : e.target.value
-    })
+    console.log(Number(e.target.value))
   }
   // Cuando el estado cambie, se tendra este efecto
   useEffect(() => {
