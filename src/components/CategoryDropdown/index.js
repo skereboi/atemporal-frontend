@@ -14,6 +14,18 @@ const CategoryOption = (props) => {
 export const CategoryDropdown = () => {
   // Se usara el Estado
   const [categories, setCategories] = useState([])
+  const [idCategorySelected, setIdCategorySelected] = useState({
+    id_categoria: ''
+  })
+  const handlerChange = (e) => {
+    setIdCategorySelected({
+      ...idCategorySelected,
+      [e.target.value]:
+        e.target.value === 'id_categoria'
+          ? Number(e.target.value)
+          : e.target.value
+    })
+  }
   // Cuando el estado cambie, se tendra este efecto
   useEffect(() => {
     // Logica: Obtener categorias, peticion asincrona
@@ -22,6 +34,7 @@ export const CategoryDropdown = () => {
         // Esperar a resolver la peticion para avanzar
         const dbCateogires = await categoryService.getAllCategories()
         setCategories(dbCateogires)
+        console.log(dbCateogires)
         // id={parseInt(value)}
       } catch (error) {
         console.log(error)
@@ -36,7 +49,7 @@ export const CategoryDropdown = () => {
         {/* Page content */}
         <div className="col-lg-5 col-sm-6">
           <div className="d-flex align-items-center">
-            <select onChange={() => console.log('A')} className="form-select">
+            <select onChange={handlerChange} className="form-select">
               {/* ALL CATEGORIES  */}
               <option>Todas las categorias...</option>
               {

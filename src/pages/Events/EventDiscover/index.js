@@ -19,8 +19,8 @@ export const EventDiscoverPage = () => {
 
     const getEventsByCategory = async (id) => {
       try {
-        const dbEvents = await eventService.getEventsByCategory(id)
-        setEvents(dbEvents) // Nuevo set?
+        const dbEventsByCategory = await eventService.getEventsByCategory(id)
+        setEvents(dbEventsByCategory) // Nuevo set?
       } catch (error) {
         console.log(error)
       }
@@ -40,7 +40,7 @@ export const EventDiscoverPage = () => {
             </div>
             <div className="col-lg-7 col-md-8">
           <form className="row gy-2">
-            <CategoryDropdown/>
+            <CategoryDropdown setEvents={setEvents}/>
             <TextFinder/>
             </form>
             </div>
