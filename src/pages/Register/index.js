@@ -39,14 +39,13 @@ export const RegisterPage = () => {
       await registerAccount(account)
       setIsLoading(false)
     } catch (error) {
-      console.log(error.response.data.msg)
+      setIsLoading(false)
       if (error.response.data.msg[0].type) {
         setErrorMessage('Revisa tu correo')
       } else {
         setErrorMessage(error.response.data.msg)
       }
     }
-    setIsLoading(false)
   }
 
   return (

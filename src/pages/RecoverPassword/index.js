@@ -34,8 +34,6 @@ export const RecoverPasswordPage = () => {
       alert(msg)
       setIsSent(true)
     } catch (error) {
-      console.log(error.response.data.msg)
-      console.log(error.status)
       if (!error.response) {
         setErrorMessage('⚠️ Servicios desconectados, estamos en mantenimiento ⚠️')
       }
