@@ -8,7 +8,10 @@ export const Profile = () => {
   return (
     <>
 
-      <Link to={user.typeUser === 'admin' ? 'dashboard/mi-cuenta' : '/mi-cuenta'} className='btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex'>{user.nombre}</Link>
+      <Link to={user.typeUser === 'admin' ? 'dashboard/mi-cuenta' : '/mi-cuenta'} className='btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex'>
+        <i className="bx bx-user fs-5 lh-1 me-1" />
+        {user.nombre}
+      </Link>
 
     </>
   )

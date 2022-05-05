@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { data } from '../../../data'
 import { useAuth } from '../../../hooks/useAuth'
 
 export const AccounteMenu = () => {
@@ -22,22 +23,13 @@ export const AccounteMenu = () => {
             <p className="mb-3 pb-3">{user.email}</p>
             <button type="button" className="btn btn-secondary w-100 d-md-none mt-n2 mb-3" data-bs-toggle="collapse" data-bs-target="#account-menu">
               <i className="bx bxs-user-detail fs-xl me-2" />
-              Menú de cuenta
+              {data.menuAccount.title}
               <i className="bx bx-chevron-down fs-lg ms-1" />
             </button>
             <div id="account-menu" className="list-group list-group-flush collapse d-md-block">
-              <Link to="/mi-cuenta" className="list-group-item list-group-item-action d-flex align-items-center ">
-                <i className="bx bx-cog fs-xl opacity-60 me-2" />
-                Datos de cuenta
-              </Link>
-              <Link to="cambiar-password" className="list-group-item list-group-item-action d-flex align-items-center">
-                <i className="bx bx-credit-card-front fs-xl opacity-60 me-2" />
-                Seguridad
-              </Link>
-              <Link to="eventos" className="list-group-item list-group-item-action d-flex align-items-center">
-                <i className="bx bx-credit-card-front fs-xl opacity-60 me-2" />
-                Mis eventos
-              </Link>
+              {
+                data.menuAccount.options.map(option => (<MenuOptionAccount key={option.id} {...option} />))
+              }
               {
                 user.typeUser === 'general' && (<Link to="metodos-pago" className="list-group-item list-group-item-action d-flex align-items-center">
                   <i className="bx bx-credit-card-front fs-xl opacity-60 me-2" />
@@ -56,3 +48,9 @@ export const AccounteMenu = () => {
     </>
   )
 }
+const MenuOptionAccount = (props) => (
+  <Link to={props.pathname} className="list-group-item list-group-item-action d-flex align-items-center ">
+    <i className={`${props.icon} fs-xl opacity-60 me-2`} />
+    {props.title}
+  </Link>
+)
