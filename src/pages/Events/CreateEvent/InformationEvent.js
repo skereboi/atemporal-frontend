@@ -25,33 +25,104 @@ export const InformationEvent = () => {
       <form className="needs-validation border-bottom pb-3 pb-lg-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="row pb-2">
           <div className="col-sm-12 mb-4">
-            <label htmlFor="fn" className="form-label fs-base">Nombre del evento</label>
+            <label htmlFor="nombre_evento" className="form-label fs-base">Nombre del evento</label>
             <input type="text"
-              id="fn" className="form-control form-control-lg"
+              id="nombre_evento" className="form-control form-control-lg"
               {...register('nombre_evento')}
             />
             {errors.nombre_evento && (<AlertErrorForm messageError={errors.nombre_evento.message} />)}
           </div>
-          <div className="col-sm-6 mb-4">
-            <label htmlFor="sn" className="form-label fs-base">Celular principal</label>
-            <input type="text" id="sn"
-              className="form-control form-control-lg"
-              {...register('celular_principal')}
-              defaultValue={state.celular_principal}
+          <div className="col-sm-12 mb-4">
+            <label htmlFor="descripcion" className="form-label fs-base">Descripcion del evento</label>
+            <textarea type="text"
+              id="descripcion" className="form-control form-control-lg"
+              {...register('descripcion')}
             />
-            {errors.celular_principal && (<AlertErrorForm messageError={errors.celular_principal.message} />)}
+            {errors.descripcion && (<AlertErrorForm messageError={errors.descripcion.message} />)}
+          </div>
+          <div className="col-sm-4 mb-4">
+            <label htmlFor="fecha_evento" className="form-label fs-base">Fecha de evento</label>
+            <input type="text" id="fecha_evento"
+              className="form-control form-control-lg"
+              {...register('fecha_evento')}
+              defaultValue={state.fecha_evento}
+            />
+            {errors.fecha_evento && (<AlertErrorForm messageError={errors.fecha_evento.message} />)}
+          </div>
+          <div className="col-sm-4 mb-4">
+            <label htmlFor="hora_inicio" className="form-label fs-base">Hora inicio</label>
+            <input type="text" id="hora_inicio"
+              className="form-control form-control-lg"
+              {...register('hora_inicio')}
+              defaultValue={state.hora_inicio}
+            />
+            {errors.hora_inicio && (<AlertErrorForm messageError={errors.hora_inicio.message} />)}
+          </div>
+          <div className="col-sm-4 mb-4">
+            <label htmlFor="hora_final" className="form-label fs-base">Hora final</label>
+            <input type="text" id="hora_final"
+              className="form-control form-control-lg"
+              {...register('hora_final')}
+              defaultValue={state.hora_final}
+            />
+            {errors.hora_final && (<AlertErrorForm messageError={errors.hora_final.message} />)}
           </div>
           <div className="col-sm-6 mb-4">
-            <label htmlFor="sn" className="form-label fs-base">Celular secundario</label>
-            <input type="text" id="sn"
+            <label htmlFor="lugar" className="form-label fs-base">Nombre del lugar</label>
+            <input type="text" id="lugar"
               className="form-control form-control-lg"
-              {...register('celular_secundario')}
-              defaultValue={state.celular_secundario}
+              {...register('lugar')}
+              defaultValue={state.lugar}
             />
-            {errors.celular_secundario && (<AlertErrorForm messageError={errors.celular_secundario.message} />)}
+            {errors.lugar && (<AlertErrorForm messageError={errors.lugar.message} />)}
+          </div>
+          <div className="col-sm-6 mb-4">
+            <label htmlFor="ubicacion_maps" className="form-label fs-base">Selecciona la ubicación en maps</label>
+            <input type="text" id="ubicacion_maps"
+              className="form-control form-control-lg"
+              {...register('ubicacion_maps')}
+              defaultValue={state.ubicacion_maps}
+            />
+            {errors.ubicacion_maps && (<AlertErrorForm messageError={errors.ubicacion_maps.message} />)}
+          </div>
+          <div className="col-sm-12 mb-4">
+            <label htmlFor="direccion" className="form-label fs-base">Dirección del evento</label>
+            <textarea type="text"
+              id="direccion" className="form-control form-control-lg"
+              {...register('direccion')}
+            />
+            {errors.direccion && (<AlertErrorForm messageError={errors.direccion.message} />)}
+          </div>
+          <div className="col-sm-6 mb-4">
+            <label htmlFor="url_video" className="form-label fs-base">Url de video youtube (Opcional)</label>
+            <input type="text" id="url_video"
+              className="form-control form-control-lg"
+              {...register('url_video')}
+              defaultValue={state.url_video}
+            />
+            {errors.url_video && (<AlertErrorForm messageError={errors.url_video.message} />)}
+          </div>
+          <div className="col-sm-6 mb-4">
+            <label htmlFor="itinerario_evento" className="form-label fs-base">Itinerario de evento (.jpg, .png, .pdf). (Opcional)</label>
+            <input type="text" id="itinerario_evento"
+              className="form-control form-control-lg"
+              {...register('itinerario_evento')}
+              defaultValue={state.itinerario_evento}
+            />
+            {errors.itinerario_evento && (<AlertErrorForm messageError={errors.itinerario_evento.message} />)}
+          </div>
+          <div className="col-sm-12 mb-4">
+            <label htmlFor="categorias" className="form-label fs-base">Selecciona las categorias a las que pertenece tu evento</label>
+            <input type="text" id="categorias"
+              className="form-control form-control-lg"
+              {...register('categorias')}
+              defaultValue={state.categorias}
+            />
+            {errors.categorias && (<AlertErrorForm messageError={errors.categorias.message} />)}
           </div>
         </div>
-        <div className="d-flex mb-3">
+        <div className="options-buttons">
+          <button onClick={() => navigate(-1)} className="btn btn-primary mr-3" >Atras</button>
           <button type="submit" className="btn btn-primary" >Siguiente</button>
         </div>
       </form>
