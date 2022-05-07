@@ -38,7 +38,7 @@ export const EventDiscoverPage = () => {
               </h1>
             </div>
             {
-              user.typeUser === 'general' && (
+              user?.typeUser === 'general' && (
                 <div className="col-lg-7 col-md-8">
                 <form className="row gy-2">
                   <CategoryDropdown />
@@ -52,9 +52,8 @@ export const EventDiscoverPage = () => {
           <div className="row row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-md-4 gy-2">
             {/* ALL EVENTS  */}
             {
-              events.map(event => (<CardEvent key={event.nombre_evento} {...event} />))
+              events.map((event) => (<CardEvent key={event.id_evento} {...event} />))
             }
-
           </div>
           {/* Pagination */}
 

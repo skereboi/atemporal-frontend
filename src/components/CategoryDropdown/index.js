@@ -37,7 +37,7 @@ export const CategoryDropdown = () => {
               {/* ALL CATEGORIES  */}
               <option>Todas las categorias...</option>
               {
-              categories.map(categories => (<CategoryOption key={categories} {...categories} />))
+              categories.map(category => (<CategoryOption key={category.id_categoria} {...category} />))
               }
             </select>
           </div>
