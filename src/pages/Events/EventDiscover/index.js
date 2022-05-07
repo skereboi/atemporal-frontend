@@ -3,9 +3,13 @@ import { CategoryDropdown } from '../../../components/CategoryDropdown'
 import { TextFinder } from '../../../components/TextFinder'
 import { CardEvent } from '../../../components/Events/CardEvent'
 import { eventService } from '../../../services/event.service'
+import { useAuth } from '../../../hooks/useAuth'
+import { useLocation } from 'react-router-dom'
 
 export const EventDiscoverPage = () => {
   const [events, setEvents] = useState([])
+  const location = useLocation()
+  const { user } = useAuth()
   useEffect(() => {
     const getEvents = async () => {
       try {
@@ -25,20 +29,30 @@ export const EventDiscoverPage = () => {
           {/* Page title + Layout switcher + Search form */}
           <div className="row align-items-end gy-3 mb-4 pb-lg-3 pb-1">
             <div className="col-lg-5 col-md-4">
-              <h1 className="mb-2 mb-md-0">Descubre eventos</h1>
+              <h1 className="mb-2 mb-md-0">
+                {
+                location.pathname === '/dashboard/eventos'
+                  ? 'Aprobar eventos'
+                  : 'Descubre eventos'
+                }
+              </h1>
             </div>
-            <div className="col-lg-7 col-md-8">
-          <form className="row gy-2">
-            <CategoryDropdown/>
-            <TextFinder/>
-            </form>
-            </div>
+            {
+              user.typeUser === 'general' && (
+                <div className="col-lg-7 col-md-8">
+                <form className="row gy-2">
+                  <CategoryDropdown />
+                  <TextFinder />
+                </form>
+                </div>
+              )
+            }
           </div>
           {/* Blog grid */}
           <div className="row row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-md-4 gy-2">
             {/* ALL EVENTS  */}
             {
-              events.map(event => (<CardEvent key={event} {...event} />))
+              events.map(event => (<CardEvent key={event.nombre_evento} {...event} />))
             }
 
           </div>

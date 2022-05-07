@@ -14,7 +14,7 @@ export const LoginPage = () => {
   const { login } = useAuth()
   const generalState = {
     email: 'danielcu.sanchez@gmail.com',
-    password: 'general1234'
+    password: 'admin1234'
   }
   const adminState = {
     email: 'danielcu@alternet.com.mx',
@@ -62,7 +62,6 @@ export const LoginPage = () => {
           <p className="text-center text-xl-start pb-3 mb-3">¿No tienes una cuenta?<Link to="/registrarse"> Crea tu cuenta aqui.</Link></p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
-
               <div className="col-12">
                 <div className="position-relative mb-4">
                   <label htmlFor="email" className="form-label fs-base">Correo electrónico</label>
