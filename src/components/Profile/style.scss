@@ -1,10 +1,28 @@
-@media (max-width: 950px) {
-  .menu-mobile {
-    display: block;
+.dropdown-menu {
+  right: 2px;
+  top: 30px;
+}
+
+.menu-mobile {
+  display: flex;
+  flex-direction: column;
+
+  a {
+    color: #000;
+    text-decoration: none;
+    padding: 10px !important;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
-@media (min-width: 951px) {
+.show {
+  display: block !important;
+}
+
+@media (min-width: 991px) {
   .menu-mobile {
     display: none;
   }
