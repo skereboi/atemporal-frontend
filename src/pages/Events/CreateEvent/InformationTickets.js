@@ -6,17 +6,10 @@ import updateAction from './updateAction'
 import { useNavigate } from 'react-router-dom'
 import { SchemaOrganizer } from './schemas'
 import { AlertErrorForm } from '../../../components/AlertErrorForm'
+import { FormButtons } from '../../../components/Events/FormButtons'
+import { CreateTicket } from '../../../components/Events/CreateTicket'
 export const InformationTickets = () => {
-  const testStates = {
-    nombre_organizador: 'Daniel Cu',
-    celular_principal: '4424747494',
-    celular_secundario: '4482750190'
-  }
-
-  const { register, handleSubmit, watch, control, formState: { errors } } = useForm({
-    resolver: yupResolver(SchemaOrganizer),
-    defaultValues: testStates
-  })
+  const { register, handleSubmit, watch, control, formState: { errors } } = useForm({ resolver: yupResolver(SchemaOrganizer) })
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'boletos'
@@ -25,7 +18,7 @@ export const InformationTickets = () => {
   const navigate = useNavigate()
   const onSubmit = (data) => {
     actions.updateAction(data)
-    navigate('informacion-evento')
+    navigate('resumen')
   }
   const habraBoletos = watch('habraBoletos')
 
@@ -67,44 +60,19 @@ export const InformationTickets = () => {
           {habraBoletos && (
             <>
             <div>
-              {fields.map(({ id, name, type, amount }, index) => {
+              {fields.map((ticket, index) => {
                 return (
-                  <div key={id}>
-                    <input
-                      {...register('name')}
-                      name={`boletos[${index}].name`}
-                      defaultValue={name}
-                    />
-                    <select
-                      {...register('type')}
-                      name={`boletos[${index}].type`}
-                      defaultValue={type}
-                    >
-                      <option value="">Select</option>
-                      <option value="10">ItemA</option>
-                      <option value="20">ItemB</option>
-                    </select>
-                    <input
-                      {...register('amount')}
-                      type="number"
-                      name={`boletos[${index}].amount`}
-                      defaultValue={amount}
-                    />
-
-                    <button type="button" onClick={() => remove(index)}>
-                      Remove
-                    </button>
-                  </div>
+                  <CreateTicket key={index} index={index} remove={remove} register={register} />
                 )
               })}
             </div>
-              <button type="button" onClick={() => append({})}>Append</button>
+              <button type="button" className='btn btn-secondary btn-lg' onClick={() => append({})}>
+                Agregar boleto
+              </button>
             </>
           )}
         </div>
-        <div className="d-flex mb-3">
-          <button type="submit" className="btn btn-primary" >Siguiente</button>
-        </div>
+        <FormButtons backPage="/crear-evento/informacion-evento" />
       </form>
     </>
   )

@@ -24,16 +24,16 @@ export const SchemaEvent = yup.object({
     yup.string()
       .required('Campo obligatorio'),
   fecha_evento:
-    yup.date()
+    yup.date('Debe ser una fecha válida')
       .required('Campo obligatorio'),
   hora_inicio:
     yup.string()
-      .length(5)
+      .length(5, 'Hora inválida')
       .matches(/(\d){2}:(\d){2}/, 'La hora debe contener este formato "00:00"')
       .required('Campo obligatorio'),
   hora_final:
     yup.string()
-      .length(5)
+      .length(5, 'Hora inválida')
       .matches(/(\d){2}:(\d){2}/, 'La hora debe contener este formato "00:00"')
       .required('Campo obligatorio'),
   lugar:
@@ -54,7 +54,7 @@ export const SchemaEvent = yup.object({
     yup.array()
       .of(yup.object({
         id: yup.number().required('Campo inválido')
-      }))
+      }, 'Debes selecciona una categoria'))
       .required('Campo obligatorio') // Ejemplo categorias [{id: 1}, {id: 2}, {id: 10}]
 })
 

@@ -6,6 +6,7 @@ import updateAction from './updateAction'
 import { useNavigate } from 'react-router-dom'
 import { SchemaEvent } from './schemas'
 import { AlertErrorForm } from '../../../components/AlertErrorForm'
+import { FormButtons } from '../../../components/Events/FormButtons'
 export const InformationEvent = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(SchemaEvent)
@@ -121,10 +122,7 @@ export const InformationEvent = () => {
             {errors.categorias && (<AlertErrorForm messageError={errors.categorias.message} />)}
           </div>
         </div>
-        <div className="options-buttons">
-          <button onClick={() => navigate(-1)} className="btn btn-primary mr-3" >Atras</button>
-          <button type="submit" className="btn btn-primary" >Siguiente</button>
-        </div>
+        <FormButtons backPage="/crear-evento"/>
       </form>
     </>
   )
