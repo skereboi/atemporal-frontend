@@ -30,6 +30,16 @@ export const Profile = () => {
         </div>
       </div>
 
+      <div className="btn-group">
+                    <button className="btn dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Perfil <span className="caret"></span></button>
+                    <ul className="dropdown-menu">
+                        <li><a href="#">Ver perfil</a></li>
+                        <li><a href="#">Mis reservaciones</a></li>
+                        <li className="divider"></li>
+                        <li><a href="#">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+
     </>
   )
 }
