@@ -4,7 +4,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { TypeUser } from '../../components/Auth/TypeUser'
-import { useAuth } from '../../hooks/useAuth'
+import { InputPassword } from '../../components/InputPassword'
 import { useGeneralApp } from '../../hooks/useGeneralApp'
 import { authService } from '../../services/auth.service'
 import { schemaChangePassword } from './schemaChangePassword'
@@ -54,20 +54,13 @@ export const ChangePasswordPage = () => {
           <p className="text-center text-xl-start pb-3 mb-3">¿Recordaste tu contraseña?<Link to="/iniciar-sesion"> Inicia sesión.</Link></p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
-              <div className="col-12">
-                <div className="position-relative mb-4">
-                  <label htmlFor="password" className="form-label fs-base">Ingresa tu nueva contraseña</label>
-                  <input type="password" id="password" className="form-control form-control-lg" {...register('password')} autoComplete="off" />
-                  <div>
-                    {errors.password?.message}
-                  </div>
-                  <label htmlFor="password" className="form-label fs-base mt-4">Confirma tu nueva contraseña</label>
-                  <input type="password" id="confirmPassword" className="form-control form-control-lg" {...register('confirmPassword')} autoComplete="off" />
-                  <div>
-                    {errors.confirmPassword?.message}
-                  </div>
-                </div>
-              </div>
+              <InputPassword register={register} errors={errors} />
+              <InputPassword
+                register={register}
+                errors={errors}
+                type="confirmPassword"
+                title='Confirma tu contraseña'
+              />
             </div>
             <button type="submit" className="btn btn-primary shadow-primary btn-lg w-100" disabled={isLoading}>Recuperar contraseña</button>
           </form>

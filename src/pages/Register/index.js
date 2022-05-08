@@ -7,6 +7,7 @@ import { schemaRegister } from './schemaRegister'
 import { useGeneralApp } from '../../hooks/useGeneralApp'
 import { useAuth } from '../../hooks/useAuth'
 import { TypeUser } from '../../components/Auth/TypeUser'
+import { InputPassword } from '../../components/InputPassword'
 
 export const RegisterPage = () => {
   const { setErrorMessage, isLoading, setIsLoading } = useGeneralApp()
@@ -86,24 +87,13 @@ export const RegisterPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-12 mb-4">
-                <label htmlFor="password" className="form-label fs-base">Contraseña</label>
-                <div className="password-toggle">
-                  <input type="password" id="password" className="form-control form-control-lg" {...register('password')} autoComplete="off" />
-                  <div>
-                    {errors.password?.message}
-                  </div>
-                </div>
-              </div>
-              <div className="col-12 mb-4">
-                <label htmlFor="password-confirm" className="form-label fs-base">Confirma tu contraseña</label>
-                <div className="password-toggle">
-                  <input type="password" id="password-confirm" className="form-control form-control-lg" {...register('confirmPassword')} autoComplete="off" />
-                  <div>
-                    {errors.confirmPassword?.message}
-                  </div>
-                </div>
-              </div>
+              <InputPassword register={register} errors={ errors}/>
+              <InputPassword
+                register={register}
+                errors={errors}
+                type="confirmPassword"
+                title='Confirma tu contraseña'
+              />
             </div>
             <div className="mb-4">
               <div className="form-check">

@@ -26,7 +26,6 @@ export const MenuCreateEvent = () => {
 }
 const MenuLink = (props) => {
   const { pathname } = useLocation()
-  console.log(pathname)
   return (
 
     <Link to={props.link}

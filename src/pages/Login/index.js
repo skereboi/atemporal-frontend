@@ -4,6 +4,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { TypeUser } from '../../components/Auth/TypeUser'
+import { InputPassword } from '../../components/InputPassword'
 import { useAuth } from '../../hooks/useAuth'
 import { useGeneralApp } from '../../hooks/useGeneralApp'
 import { schemaLogin } from './schemaLogin'
@@ -71,16 +72,7 @@ export const LoginPage = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="col-12 mb-4">
-                <label htmlFor="password" className="form-label fs-base">Contraseña</label>
-                <div className="password-toggle">
-                  <input type="password" id="password" className="form-control form-control-lg" {...register('password')} autoComplete="off" />
-                  <div>
-                    {errors.password?.message}
-                  </div>
-                </div>
-              </div>
+              <InputPassword register={register} errors={errors}/>
             </div>
 
             <button type="submit" className="btn btn-primary shadow-primary btn-lg w-100" disabled={isLoading}>Iniciar sesión</button>

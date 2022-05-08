@@ -29,8 +29,11 @@ export const authService = {
         Authorization: `Bearer ${token}`
       }
     })
-
     const { data } = await instance.put(`${globalConfig.url}/cambiar-password`, { password })
+    return data
+  },
+  updatePassword: async (password, id) => {
+    const { data } = await Axios.put(`${globalConfig.url}/api/usuarios/${id}/actualizar-password`, { password })
     return data
   }
 }

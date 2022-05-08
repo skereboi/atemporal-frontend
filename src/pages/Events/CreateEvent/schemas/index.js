@@ -60,12 +60,11 @@ export const SchemaEvent = yup.object({
 
 export const SchemaTickets = yup.object({
   tipo_cobro:
-    yup.string()
-      .required('Campo obligatorio'),
+    yup.boolean(),
   metodos_pago:
     yup.array()
       .of(yup.object({
-        id: yup.number().required('Campo inválido')
+        id: yup.number()
       })),
   // Ejemplo metodo de pago [{id: 1}, {id: 2}, {id: 10}]
   boletos: yup
@@ -82,7 +81,6 @@ export const SchemaTickets = yup.object({
           yup.string()
             .required('Campo obligatorio')
       }))
-    .required('Campo obligatorio')
 })
 
 export const SummaryTicket = yup.object({
