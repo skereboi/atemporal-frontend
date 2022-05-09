@@ -5,19 +5,14 @@ import { categoryService } from '../../services/category.service'
 // import { EventDiscoverPage } from '../../pages/Events/EventDiscover'
 
 // Genera N Opciones de Categorias depeniendo del Sser
-const CategoryOption = (props) => {
-  return (
-    <option value={props.id_categoria}>{props.nombre}</option>
-  )
-}
-
-export const CategoryDropdown = () => {
+export const CategoryDropdown = ({ events, setEvents }) => {
   // Se usara el Estado
   const [categories, setCategories] = useState([])
 
   const handlerChange = (e) => {
-    console.log(Number(e.target.value))
+    setCategories(Number(e.target.value))
   }
+
   // Cuando el estado cambie, se tendra este efecto
   useEffect(() => {
     // Logica: Obtener categorias, peticion asincrona
@@ -34,19 +29,23 @@ export const CategoryDropdown = () => {
     }
 
     getCategories()
-  }, [])
+  }, [categories])
 
   return (
     <>
         {/* Page content */}
         <div className="col-lg-5 col-sm-6">
           <div className="d-flex align-items-center">
-            <select onChange={handlerChange} className="form-select">
+            <select isSelected={handlerChange} onChange={handlerChange} className="form-select">
               {/* ALL CATEGORIES  */}
               <option>Todas las categorias...</option>
               {
-              categories.map(categories => (<CategoryOption key={categories} {...categories} />))
-              }
+                categories.map(props => {
+                  return (
+                  <option key={categories} {...categories} value={props.id_categoria}>{props.nombre}</option>
+                  )
+                })
+          }
             </select>
           </div>
         </div>

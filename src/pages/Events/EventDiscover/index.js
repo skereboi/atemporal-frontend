@@ -7,6 +7,8 @@ import { eventService } from '../../../services/event.service'
 export const EventDiscoverPage = () => {
   const [events, setEvents] = useState([])
   useEffect(() => {
+    console.log('A: ', idSelected)
+
     const getEvents = async () => {
       try {
         const dbEvents = await eventService.getAllEvents()
@@ -16,18 +18,22 @@ export const EventDiscoverPage = () => {
       }
     }
     getEvents()
+  }, [])
 
-    const getEventsByCategory = async (id) => {
+  const [idSelected, setIdSelected] = useState([])
+  useEffect(() => {
+    console.log('A: ', idSelected)
+    const getEventsByCategory = async (idSelected) => {
       try {
-        const dbEventsByCategory = await eventService.getEventsByCategory(id)
-        setEvents(dbEventsByCategory) // Nuevo set?
+        const dbEventsByCategory = await eventService.getEventsByCategory(idSelected)
+        setIdSelected(dbEventsByCategory) // Nuevo set?
       } catch (error) {
         console.log(error)
       }
     }
 
-    getEventsByCategory()
-  }, [])
+    getEventsByCategory(idSelected)
+  }, [idSelected])
 
   return (
     <>
@@ -40,7 +46,7 @@ export const EventDiscoverPage = () => {
             </div>
             <div className="col-lg-7 col-md-8">
           <form className="row gy-2">
-            <CategoryDropdown setEvents={setEvents}/>
+            <CategoryDropdown events={setEvents}/>
             <TextFinder/>
             </form>
             </div>
