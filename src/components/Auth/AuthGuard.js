@@ -25,9 +25,7 @@ export const AuthGuard = (props) => {
     setRequestedLocation(null)
     return <Navigate to={requestedLocation} />
   }
-  console.log(auth.user.typeUser)
-  console.log(typeUser, '😀')
-  console.log(auth.user.typeUser === typeUser)
+
   if (auth.user.typeUser === typeUser) {
     return <Outlet/>
   } else {

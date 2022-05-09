@@ -7,15 +7,14 @@ import { useNavigate } from 'react-router-dom'
 import { SchemaOrganizer } from './schemas'
 import { AlertErrorForm } from '../../../components/AlertErrorForm'
 export const InformationOrganizer = () => {
-  const testStates = {
-    nombre_organizador: 'Daniel Cu',
-    celular_principal: '4424747494',
-    celular_secundario: '4482750190'
-  }
+  // const testStates = {
+  //   nombre_organizador: 'Daniel Cu',
+  //   celular_principal: '4424747494',
+  //   celular_secundario: '4482750190'
+  // }
 
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(SchemaOrganizer),
-    defaultValues: testStates
+    resolver: yupResolver(SchemaOrganizer)
   })
   const { actions, state } = useStateMachine({ updateAction })
   const navigate = useNavigate()

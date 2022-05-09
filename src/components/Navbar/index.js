@@ -4,7 +4,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { MenuAuthenticated } from '../MenuAuthenticated'
 
 export const Navbar = () => {
-  const { user, isAuthenticated, logout } = useAuth()
+  const { isAuthenticated } = useAuth()
   return (
     <header className="header navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div className="container px-3">
@@ -12,7 +12,7 @@ export const Navbar = () => {
           Atemporal
         </Link>
         {
-          !isAuthenticated ? (<PublicButtons />) : <MenuAuthenticated {...user} logout={logout}/>
+          !isAuthenticated ? (<PublicButtons />) : <MenuAuthenticated />
         }
       </div>
     </header>

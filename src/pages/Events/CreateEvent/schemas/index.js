@@ -23,18 +23,18 @@ export const SchemaEvent = yup.object({
   descripcion:
     yup.string()
       .required('Campo obligatorio'),
-  hora_final:
-    yup.string()
-      .length(5)
-      .matches(/(\d){2}:(\d){2}/, 'La hora debe contener este formato "00:00"')
+  fecha_evento:
+    yup.date('Debe ser una fecha válida')
       .required('Campo obligatorio'),
   hora_inicio:
     yup.string()
-      .length(5)
+      .length(5, 'Hora inválida')
       .matches(/(\d){2}:(\d){2}/, 'La hora debe contener este formato "00:00"')
       .required('Campo obligatorio'),
-  fecha_evento:
-    yup.date()
+  hora_final:
+    yup.string()
+      .length(5, 'Hora inválida')
+      .matches(/(\d){2}:(\d){2}/, 'La hora debe contener este formato "00:00"')
       .required('Campo obligatorio'),
   lugar:
     yup.string()
@@ -54,18 +54,17 @@ export const SchemaEvent = yup.object({
     yup.array()
       .of(yup.object({
         id: yup.number().required('Campo inválido')
-      }))
+      }, 'Debes selecciona una categoria'))
       .required('Campo obligatorio') // Ejemplo categorias [{id: 1}, {id: 2}, {id: 10}]
 })
 
 export const SchemaTickets = yup.object({
   tipo_cobro:
-    yup.string()
-      .required('Campo obligatorio'),
+    yup.boolean(),
   metodos_pago:
     yup.array()
       .of(yup.object({
-        id: yup.number().required('Campo inválido')
+        id: yup.number()
       })),
   // Ejemplo metodo de pago [{id: 1}, {id: 2}, {id: 10}]
   boletos: yup
@@ -82,7 +81,6 @@ export const SchemaTickets = yup.object({
           yup.string()
             .required('Campo obligatorio')
       }))
-    .required('Campo obligatorio')
 })
 
 export const SummaryTicket = yup.object({

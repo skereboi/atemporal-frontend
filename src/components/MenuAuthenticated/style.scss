@@ -1,0 +1,23 @@
+.menu-authenticated {
+  display: flex;
+  align-items: center;
+}
+
+.menu-web {
+  a {
+    color: #fefefe;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      color: #fefefe;
+    }
+  }
+
+}
+
+@media (max-width: 991px) {
+  .menu-web {
+    display: none;
+  }
+}

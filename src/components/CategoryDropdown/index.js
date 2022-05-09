@@ -40,12 +40,8 @@ export const CategoryDropdown = ({ events, setEvents }) => {
               {/* ALL CATEGORIES  */}
               <option>Todas las categorias...</option>
               {
-                categories.map(props => {
-                  return (
-                  <option key={categories} {...categories} value={props.id_categoria}>{props.nombre}</option>
-                  )
-                })
-          }
+              categories.map(category => (<CategoryOption key={category.id_categoria} {...category} />))
+              }
             </select>
           </div>
         </div>

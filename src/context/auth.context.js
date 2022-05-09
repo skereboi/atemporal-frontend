@@ -12,7 +12,6 @@ const initialState = {
 const handlers = {
   INITIALIZE: (state, action) => {
     const { isAuthenticated, user } = action.payload
-    console.log(isAuthenticated)
     return {
       ...state,
       isAuthenticated,

@@ -29,6 +29,8 @@ import { StateMachineProvider, createStore } from 'little-state-machine'
 import { InformationOrganizer } from './pages/Events/CreateEvent/InformationOrganizer'
 import { InformationTickets } from './pages/Events/CreateEvent/InformationTickets'
 import { InformationSummary } from './pages/Events/CreateEvent/InformationSummary'
+import { AproveEventPage } from './pages/Dashboard/AproveEventPage'
+import { ContentLayoutPage } from './pages/Dashboard/ContentLayoutDashboard'
 
 initAxiosInterceptors()
 createStore({})
@@ -81,13 +83,16 @@ const App = () => {
             </Route>
             {/* Private routes admin */}
             <Route path='dashboard' element={<AuthGuard typeUser='admin' />}>
-              <Route index element={<DashboardHomePage />} />
-              <Route path='eventos' element={<EventDiscoverPage />} />
-              <Route path="actualizar-evento" element={<UpdateEventPage />} />
-              <Route path="mi-cuenta" element={<AccountLayout />}>
-                <Route index element={<AccountDetail />} />
-                <Route path='cambiar-password' element={<AccountPassword />} />
-                <Route path='eventos' element={<AccountEvents />} />
+              <Route element={<ContentLayoutPage/>}>
+                <Route index element={<DashboardHomePage />} />
+                <Route path='aprobar' element={<AproveEventPage />} />
+                <Route path='eventos' element={<EventDiscoverPage />} />
+                <Route path="actualizar-evento" element={<UpdateEventPage />} />
+                <Route path="mi-cuenta" element={<AccountLayout />}>
+                  <Route index element={<AccountDetail />} />
+                  <Route path='cambiar-password' element={<AccountPassword />} />
+                  <Route path='eventos' element={<AccountEvents />} />
+                </Route>
               </Route>
             </Route>
           </Route>

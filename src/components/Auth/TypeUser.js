@@ -6,7 +6,7 @@ export const TypeUser = () => {
   const auth = useAuth()
   if (auth.user) {
     if (auth.user.typeUser === 'admin') {
-      return <Navigate to="/dashboard"/>
+      return <Navigate to="/dashboard/aprobar"/>
     } else if (auth.user.typeUser === 'general') {
       return <Navigate to="/eventos" />
     }
