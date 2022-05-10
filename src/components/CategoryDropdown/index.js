@@ -4,14 +4,15 @@ import React, { useEffect, useState } from 'react'
 import { categoryService } from '../../services/category.service'
 // import { EventDiscoverPage } from '../../pages/Events/EventDiscover'
 
+const CategoryOption = (props) => {
+  return (
+    <option value={props.id_categoria}>{props.nombre}</option>
+  )
+}
 // Genera N Opciones de Categorias depeniendo del Sser
-export const CategoryDropdown = ({ events, setEvents }) => {
+export const CategoryDropdown = (props) => {
   // Se usara el Estado
   const [categories, setCategories] = useState([])
-
-  const handlerChange = (e) => {
-    setCategories(Number(e.target.value))
-  }
 
   // Cuando el estado cambie, se tendra este efecto
   useEffect(() => {
@@ -21,7 +22,7 @@ export const CategoryDropdown = ({ events, setEvents }) => {
         // Esperar a resolver la peticion para avanzar
         const dbCateogires = await categoryService.getAllCategories()
         setCategories(dbCateogires)
-        console.log(dbCateogires)
+        // console.log(dbCateogires)
         // id={parseInt(value)}
       } catch (error) {
         console.log(error)
@@ -29,18 +30,19 @@ export const CategoryDropdown = ({ events, setEvents }) => {
     }
 
     getCategories()
-  }, [categories])
+  }, [])
 
   return (
     <>
         {/* Page content */}
         <div className="col-lg-5 col-sm-6">
           <div className="d-flex align-items-center">
-            <select isSelected={handlerChange} onChange={handlerChange} className="form-select">
+            <select onChange={() => props.setIdSelected((this.target.value))} className="form-select">
               {/* ALL CATEGORIES  */}
               <option>Todas las categorias...</option>
               {
               categories.map(category => (<CategoryOption key={category.id_categoria} {...category} />))
+
               }
             </select>
           </div>
