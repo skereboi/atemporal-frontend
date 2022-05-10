@@ -7,37 +7,32 @@ import { useAuth } from '../../../hooks/useAuth'
 import { useLocation } from 'react-router-dom'
 
 export const EventDiscoverPage = () => {
+  // Estados
   const [events, setEvents] = useState([])
+  const [categorySelected, setCategorySelected] = useState(null)
+
+  // hooks
   const location = useLocation()
   const { user } = useAuth()
-  useEffect(() => {
-    console.log('A: ', idSelected)
 
+  // Trae todas los eventos
+  useEffect(() => {
     const getEvents = async () => {
       try {
-        const dbEvents = await eventService.getAllEvents()
-        setEvents(dbEvents)
+        if (categorySelected === null) {
+          const dbEvents = await eventService.getAllEvents()
+          setEvents(dbEvents)
+        } else {
+          console.log(categorySelected, '😀')
+          const dbEvents = await eventService.getAllEventsByCategory(parseInt(categorySelected))
+          setEvents(dbEvents)
+        }
       } catch (error) {
         console.log(error)
       }
     }
     getEvents()
-  }, [])
-
-  const [idSelected, setIdSelected] = useState([])
-  useEffect(() => {
-    console.log('A: ', idSelected)
-    const getEventsByCategory = async (idSelected) => {
-      try {
-        const dbEventsByCategory = await eventService.getEventsByCategory(idSelected)
-        setIdSelected(dbEventsByCategory) // Nuevo set?
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    getEventsByCategory(idSelected)
-  }, [idSelected])
+  }, [categorySelected])
 
   return (
     <>
@@ -58,7 +53,7 @@ export const EventDiscoverPage = () => {
               user?.typeUser === 'general' && (
                 <div className="col-lg-7 col-md-8">
                 <form className="row gy-2">
-                  <CategoryDropdown />
+                  <CategoryDropdown setCategorySelected={setCategorySelected} />
                   <TextFinder />
                 </form>
                 </div>
@@ -69,10 +64,13 @@ export const EventDiscoverPage = () => {
           <div className="row row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-md-4 gy-2">
             {/* ALL EVENTS  */}
             {
-              events.map((event) => (<CardEvent key={event.id_evento} {...event} />))
+            events.map((event) => (<CardEvent key={event.id_evento} {...event} />))
             }
           </div>
-          {/* Pagination */}
+        {/* Pagination */}
+        {
+          JSON.stringify(events)
+        }
 
         </section>
     </>

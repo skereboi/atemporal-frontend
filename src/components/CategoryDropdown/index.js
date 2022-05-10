@@ -1,20 +1,9 @@
-// Se importa react, su estado y el efecto
 import React, { useEffect, useState } from 'react'
-// Para hacer el dropdoen dinamico se usara el servicio de Categorias
 import { categoryService } from '../../services/category.service'
-// import { EventDiscoverPage } from '../../pages/Events/EventDiscover'
 
-const CategoryOption = (props) => {
-  return (
-    <option value={props.id_categoria}>{props.nombre}</option>
-  )
-}
-// Genera N Opciones de Categorias depeniendo del Sser
-export const CategoryDropdown = (props) => {
-  // Se usara el Estado
+export const CategoryDropdown = ({ setCategorySelected }) => {
   const [categories, setCategories] = useState([])
 
-  // Cuando el estado cambie, se tendra este efecto
   useEffect(() => {
     // Logica: Obtener categorias, peticion asincrona
     const getCategories = async () => {
@@ -22,8 +11,6 @@ export const CategoryDropdown = (props) => {
         // Esperar a resolver la peticion para avanzar
         const dbCateogires = await categoryService.getAllCategories()
         setCategories(dbCateogires)
-        // console.log(dbCateogires)
-        // id={parseInt(value)}
       } catch (error) {
         console.log(error)
       }
@@ -32,12 +19,17 @@ export const CategoryDropdown = (props) => {
     getCategories()
   }, [])
 
+  const handlerOnChange = (event) => {
+    // console.log(event.target.value)
+    setCategorySelected(event.target.value)
+  }
+
   return (
     <>
         {/* Page content */}
         <div className="col-lg-5 col-sm-6">
           <div className="d-flex align-items-center">
-            <select onChange={() => props.setIdSelected((this.target.value))} className="form-select">
+          <select onChange={handlerOnChange} className="form-select">
               {/* ALL CATEGORIES  */}
               <option>Todas las categorias...</option>
               {
@@ -48,5 +40,11 @@ export const CategoryDropdown = (props) => {
           </div>
         </div>
     </>
+  )
+}
+
+const CategoryOption = (props) => {
+  return (
+    <option value={props.id_categoria}>{props.nombre}</option>
   )
 }

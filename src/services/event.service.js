@@ -15,8 +15,16 @@ export const eventService = {
     const { data } = await Axios.put(`${globalConfig.url}/api/eventos/aprobar/${id}`)
     return data
   },
-  getAllEventsByCategory: async (id) => {
-    const { data } = await Axios.get(`http://localhost:4000/eventos/${id}`)
-    return data
+  getAllEventsByCategory: (id) => {
+    // const { data } = await Axios.get(`${globalConfig.url}/api/eventos/${id}`)
+    // return data
+    const categories = [
+      { id: 1, nombre: 'prueba1' },
+      { id: 2, nombre: 'prueba2' },
+      { id: 3, nombre: 'prueba3' },
+      { id: 4, nombre: 'prueba4' }
+    ]
+
+    return categories.filter(c => c.id === id)
   }
 }
