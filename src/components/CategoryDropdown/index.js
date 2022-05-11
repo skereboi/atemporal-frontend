@@ -31,7 +31,7 @@ export const CategoryDropdown = ({ setCategorySelected }) => {
           <div className="d-flex align-items-center">
           <select onChange={handlerOnChange} className="form-select">
               {/* ALL CATEGORIES  */}
-              <option>Todas las categorias...</option>
+              <option value='0'>Todas las categorias...</option>
               {
               categories.map(category => (<CategoryOption key={category.id_categoria} {...category} />))
 

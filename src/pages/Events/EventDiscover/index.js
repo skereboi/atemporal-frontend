@@ -22,9 +22,12 @@ export const EventDiscoverPage = () => {
         if (categorySelected === null) {
           const dbEvents = await eventService.getAllEvents()
           setEvents(dbEvents)
+        } else if (categorySelected === '0') {
+          const dbEvents = await eventService.getAllEvents()
+          setEvents(dbEvents)
         } else {
           console.log(categorySelected, '😀')
-          const dbEvents = await eventService.getAllEventsByCategory(parseInt(categorySelected))
+          const dbEvents = await eventService.getEventsByCategory(parseInt(categorySelected))
           setEvents(dbEvents)
         }
       } catch (error) {
