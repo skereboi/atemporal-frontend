@@ -71,9 +71,6 @@ export const EventDiscoverPage = () => {
             }
           </div>
         {/* Pagination */}
-        {
-          JSON.stringify(events)
-        }
 
         </section>
     </>
