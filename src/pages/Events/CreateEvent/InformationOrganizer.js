@@ -2,7 +2,7 @@ import React from 'react'
 import { useStateMachine } from 'little-state-machine'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import updateAction from './updateAction'
+import { updateCreateEvent } from './actions'
 import { useNavigate } from 'react-router-dom'
 import { SchemaOrganizer } from './schemas'
 import { AlertErrorForm } from '../../../components/AlertErrorForm'
@@ -16,10 +16,11 @@ export const InformationOrganizer = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(SchemaOrganizer)
   })
-  const { actions, state } = useStateMachine({ updateAction })
+  const { actions, state } = useStateMachine({ updateCreateEvent })
   const navigate = useNavigate()
   const onSubmit = (data) => {
-    actions.updateAction(data)
+    actions.updateCreateEvent({ payload: data })
+    console.log(state, 'ORGANIZER 🎢')
     navigate('informacion-evento')
   }
 
@@ -44,7 +45,6 @@ export const InformationOrganizer = () => {
             <input type="text" id="sn"
               className="form-control form-control-lg"
               {...register('celular_principal')}
-              defaultValue={state.celular_principal}
             />
             {errors.celular_principal && (<AlertErrorForm messageError={errors.celular_principal.message} />)}
           </div>
@@ -53,7 +53,6 @@ export const InformationOrganizer = () => {
             <input type="text" id="sn"
               className="form-control form-control-lg"
               {...register('celular_secundario')}
-              defaultValue={state.celular_secundario}
             />
             {errors.celular_secundario && (<AlertErrorForm messageError={errors.celular_secundario.message} />)}
           </div>

@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useStateMachine } from 'little-state-machine'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import updateAction from './updateAction'
+import { updateCreateEvent } from './actions'
 import { useNavigate } from 'react-router-dom'
-import { SchemaOrganizer } from './schemas'
+import { SchemaTickets } from './schemas'
 import { AlertErrorForm } from '../../../components/AlertErrorForm'
 import { FormButtons } from '../../../components/Events/FormButtons'
 import { CreateTicket } from '../../../components/Events/CreateTicket'
@@ -16,18 +16,24 @@ import { paymentService } from '../../../services/paymet.services'
 export const InformationTickets = () => {
   const animatedComponents = makeAnimated()
   const [paymentMethods, setPaymentMethods] = useState([])
-  const { register, handleSubmit, watch, control, formState: { errors } } = useForm({ resolver: yupResolver(SchemaOrganizer) })
+  const { register, handleSubmit, watch, control, formState: { errors } } =
+    useForm(
+      {
+        resolver: yupResolver(SchemaTickets)
+      }
+    )
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'boletos'
   })
-  const { actions } = useStateMachine({ updateAction })
+  const { actions, state } = useStateMachine({ updateCreateEvent })
   const navigate = useNavigate()
   const onSubmit = (data) => {
-    actions.updateAction(data)
-    console.log(data)
-    navigate('resumen')
+    actions.updateCreateEvent({ payload: data })
+    console.log(state, 'ESTADO TICKETS 🐊')
+    navigate('/crear-evento/resumen')
   }
+  console.log(errors, 'ERRROR')
   const habraBoletos = watch('habraBoletos')
   const tipo_cobro = watch('tipo_cobro')
 
@@ -49,7 +55,9 @@ export const InformationTickets = () => {
           <div className="col-sm-12 mb-4">
             <div className="form-check">
               <label htmlFor="tipo_cobro" className="form-label fs-base">¿Es evento de pago?</label>
-              <input type="checkbox" id="tipo_cobro"
+              <input
+                type="checkbox"
+                id="tipo_cobro"
                 className="form-check-input ml-4"
                 {...register('tipo_cobro')}
               />
@@ -63,8 +71,7 @@ export const InformationTickets = () => {
                 <label htmlFor="metodos_pago" className="form-label fs-base">Selecciona los métodos de pagos disponibles para el evento</label>
                 {/* Metodos */}
                 <Controller
-                  name="select"
-                  {...register('metodos_pago')}
+                  name="metodos_pago"
                   control={control}
                   render={({ field }) =>
                     <Select

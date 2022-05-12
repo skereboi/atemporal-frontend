@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
+import { DevTool } from 'little-state-machine-devtools'
 import { AuthGuard } from './components/Auth/AuthGuard'
 import { AuthProvider } from './context/auth.context'
 import { GeneralProvider } from './context/general.context'
@@ -31,15 +32,19 @@ import { InformationTickets } from './pages/Events/CreateEvent/InformationTicket
 import { InformationSummary } from './pages/Events/CreateEvent/InformationSummary'
 import { AproveEventPage } from './pages/Dashboard/AproveEventPage'
 import { ContentLayoutPage } from './pages/Dashboard/ContentLayoutDashboard'
+import { initialStates } from './hooks/useLittleMachine'
 
 initAxiosInterceptors()
-createStore({})
+createStore({
+  createEvent: initialStates.createEvent
+})
 
 // eslint-disable-next-line react/display-name
 export default () => (
   <GeneralProvider>
     <AuthProvider>
       <StateMachineProvider>
+        {process.env.NODE_ENV !== 'production' && <DevTool />}
         <App/>
       </StateMachineProvider>
     </AuthProvider>

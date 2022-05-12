@@ -24,7 +24,7 @@ export const SchemaEvent = yup.object({
     yup.string()
       .required('Campo obligatorio'),
   fecha_evento:
-    yup.date('Debe ser una fecha válida')
+    yup.date()
       .required('Campo obligatorio'),
   hora_inicio:
     yup.string()
@@ -53,7 +53,7 @@ export const SchemaEvent = yup.object({
   categorias:
     yup.array()
       .of(yup.object({
-        id: yup.number().required('Campo inválido')
+        id: yup.string()
       }, 'Debes selecciona una categoria'))
       .required('Campo obligatorio') // Ejemplo categorias [{id: 1}, {id: 2}, {id: 10}]
 })
@@ -64,22 +64,19 @@ export const SchemaTickets = yup.object({
   metodos_pago:
     yup.array()
       .of(yup.object({
-        id: yup.number()
-      })),
+        id: yup.string()
+      }, 'Debes selecciona una categoria')),
   // Ejemplo metodo de pago [{id: 1}, {id: 2}, {id: 10}]
   boletos: yup
     .array()
     .of(
       yup.object({
         nombre:
-          yup.string()
-            .required('Campo obligatorio'),
+          yup.string(),
         cantidad:
-          yup.number()
-            .required('Campo obligatorio'),
+          yup.string(),
         precio:
           yup.string()
-            .required('Campo obligatorio')
       }))
 })
 

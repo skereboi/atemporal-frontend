@@ -1,21 +1,51 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStateMachine } from 'little-state-machine'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import updateAction from './updateAction'
+import { updateCreateEvent } from './actions'
 import { useNavigate } from 'react-router-dom'
 import { SchemaEvent } from './schemas'
 import { AlertErrorForm } from '../../../components/AlertErrorForm'
 import { FormButtons } from '../../../components/Events/FormButtons'
+import { categoryService } from '../../../services/category.service'
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated'
+
 export const InformationEvent = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  // const eventState = {
+  //   nombre_evento: 'LALALA',
+  //   descripcion: 'JEJEJE',
+  //   fecha_evento: '01/01/2022',
+  //   hora_inicio: '10:00',
+  //   hora_final: '10:00',
+  //   lugar: 'jkkjjkd',
+  //   foto_evento: 'mama',
+  //   direccion: 'cuautemoc',
+  //   url_video: 'kjd'
+  // }
+
+  const animatedComponents = makeAnimated()
+  const [categories, setCategories] = useState([])
+
+  const { register, handleSubmit, control, formState: { errors } } = useForm({
     resolver: yupResolver(SchemaEvent)
   })
-  const { actions, state } = useStateMachine({ updateAction })
+  console.log('ERRORS', errors)
+  const { actions, state } = useStateMachine({ updateCreateEvent })
+
+  useEffect(() => {
+    const getPaymentMethods = async () => {
+      const categories = await categoryService.getAllCategories()
+      setCategories(categories.map(c => ({ label: c.nombre, value: c.id_categoria })))
+    }
+    getPaymentMethods()
+  }, [])
+
   const navigate = useNavigate()
   const onSubmit = (data) => {
-    actions.updateAction(data)
-    navigate('informacion-evento')
+    actions.updateCreateEvent({ payload: data })
+    console.log(state, 'ESTADO EVENT 🐊')
+    navigate('/crear-evento/informacion-boletos')
   }
 
   return (
@@ -43,28 +73,27 @@ export const InformationEvent = () => {
           </div>
           <div className="col-sm-4 mb-4">
             <label htmlFor="fecha_evento" className="form-label fs-base">Fecha de evento</label>
-            <input type="text" id="fecha_evento"
+            <input type="date" id="fecha_evento"
               className="form-control form-control-lg"
               {...register('fecha_evento')}
-              defaultValue={state.fecha_evento}
             />
             {errors.fecha_evento && (<AlertErrorForm messageError={errors.fecha_evento.message} />)}
           </div>
           <div className="col-sm-4 mb-4">
             <label htmlFor="hora_inicio" className="form-label fs-base">Hora inicio</label>
-            <input type="text" id="hora_inicio"
+            <input type="time"
+              id="hora_inicial"
               className="form-control form-control-lg"
               {...register('hora_inicio')}
-              defaultValue={state.hora_inicio}
             />
             {errors.hora_inicio && (<AlertErrorForm messageError={errors.hora_inicio.message} />)}
           </div>
           <div className="col-sm-4 mb-4">
             <label htmlFor="hora_final" className="form-label fs-base">Hora final</label>
-            <input type="text" id="hora_final"
+            <input type="time"
+              id="hora_inicial"
               className="form-control form-control-lg"
               {...register('hora_final')}
-              defaultValue={state.hora_final}
             />
             {errors.hora_final && (<AlertErrorForm messageError={errors.hora_final.message} />)}
           </div>
@@ -73,7 +102,6 @@ export const InformationEvent = () => {
             <input type="text" id="lugar"
               className="form-control form-control-lg"
               {...register('lugar')}
-              defaultValue={state.lugar}
             />
             {errors.lugar && (<AlertErrorForm messageError={errors.lugar.message} />)}
           </div>
@@ -82,7 +110,6 @@ export const InformationEvent = () => {
             <input type="text" id="ubicacion_maps"
               className="form-control form-control-lg"
               {...register('ubicacion_maps')}
-              defaultValue={state.ubicacion_maps}
             />
             {errors.ubicacion_maps && (<AlertErrorForm messageError={errors.ubicacion_maps.message} />)}
           </div>
@@ -94,30 +121,43 @@ export const InformationEvent = () => {
             />
             {errors.direccion && (<AlertErrorForm messageError={errors.direccion.message} />)}
           </div>
-          <div className="col-sm-6 mb-4">
+          <div className="col-sm-12 col-md-4 mb-4">
             <label htmlFor="url_video" className="form-label fs-base">Url de video youtube (Opcional)</label>
             <input type="text" id="url_video"
               className="form-control form-control-lg"
               {...register('url_video')}
-              defaultValue={state.url_video}
             />
             {errors.url_video && (<AlertErrorForm messageError={errors.url_video.message} />)}
           </div>
-          <div className="col-sm-6 mb-4">
-            <label htmlFor="itinerario_evento" className="form-label fs-base">Itinerario de evento (.jpg, .png, .pdf). (Opcional)</label>
+          <div className="col-sm-12 col-md-4 mb-4">
+            <label htmlFor="itinerario_evento" className="form-label fs-base">Foto de evento</label>
+            <input type="text" id="itinerario_evento"
+              className="form-control form-control-lg"
+              {...register('foto_evento')}
+            />
+            {errors.foto_evento && (<AlertErrorForm messageError={errors.foto_evento.message} />)}
+          </div>
+          <div className="col-sm-12 col-md-4 mb-4">
+            <label htmlFor="itinerario_evento" className="form-label fs-base">Itinerario de evento (.pdf)</label>
             <input type="text" id="itinerario_evento"
               className="form-control form-control-lg"
               {...register('itinerario_evento')}
-              defaultValue={state.itinerario_evento}
             />
             {errors.itinerario_evento && (<AlertErrorForm messageError={errors.itinerario_evento.message} />)}
           </div>
           <div className="col-sm-12 mb-4">
             <label htmlFor="categorias" className="form-label fs-base">Selecciona las categorias a las que pertenece tu evento</label>
-            <input type="text" id="categorias"
-              className="form-control form-control-lg"
-              {...register('categorias')}
-              defaultValue={state.categorias}
+            <Controller
+              name="categorias"
+              control={control}
+              render={({ field }) =>
+              <Select
+                  {...field}
+                  placeholder="Selecciona tu categoria"
+                  components={animatedComponents}
+                  isMulti
+                  options={categories}
+                />}
             />
             {errors.categorias && (<AlertErrorForm messageError={errors.categorias.message} />)}
           </div>
