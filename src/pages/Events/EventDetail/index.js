@@ -104,7 +104,11 @@ export const EventDetail = () => {
                   <a href="#" className="btn btn-icon btn-secondary btn-linkedin me-2 mb-2">
                     <i className="bx bxl-facebook" />
                   </a>
-                </div> */}
+                </div>
+                <button className="btn mb-2 mr-2 btn-icon btn-pill btn-facebook" type="button">
+                  <span className="btn-inner-icon"><i className="fab fa-twitter"></i></span>
+                  <span className="btn-inner-text">Login with Facebook</span>
+                </button> */}
                 <button className="btn btn-lg btn-outline-secondary">
                   <i className="bx bx-like me-2 lead" />
                   Compartir
