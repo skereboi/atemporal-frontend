@@ -2,8 +2,7 @@ import React from 'react'
 import { AlertErrorForm } from '../../../components/AlertErrorForm'
 
 export const InformationCategory = () => {
-
-    return (
+  return (
         <>
           <h1 className="h2 pt-xl-1 pb-3">Crea una nueva categoría</h1>
           {/* Basic info */}
@@ -20,7 +19,7 @@ export const InformationCategory = () => {
 
               <div className="col-sm-6 mb-4">
                 <label htmlFor="sn" className="form-label fs-base">Estado de la categoría</label>
-                <select class="form-select" aria-label="Default select example">
+                <select className="form-select" aria-label="Default select example">
                     <option selected>Selecciona el estado</option>
                     <option value="1">Activa</option>
                     <option value="2">Inactiva</option>
@@ -28,10 +27,9 @@ export const InformationCategory = () => {
               </div>
             </div>
             <div className="d-flex mb-3">
-              <button type="submit" className="btn btn-primary" >Siguiente</button>
+              <button type="submit" className="btn btn-primary" >Crear</button>
             </div>
           </form>
         </>
-      )
-    }
+  )
 }
