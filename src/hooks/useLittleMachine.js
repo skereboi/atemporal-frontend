@@ -16,7 +16,8 @@ export const initialStates = {
     url_video: '',
     itinerario_evento: '',
     categorias: [],
-    tipo_cobro: '',
+    tipo_cobro: false,
+    habra_boletos: false,
     metodos_pago: [],
     boletos: [],
     acepto_terminos: false

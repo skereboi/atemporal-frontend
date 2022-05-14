@@ -58,26 +58,48 @@ export const SchemaEvent = yup.object({
       .required('Campo obligatorio') // Ejemplo categorias [{id: 1}, {id: 2}, {id: 10}]
 })
 
-export const SchemaTickets = yup.object({
+export const SchemaTickets = yup.object().shape({
   tipo_cobro:
     yup.boolean(),
   metodos_pago:
     yup.array()
-      .of(yup.object({
-        id: yup.string()
-      }, 'Debes selecciona una categoria')),
-  // Ejemplo metodo de pago [{id: 1}, {id: 2}, {id: 10}]
-  boletos: yup
-    .array()
-    .of(
-      yup.object({
-        nombre:
-          yup.string(),
-        cantidad:
-          yup.string(),
-        precio:
-          yup.string()
-      }))
+      .when('tipo_cobro', {
+        is: true,
+        then:
+          yup.array().of(
+            yup.object().shape({
+              label:
+                yup.string()
+                  .required('Label requerido'),
+              value:
+                yup.number()
+                  .required('Value requerido')
+            })
+          ).required('Selecciona un método de pago')
+      }),
+  // Ejemplo metodo de pago [{label: "efectivo"", value: 1}]
+  habra_boletos:
+    yup.boolean(),
+  boletos:
+    yup.array()
+      .when('habra_boletos', {
+        is: true,
+        then:
+          yup.array().of(
+            yup.object().shape({
+              nombre:
+                yup.string()
+                  .min(3)
+                  .required('Nombre requerido'),
+              cantidad:
+                yup.number()
+                  .required('Cantidad requerido'),
+              precio:
+                yup.number()
+                  .required('Precio requerido')
+            })
+          )
+      })
 })
 
 export const SummaryTicket = yup.object({

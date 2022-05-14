@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import { SchemaTickets } from './schemas'
 import { AlertErrorForm } from '../../../components/AlertErrorForm'
 import { FormButtons } from '../../../components/Events/FormButtons'
-import { CreateTicket } from '../../../components/Events/CreateTicket'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 import { paymentService } from '../../../services/paymet.services'
@@ -19,22 +18,25 @@ export const InformationTickets = () => {
   const { register, handleSubmit, watch, control, formState: { errors } } =
     useForm(
       {
-        resolver: yupResolver(SchemaTickets)
+        resolver: yupResolver(SchemaTickets),
+        defaultValues: {
+          boletos: [{ nombre: 'General', cantidad: 10, precio: '0' }]
+        }
       }
     )
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'boletos'
   })
-  const { actions, state } = useStateMachine({ updateCreateEvent })
+  const { actions, state: { createEvent } } = useStateMachine({ updateCreateEvent })
   const navigate = useNavigate()
   const onSubmit = (data) => {
     actions.updateCreateEvent({ payload: data })
-    console.log(state, 'ESTADO TICKETS 🐊')
+    console.log(createEvent, 'ESTADO TICKETS 🐊')
     navigate('/crear-evento/resumen')
   }
   console.log(errors, 'ERRROR')
-  const habraBoletos = watch('habraBoletos')
+  const habra_boletos = watch('habra_boletos')
   const tipo_cobro = watch('tipo_cobro')
 
   useEffect(() => {
@@ -57,27 +59,32 @@ export const InformationTickets = () => {
               <label htmlFor="tipo_cobro" className="form-label fs-base">¿Es evento de pago?</label>
               <input
                 type="checkbox"
+                {...register('tipo_cobro')}
                 id="tipo_cobro"
                 className="form-check-input ml-4"
-                {...register('tipo_cobro')}
+                checked={tipo_cobro || createEvent.tipo_cobro}
               />
             </div>
             {errors.tipo_cobro && (<AlertErrorForm messageError={errors.tipo_cobro.message} />)}
           </div>
           {
-            tipo_cobro && (<>
+            (tipo_cobro || createEvent.tipo_cobro) && (<>
 
               <div className="col-sm-12 mb-4">
-                <label htmlFor="metodos_pago" className="form-label fs-base">Selecciona los métodos de pagos disponibles para el evento</label>
+                <label
+                  htmlFor="metodos_pago"
+                  className="form-label fs-base">
+                  Selecciona los métodos de pagos disponibles para el evento
+                </label>
                 {/* Metodos */}
                 <Controller
                   name="metodos_pago"
                   control={control}
+                  defaultValue={createEvent.metodos_pago}
                   render={({ field }) =>
                     <Select
                       {...field}
                       placeholder="Métodos de pago"
-                      closeMenuOnSelect={false}
                       components={animatedComponents}
                       isMulti
                       options={paymentMethods}
@@ -88,27 +95,98 @@ export const InformationTickets = () => {
               </div>
               <div className="col-sm-12 mb-4">
                 <div className="form-check">
-                  <label htmlFor="habraBoletos" className="form-label fs-base">¿Tendrás varios tipos de boletos?</label>
-                  <input type="checkbox" id="habraBoletos"
+                  <label htmlFor="habra_boletos" className="form-label fs-base">¿Tendrás varios tipos de boletos?</label>
+                  <input
+                    type="checkbox"
+                    {...register('habra_boletos')}
+                    id="habra_boletos"
                     className="form-check-input ml-4"
-                    {...register('habraBoletos')}
+                    checked={habra_boletos || createEvent.habra_boletos}
                   />
                 </div>
               </div>
-
-              {habraBoletos && (
+              {
+                console.log(habra_boletos, tipo_cobro, watch('boletos'))
+              }
+              {errors.boletos && (<AlertErrorForm messageError={errors.boletos.message} />)}
+              {(habra_boletos || createEvent.habra_boletos) && (
                 <>
-                  {fields.map((t, index) => {
-                    return (
-                      <CreateTicket key={t.id} index={index} remove={remove} register={register} />
-                    )
-                  })}
+                  {
+                    fields.map((item, index) => {
+                      return (
+                        <div key={item.id} className='form-control my-2'>
+                          <div className="mb-4">
+                            <label htmlFor="text-input" className="form-label">
+                              Nombre del boleto
+                            </label>
+                            <Controller
+                              name={`boletos.${index}.nombre`}
+                              control={control}
+                              render={({ field }) => (
+                                <input
+                                  {...field}
+                                  className="form-control"
+                                  type="text" id="text-input"
+                                />
+                              )}
+                            />
+                          </div>
+
+                          <div className="mb-4">
+                            <label htmlFor="number-input" className="form-label">
+                              Cantidad de boletos disponibles
+                            </label>
+                            <Controller
+                              name={ `boletos.${index}.cantidad`}
+                              control={control}
+                              render={({ field }) => (
+                                <input
+                                  {...field}
+                                  className="form-control"
+                                  type="number"
+                                  id="cantidad"
+                                />
+                              )}
+                            />
+
+                          </div>
+
+                          <div className="mb-4">
+                            <label htmlFor="number-input" className="form-label">
+                              Precio del boleto (MXN - Peso mexicano)
+                            </label>
+                            <Controller
+                              name={`boletos.${index}.precio`}
+                              control={control}
+                              render={({ field }) => (
+                                <input
+                                  {...field}
+                                  className="form-control"
+                                  type="number"
+                                  id="precio"
+                                />
+                              )}
+                            />
+                          </div>
+
+                          <button
+                            type="button"
+                            className='btn btn-danger btn-sm'
+                            onClick={() => remove(index)}
+                          >
+                            Eliminar boleto
+                          </button>
+                        </div>
+                      )
+                    })
+                  }
                   <button type="button" className='btn btn-secondary btn-lg' onClick={() => append({})}>
                     Agregar boleto
                   </button>
                 </>
               )}
-            </>)
+              </>
+            )
           }
 
         </div>
