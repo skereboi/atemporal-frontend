@@ -75,7 +75,9 @@ export const SchemaTickets = yup.object().shape({
                 yup.number()
                   .required('Value requerido')
             })
-          ).required('Selecciona un método de pago')
+          )
+            .min(1, 'Selecciona al menos un método de pago')
+            .required('Campo obligatorio')
       }),
   // Ejemplo metodo de pago [{label: "efectivo"", value: 1}]
   habra_boletos:
@@ -99,6 +101,8 @@ export const SchemaTickets = yup.object().shape({
                   .required('Precio requerido')
             })
           )
+            .min(1, 'Agrega al menos un boleto')
+            .required('Campo obligatorio')
       })
 })
 

@@ -18,10 +18,8 @@ export const InformationTickets = () => {
   const { register, handleSubmit, watch, control, formState: { errors } } =
     useForm(
       {
-        resolver: yupResolver(SchemaTickets),
-        defaultValues: {
-          boletos: [{ nombre: 'General', cantidad: 10, precio: '0' }]
-        }
+        resolver: yupResolver(SchemaTickets)
+
       }
     )
   const { fields, append, remove } = useFieldArray({
