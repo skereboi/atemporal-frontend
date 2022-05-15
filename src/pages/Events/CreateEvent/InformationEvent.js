@@ -26,12 +26,13 @@ export const InformationEvent = () => {
 
   const animatedComponents = makeAnimated()
   const [categories, setCategories] = useState([])
+  const { actions, state: { createEvent } } = useStateMachine({ updateCreateEvent })
 
   const { register, handleSubmit, control, formState: { errors } } = useForm({
-    resolver: yupResolver(SchemaEvent)
+    resolver: yupResolver(SchemaEvent),
+    defaultValues: createEvent
   })
   console.log('ERRORS', errors)
-  const { actions, state } = useStateMachine({ updateCreateEvent })
 
   useEffect(() => {
     const getPaymentMethods = async () => {
@@ -44,7 +45,6 @@ export const InformationEvent = () => {
   const navigate = useNavigate()
   const onSubmit = (data) => {
     actions.updateCreateEvent({ payload: data })
-    console.log(state, 'ESTADO EVENT 🐊')
     navigate('/crear-evento/informacion-boletos')
   }
 

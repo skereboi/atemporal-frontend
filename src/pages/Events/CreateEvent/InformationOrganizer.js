@@ -12,15 +12,15 @@ export const InformationOrganizer = () => {
   //   celular_principal: '4424747494',
   //   celular_secundario: '4482750190'
   // }
+  const { actions, state: { createEvent } } = useStateMachine({ updateCreateEvent })
 
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(SchemaOrganizer)
+    resolver: yupResolver(SchemaOrganizer),
+    defaultValues: createEvent
   })
-  const { actions, state } = useStateMachine({ updateCreateEvent })
   const navigate = useNavigate()
   const onSubmit = (data) => {
     actions.updateCreateEvent({ payload: data })
-    console.log(state, 'ORGANIZER 🎢')
     navigate('informacion-evento')
   }
 
@@ -29,7 +29,7 @@ export const InformationOrganizer = () => {
       <h1 className="h2 pt-xl-1 pb-3">Información del organizador</h1>
       {/* Basic info */}
       <h2 className="h5 text-primary mb-4">Datos del organizador</h2>
-      <form className="needs-validation border-bottom pb-3 pb-lg-4" onSubmit={handleSubmit(onSubmit)}>
+      <form className="border-bottom pb-3 pb-lg-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="row pb-2">
           <div className="col-sm-12 mb-4">
             <label htmlFor="fn" className="form-label fs-base">Nombre del organizador</label>

@@ -55,6 +55,7 @@ export const SchemaEvent = yup.object({
       .of(yup.object({
         id: yup.string()
       }, 'Debes selecciona una categoria'))
+      .min(1, 'Selecciona al menos una categoria')
       .required('Campo obligatorio') // Ejemplo categorias [{id: 1}, {id: 2}, {id: 10}]
 })
 

@@ -15,18 +15,18 @@ import { paymentService } from '../../../services/paymet.services'
 export const InformationTickets = () => {
   const animatedComponents = makeAnimated()
   const [paymentMethods, setPaymentMethods] = useState([])
+  const { actions, state: { createEvent } } = useStateMachine({ updateCreateEvent })
   const { register, handleSubmit, watch, control, formState: { errors } } =
     useForm(
       {
-        resolver: yupResolver(SchemaTickets)
-
+        resolver: yupResolver(SchemaTickets),
+        defaultValues: createEvent
       }
     )
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'boletos'
   })
-  const { actions, state: { createEvent } } = useStateMachine({ updateCreateEvent })
   const navigate = useNavigate()
   const onSubmit = (data) => {
     actions.updateCreateEvent({ payload: data })
@@ -78,7 +78,6 @@ export const InformationTickets = () => {
                 <Controller
                   name="metodos_pago"
                   control={control}
-                  defaultValue={createEvent.metodos_pago}
                   render={({ field }) =>
                     <Select
                       {...field}
