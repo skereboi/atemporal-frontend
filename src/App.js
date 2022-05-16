@@ -93,7 +93,7 @@ const App = () => {
               <Route element={<ContentLayoutPage/>}>
                 <Route index element={<DashboardHomePage />} />
                 <Route path='aprobar' element={<AproveEventPage />} />
-                <Route path='eventos' element={<EventDiscoverPage />} />
+                <Route path='eventos' element={<EventDiscoverPage isAdmin />} />
                 <Route path="actualizar-evento" element={<UpdateEventPage />} />
                 <Route path="mi-cuenta" element={<AccountLayout />}>
                   <Route index element={<AccountDetail />} />

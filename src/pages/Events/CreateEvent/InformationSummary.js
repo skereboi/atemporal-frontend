@@ -10,8 +10,10 @@ import { mainSchemaCreateEvent } from './schemas'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Link, useNavigate } from 'react-router-dom'
 import { FormButtons } from '../../../components/Events/FormButtons'
+import { eventService } from '../../../services/event.service'
+import { useGeneralApp } from '../../../hooks/useGeneralApp'
 export const InformationSummary = () => {
-  const navigate = useNavigate()
+  const { setErrorMessage, setIsLoading } = useGeneralApp()
   const [submitted, setSubmitted] = useState(false)
   const { actions, state: { createEvent } } = useStateMachine({ clearAction })
   const { register, handleSubmit, control, formState: { errors } } = useForm({
@@ -19,11 +21,48 @@ export const InformationSummary = () => {
     defaultValues: createEvent
   })
   const { fields } = useFieldArray({ control, name: 'boletos' })
-  const onSubmit = (data) => {
-    alert('Backend')
-    setTimeout(() => {
+  const onSubmit = async (data) => {
+    try {
+      setIsLoading(true)
+
+      const eventData = {
+        event: {
+          nombre_organizador: data.nombre_organizador,
+          celular_principal: data.celular_principal,
+          celular_secundario: data.celular_secundario,
+          nombre_evento: data.nombre_evento,
+          fecha_evento: '28-08-22',
+          hora_inicio: data.hora_inicio,
+          hora_final: data.hora_final,
+          lugar: data.lugar,
+          descripcion: data.descripcion,
+          ubicacion_maps: data.ubicacion_maps,
+          direccion: data.direccion,
+          url_video: data.url_video,
+          tipo_cobro: data.tipo_cobro,
+          foto_evento: 'https://upload.wikimedia.org/wikipedia/commons/0/00/ITESM_Campus_Queretaro.jpg',
+          itinerario_evento: data.itinerario_evento
+        },
+        ticket: [...data.boletos],
+        categorias: [...data.categorias.map(c => ({ id: c.value }))]
+      }
+
+      await eventService.createOneEvent(eventData)
       setSubmitted(true)
-    }, 1000)
+      setIsLoading(false)
+      // actions.clearAction({ payload: initialStates })
+    } catch (error) {
+      console.log(error)
+      if (!error.response) {
+        setErrorMessage('⚠️ Servicios desconectados, estamos en mantenimiento ⚠️')
+      }
+      if (error.response.data.msg[0].type) {
+        setErrorMessage('Revisa tu correo')
+      } else {
+        setErrorMessage(error.response.data.msg)
+      }
+      setIsLoading(false)
+    }
   }
   return (
     <>
@@ -32,6 +71,7 @@ export const InformationSummary = () => {
           ? (
             <>
               <p>Tu evento esta revisión</p>
+              <Link to="/eventos">Ver eventos</Link>
               {
                 JSON.stringify(createEvent)
               }

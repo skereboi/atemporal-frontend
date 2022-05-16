@@ -11,13 +11,15 @@ export const EventToAprove = (props) => {
     nombre_evento,
     nombre_organizador,
     foto_evento,
-    id_evento
+    id_evento,
+    setAproved,
+    aproved
   } = props
 
   const handlerAproveEvent = async (e) => {
     try {
       await eventService.aproveEvent(id_evento)
-      alert('Aprobado')
+      setAproved(() => !aproved)
     } catch (error) {
       alert('error')
       console.log(error)

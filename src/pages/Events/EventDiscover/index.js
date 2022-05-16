@@ -6,9 +6,10 @@ import { eventService } from '../../../services/event.service'
 import { useAuth } from '../../../hooks/useAuth'
 import { useLocation } from 'react-router-dom'
 
-export const EventDiscoverPage = () => {
+export const EventDiscoverPage = ({ isAdmin }) => {
   // Estados
   const [events, setEvents] = useState([])
+  const [isRejected, setIsRejected] = useState(false)
   const [categorySelected, setCategorySelected] = useState(null)
 
   // hooks
@@ -35,7 +36,7 @@ export const EventDiscoverPage = () => {
       }
     }
     getEvents()
-  }, [categorySelected])
+  }, [categorySelected, isRejected])
 
   return (
     <>
@@ -67,7 +68,12 @@ export const EventDiscoverPage = () => {
           <div className="row row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-md-4 gy-2">
             {/* ALL EVENTS  */}
             {
-            events.map((event) => (<CardEvent key={event.id_evento} {...event} />))
+            events.map((event) => (
+              <CardEvent
+                setIsRejected={setIsRejected}
+                isRejected={isRejected}
+                isAdmin={isAdmin}
+                key={event.id_evento} {...event} />))
             }
           </div>
         {/* Pagination */}
