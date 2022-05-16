@@ -2,6 +2,7 @@
   "name": "atemporal-frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "@emotion/styled": "^11.8.1",
     "@hookform/resolvers": "^2.8.8",
