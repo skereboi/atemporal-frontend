@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export const SchemaOrganizer = yup.object({
+const schemaTemplateOrganizer = {
   nombre_organizador:
     yup.string()
       .required('Campo obligatorio'),
@@ -14,9 +14,9 @@ export const SchemaOrganizer = yup.object({
       .max(10, 'Máximo 10 digitos')
       .min(10, 'Ingresa un número válido a 10 digitos')
       .required('Campo obligatorio')
-})
+}
 
-export const SchemaEvent = yup.object({
+const schemaTemplateEvent = {
   nombre_evento:
     yup.string()
       .required('Campo obligatorio'),
@@ -57,11 +57,11 @@ export const SchemaEvent = yup.object({
       }, 'Debes selecciona una categoria'))
       .min(1, 'Selecciona al menos una categoria')
       .required('Campo obligatorio') // Ejemplo categorias [{id: 1}, {id: 2}, {id: 10}]
-})
+}
 
-export const SchemaTickets = yup.object().shape({
+const schemaTemplateTickets = {
   tipo_cobro:
-    yup.boolean(),
+  yup.boolean(),
   metodos_pago:
     yup.array()
       .when('tipo_cobro', {
@@ -105,10 +105,21 @@ export const SchemaTickets = yup.object().shape({
             .min(1, 'Agrega al menos un boleto')
             .required('Campo obligatorio')
       })
+}
+const schemaTemplateSummary = {
+  acepto_terminos: yup.boolean()
+    .oneOf([true], 'Debes aceptar los términos y condiciones')
+    .required('Debes aceptar los términos')
+}
+
+export const mainSchemaCreateEvent = yup.object({
+  ...schemaTemplateOrganizer,
+  ...schemaTemplateEvent,
+  ...schemaTemplateTickets,
+  ...schemaTemplateSummary
 })
 
-export const SummaryTicket = yup.object({
-  acepto_terminos:
-    yup.boolean()
-      .oneOf([true], 'Debes aceptar los términos y condiciones')
-})
+export const SummaryTicket = yup.object(schemaTemplateSummary)
+export const SchemaEvent = yup.object(schemaTemplateEvent)
+export const SchemaTickets = yup.object(schemaTemplateTickets)
+export const SchemaOrganizer = yup.object(schemaTemplateOrganizer)

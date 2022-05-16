@@ -33,7 +33,6 @@ export const InformationTickets = () => {
     console.log(createEvent, 'ESTADO TICKETS 🐊')
     navigate('/crear-evento/resumen')
   }
-  console.log(errors, 'ERRROR')
   const habra_boletos = watch('habra_boletos')
   const tipo_cobro = watch('tipo_cobro')
 
@@ -60,7 +59,6 @@ export const InformationTickets = () => {
                 {...register('tipo_cobro')}
                 id="tipo_cobro"
                 className="form-check-input ml-4"
-                checked={tipo_cobro || createEvent.tipo_cobro}
               />
             </div>
             {errors.tipo_cobro && (<AlertErrorForm messageError={errors.tipo_cobro.message} />)}
@@ -98,13 +96,10 @@ export const InformationTickets = () => {
                     {...register('habra_boletos')}
                     id="habra_boletos"
                     className="form-check-input ml-4"
-                    checked={habra_boletos || createEvent.habra_boletos}
                   />
                 </div>
               </div>
-              {
-                console.log(habra_boletos, tipo_cobro, watch('boletos'))
-              }
+
               {errors.boletos && (<AlertErrorForm messageError={errors.boletos.message} />)}
               {(habra_boletos || createEvent.habra_boletos) && (
                 <>
