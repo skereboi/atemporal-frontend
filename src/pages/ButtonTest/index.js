@@ -2,6 +2,7 @@
 /* eslint-disable eol-last */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
+import Axios from 'axios'
 
 export const ButtonTest = () => {
   const [fileInputState, setFileInputState] = useState('')
@@ -28,11 +29,11 @@ export const ButtonTest = () => {
 
   const uploadImage = async (base64EncodedImage) => {
     console.log(base64EncodedImage)
-
     try {
-      await fetch('/api/upload', {
+      await fetch('http://localhost:3001/api/upload', {
         method: 'POST',
-        body: JSON.stringify({ data: base64EncodedImage })
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { 'Content-type': 'application/json' }
       })
     } catch (error) {
       console.error(error)
