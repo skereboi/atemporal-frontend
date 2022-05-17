@@ -7,7 +7,7 @@ export const AsideMenu = () => {
   const { user } = useAuth()
   return (
     <aside className="border-end pb-5 mt-n5">
-      <div className="position-fixed top-0 mb-5">
+      <div className="position-sticky top-0 mb-5">
         <div className="text-center pt-5">
           <div className="d-table position-relative mx-auto mt-2 mt-lg-4 pt-5 mb-3">
             <b>Administrador</b>

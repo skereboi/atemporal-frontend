@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { EventToAprove } from '../../../components/EventToAprove'
-import { eventService } from '../../../services/event.service'
+import { EventToAprove } from '../../../../components/EventToAprove'
+import { eventService } from '../../../../services/event.service'
 
 export const AproveEventPage = () => {
   const [aproved, setAproved] = useState(false)

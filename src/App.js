@@ -30,11 +30,14 @@ import { StateMachineProvider, createStore } from 'little-state-machine'
 import { InformationOrganizer } from './pages/Events/CreateEvent/InformationOrganizer'
 import { InformationTickets } from './pages/Events/CreateEvent/InformationTickets'
 import { InformationSummary } from './pages/Events/CreateEvent/InformationSummary'
-import { AproveEventPage } from './pages/Dashboard/AproveEventPage'
+import { AproveEventPage } from './pages/Dashboard/Events/AproveEventPage'
 import { ContentLayoutPage } from './pages/Dashboard/ContentLayoutDashboard'
 import { initialStates } from './hooks/useLittleMachine'
 import { ButtonTest } from './pages/ButtonTest'
-import { CreateUsers } from './pages/Dashboard/CreateAdmin'
+import { CreateUsers } from './pages/Dashboard/Users/CreateAdmin'
+import { ListCategories } from './pages/Dashboard/Categories/ListCategories'
+import { ListUsers } from './pages/Dashboard/Users/ListUsers'
+import { EditUsers } from './pages/Dashboard/Users/EditUser'
 
 initAxiosInterceptors()
 createStore({
@@ -96,7 +99,16 @@ const App = () => {
                 <Route path='aprobar' element={<AproveEventPage />} />
                 <Route path='eventos' element={<EventDiscoverPage isAdmin />} />
                 <Route path="actualizar-evento" element={<UpdateEventPage />} />
-                <Route path="usuarios" element={<CreateUsers />} />
+                <Route path='usuarios'>
+                  <Route index element={<ListUsers />} />
+                  <Route path="crear" element={<CreateUsers />} />
+                  <Route path="editar/:id" element={<EditUsers />} />
+                </Route>
+                <Route path='categorias'>
+                  <Route index element={<ListCategories />} />
+                  <Route path="crear" element={<CreateUsers />} />
+                  <Route path="actualizar/:id" element={<CreateUsers />} />
+                </Route>
               </Route>
               <Route path="mi-cuenta" element={<AccountLayout />}>
                 <Route index element={<AccountDetail />} />

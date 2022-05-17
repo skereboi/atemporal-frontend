@@ -193,6 +193,13 @@ export const data = {
       },
       {
         id: 4,
+        title: 'Categorias',
+        pathname: 'categorias',
+        link: 'categorias',
+        icon: 'bx bx-category'
+      },
+      {
+        id: 5,
         title: 'Usuarios',
         pathname: 'usuarios',
         link: 'usuarios',
