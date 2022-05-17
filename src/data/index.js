@@ -104,29 +104,99 @@ export const data = {
     ]
   },
   menuAccount: {
-    title: 'Información de cuenta',
+    general: {
+      title: 'Información de cuenta',
+      subtitle: 'Detalles',
+      options: [
+        {
+          id: 1,
+          title: 'Datos de cuenta',
+          pathname: '/mi-cuenta',
+          link: '',
+          icon: 'bx bxs-user-detail'
+        },
+        {
+          id: 2,
+          title: 'Seguridad',
+          pathname: 'cambiar-password',
+          link: 'cambiar-password',
+          icon: 'bx bx-key'
+        },
+        {
+          id: 3,
+          title: 'Mis eventos',
+          pathname: 'eventos',
+          link: 'eventos',
+          icon: 'bx bx-party'
+        },
+        {
+          id: 4,
+          title: 'Métodos de pago',
+          pathname: 'metodos-pago',
+          link: 'eventos',
+          icon: 'bx bx-credit-card-alt'
+        }
+      ]
+    },
+    admin: {
+      title: 'Información de cuenta',
+      subtitle: 'Detalles',
+      options: [
+        {
+          id: 1,
+          title: 'Datos de cuenta',
+          pathname: '',
+          link: '',
+          icon: 'bx bxs-user-detail'
+        },
+        {
+          id: 2,
+          title: 'Seguridad',
+          pathname: 'cambiar-password',
+          link: 'cambiar-password',
+          icon: 'bx bx-key'
+        },
+        {
+          id: 3,
+          title: 'Mis eventos',
+          pathname: 'eventos',
+          link: 'eventos',
+          icon: 'bx bx-party'
+        }
+      ]
+    }
+  },
+  menuDashboard: {
+    title: 'Administrador',
     subtitle: 'Detalles',
     options: [
       {
         id: 1,
-        title: 'Datos de cuenta',
-        pathname: '/mi-cuenta',
+        title: 'Home',
+        pathname: '/dashboard',
         link: '',
-        icon: 'bx bxs-user-detail'
+        icon: 'bx bxs-home'
       },
       {
         id: 2,
-        title: 'Seguridad',
-        pathname: 'cambiar-password',
-        link: 'cambiar-password',
-        icon: 'bx bx-key'
+        title: 'Aprobar eventos',
+        pathname: 'aprobar',
+        link: '',
+        icon: 'bx bxs-check-circle'
       },
       {
         id: 3,
-        title: 'Mis eventos',
+        title: 'Eventos aprobados',
         pathname: 'eventos',
         link: 'eventos',
-        icon: 'bx bx-party'
+        icon: 'bx bx-list-check'
+      },
+      {
+        id: 4,
+        title: 'Usuarios',
+        pathname: 'usuarios',
+        link: 'usuarios',
+        icon: 'bx bx-user-plus'
       }
     ]
   }

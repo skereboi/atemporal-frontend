@@ -34,6 +34,7 @@ import { AproveEventPage } from './pages/Dashboard/AproveEventPage'
 import { ContentLayoutPage } from './pages/Dashboard/ContentLayoutDashboard'
 import { initialStates } from './hooks/useLittleMachine'
 import { ButtonTest } from './pages/ButtonTest'
+import { CreateUsers } from './pages/Dashboard/CreateAdmin'
 
 initAxiosInterceptors()
 createStore({
@@ -95,11 +96,12 @@ const App = () => {
                 <Route path='aprobar' element={<AproveEventPage />} />
                 <Route path='eventos' element={<EventDiscoverPage isAdmin />} />
                 <Route path="actualizar-evento" element={<UpdateEventPage />} />
-                <Route path="mi-cuenta" element={<AccountLayout />}>
-                  <Route index element={<AccountDetail />} />
-                  <Route path='cambiar-password' element={<AccountPassword />} />
-                  <Route path='eventos' element={<AccountEvents />} />
-                </Route>
+                <Route path="usuarios" element={<CreateUsers />} />
+              </Route>
+              <Route path="mi-cuenta" element={<AccountLayout />}>
+                <Route index element={<AccountDetail />} />
+                <Route path='cambiar-password' element={<AccountPassword />} />
+                <Route path='eventos' element={<AccountEvents />} />
               </Route>
             </Route>
           </Route>
