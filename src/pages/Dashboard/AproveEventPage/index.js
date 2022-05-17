@@ -3,6 +3,7 @@ import { EventToAprove } from '../../../components/EventToAprove'
 import { eventService } from '../../../services/event.service'
 
 export const AproveEventPage = () => {
+  const [aproved, setAproved] = useState(false)
   const [eventsToAprove, setEventsToAprove] = useState([])
 
   useEffect(() => {
@@ -12,7 +13,7 @@ export const AproveEventPage = () => {
       console.log('eefect')
     }
     getEvents()
-  }, [])
+  }, [aproved])
   return (
     <>
       {/* Page content */}
@@ -25,7 +26,7 @@ export const AproveEventPage = () => {
         </div>
         {/* Events */}
         {
-          eventsToAprove.map(e => (<EventToAprove key={e.nombre_evento} {...e} />))
+          eventsToAprove.map(e => (<EventToAprove key={e.nombre_evento} {...e} setAproved={setAproved} aproved={aproved} />))
         }
 
         {/* Pagination */}

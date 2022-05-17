@@ -8,7 +8,7 @@ export const CreateTicket = ({ index, remove, register }) => {
           Nombre del boleto
         </label>
         <input
-          {...register('nombre')}
+          {...register(`boletos.${index}.nombre`)}
           className="form-control"
           type="text" id="text-input"
         />
@@ -19,7 +19,7 @@ export const CreateTicket = ({ index, remove, register }) => {
           Cantidad de boletos disponibles
         </label>
         <input
-          {...register('cantidad')}
+          {...register(`boletos.${index}.cantidad`)}
           className="form-control"
           type="number"
           id="cantidad"
@@ -31,7 +31,7 @@ export const CreateTicket = ({ index, remove, register }) => {
           Precio del boleto (MXN - Peso mexicano)
         </label>
         <input
-          {...register('precio')}
+          {...register(`boletos.${index}.precio`)}
           className="form-control"
           type="number"
           id="precio"

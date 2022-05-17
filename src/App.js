@@ -33,6 +33,7 @@ import { InformationSummary } from './pages/Events/CreateEvent/InformationSummar
 import { AproveEventPage } from './pages/Dashboard/AproveEventPage'
 import { ContentLayoutPage } from './pages/Dashboard/ContentLayoutDashboard'
 import { initialStates } from './hooks/useLittleMachine'
+import { ButtonTest } from './pages/ButtonTest'
 
 initAxiosInterceptors()
 createStore({
@@ -67,6 +68,7 @@ const App = () => {
             <Route path="cambiar-password/:idCode" element={<ChangePasswordPage />} />
             <Route path='eventos' element={<EventDiscoverPage />} />
             <Route path='eventos/:idEvento' element={<EventDetail />} />
+            <Route path='buttontest' element={<ButtonTest />} />
             {/* Private routes general user */}
             <Route element={<AuthGuard typeUser='general' />}>
               <Route path="crear-evento" element={<EventLayout />}>
@@ -91,7 +93,7 @@ const App = () => {
               <Route element={<ContentLayoutPage/>}>
                 <Route index element={<DashboardHomePage />} />
                 <Route path='aprobar' element={<AproveEventPage />} />
-                <Route path='eventos' element={<EventDiscoverPage />} />
+                <Route path='eventos' element={<EventDiscoverPage isAdmin />} />
                 <Route path="actualizar-evento" element={<UpdateEventPage />} />
                 <Route path="mi-cuenta" element={<AccountLayout />}>
                   <Route index element={<AccountDetail />} />

@@ -3,7 +3,7 @@ const globalConfig = {
     url: 'http://localhost:4000'
   },
   PRODUCTION: {
-    url: 'https://dry-plateau-91665.herokuapp.com'
+    url: 'https://atemporal-backend-3lcft8473-danielcusanchez.vercel.app/'
   }
 }
 const MODE_CONFIG =
