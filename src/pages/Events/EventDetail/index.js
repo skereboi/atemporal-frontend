@@ -105,14 +105,11 @@ export const EventDetail = () => {
                     <i className="bx bxl-facebook" />
                   </a>
                 </div> */}
-                <button className="btn btn-lg btn-outline-secondary">
-                  <i className="bx bx-like me-2 lead" />
+                <button className="btn btn-lg btn-outline-secondary" >
+                  <i className="bx bxl-facebook" />
+                  <a href={'https://www.facebook.com/sharer.php?u='}>
                   Compartir
-                  <li>
-                    <a href={'https://www.facebook.com/sharer.php?u=https://flone-v1.estori.co/product/61577c85460a89000986fddc'}>
-                  <i className="fa fa-facebook" />
-                    </a>
-                  </li>
+                  </a>
                 </button>
               </div>
             </div>
