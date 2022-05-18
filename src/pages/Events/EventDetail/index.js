@@ -107,7 +107,7 @@ export const EventDetail = () => {
                 </div> */}
                 <button className="btn btn-lg btn-outline-secondary" >
                   <i className="bx bxl-facebook" />
-                  <a href={'https://www.facebook.com/sharer.php?u='}>
+                  <a href={'https://www.facebook.com/sharer.php?u=mieventoenatemporal.com'}>
                   Compartir
                   </a>
                 </button>
