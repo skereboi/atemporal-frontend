@@ -1,6 +1,45 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../../hooks/useAuth'
+import { useGeneralApp } from '../../../hooks/useGeneralApp'
+import { whoIamService } from '../../../services/auth.service'
+import { userService } from '../../../services/user.service'
 export const AccountDetail = () => {
+  const { isLoading, setIsLoading } = useGeneralApp()
+
+  const { user } = useAuth()
+  const [isUpdated, setIsUpdated] = useState(false)
+
+  useEffect(() => {
+    const getAccountUser = async () => {
+      try {
+        await whoIamService()
+      } catch (error) {
+        alert('Error')
+        console.log(error)
+      }
+    }
+    getAccountUser()
+  }, [isUpdated])
+
+  const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: user })
+
+  const onSubmit = async (data) => {
+    try {
+      setIsLoading(true)
+      console.log(data)
+      await userService.updateOneUser(parseInt(user.id_usuario), data)
+      setIsUpdated(!isUpdated)
+      alert('Actualizado')
+      setIsLoading(false)
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false)
+    }
+  }
+
   return (
     <>
       {/* Account details */}
@@ -8,25 +47,37 @@ export const AccountDetail = () => {
         <h1 className="h2 pt-xl-1 pb-3">Detalle de cuenta</h1>
         {/* Basic info */}
         <h2 className="h5 text-primary mb-4">Información</h2>
-        <form className="needs-validation border-bottom pb-3 pb-lg-4" noValidate>
+        <form className="border-bottom pb-3 pb-lg-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="row pb-2">
             <div className="col-sm-12 mb-4">
               <label htmlFor="nombre" className="form-label fs-base">Nombre</label>
-              <input type="text" id="nombre" className="form-control form-control-lg" />
+              <input
+                type="text" id="nombre"
+                className="form-control form-control-lg"
+                { ...register('nombre')}
+              />
             </div>
 
             <div className="col-sm-6 mb-4">
               <label htmlFor="email" className="form-label fs-base">Correo electrónico</label>
-              <input type="email" id="email" className="form-control form-control-lg" />
+              <input type="email"
+                id="email"
+                className="form-control form-control-lg"
+                {...register('email')}
+              />
             </div>
             <div className="col-sm-6 mb-4">
               <label htmlFor="phone" className="form-label fs-base">Celular <small className="text-muted">(Opcional)</small></label>
-              <input type="text" id="phone" className="form-control form-control-lg" />
+              <input type="text"
+                id="phone"
+                className="form-control form-control-lg"
+                {...register('celular')}
+              />
             </div>
           </div>
           <div className="d-flex mb-3">
-            <button type="reset" className="btn btn-secondary me-3">Cancel</button>
-            <button type="submit" className="btn btn-primary">Guardar cambios</button>
+            <button type="reset" disabled={isLoading} className="btn btn-secondary me-3">Cancel</button>
+            <button type="submit" disabled={isLoading} className="btn btn-primary">Guardar cambios</button>
           </div>
         </form>
         {/* Change password account */}

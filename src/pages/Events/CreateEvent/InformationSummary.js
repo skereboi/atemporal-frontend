@@ -40,7 +40,7 @@ export const InformationSummary = () => {
           direccion: data.direccion,
           url_video: data.url_video,
           tipo_cobro: data.tipo_cobro,
-          foto_evento: 'https://upload.wikimedia.org/wikipedia/commons/0/00/ITESM_Campus_Queretaro.jpg',
+          foto_evento: data.foto_evento,
           itinerario_evento: data.itinerario_evento
         },
         ticket: [...data.boletos],

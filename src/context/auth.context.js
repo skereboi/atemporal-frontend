@@ -72,6 +72,7 @@ export const AuthProvider = (props) => {
         if (token) {
           try {
             const user = await whoIamService(token)
+            console.log('WHO_I_AM_INIT')
             dispatch({
               type: 'INITIALIZE',
               payload: {

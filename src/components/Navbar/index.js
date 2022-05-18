@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
-import { MenuAuthenticated } from '../MenuAuthenticated'
+import { Profile } from '../Profile'
 
 export const Navbar = () => {
   const { isAuthenticated } = useAuth()
@@ -12,7 +12,7 @@ export const Navbar = () => {
           Atemporal
         </Link>
         {
-          !isAuthenticated ? (<PublicButtons />) : <MenuAuthenticated />
+          !isAuthenticated ? (<PublicButtons />) : <Profile/>
         }
       </div>
     </header>
