@@ -1,8 +1,28 @@
+/* eslint-disable camelcase */
 import React from 'react'
+import { userService } from '../../../services/user.service'
 
 export const Modal = (props) => {
+  const {
+    index,
+    id_usuario,
+    setIsDeleted,
+    isDeleted
+  } = props
+  const handlerRemove = async () => {
+    try {
+      await userService.deleteOneUser(id_usuario)
+      setIsDeleted(() => !isDeleted)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
-    <div className="modal fade" id={`modal_${props.index}`} tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className="modal fade" id={`modal_${index}`}
+      tabIndex={-1}
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
@@ -15,7 +35,14 @@ export const Modal = (props) => {
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-info" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" className="btn btn-danger">Si, eliminar</button>
+            <button
+              type="button"
+              className="btn btn-danger"
+              data-bs-dismiss="modal"
+              onClick={handlerRemove}
+            >
+              Si, eliminar
+            </button>
           </div>
         </div>
       </div>

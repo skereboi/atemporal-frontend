@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { AlertErrorForm } from '../AlertErrorForm'
 import './style.scss'
 
 export const InputPassword = ({
@@ -26,10 +27,7 @@ export const InputPassword = ({
             }
           </label>
         </div>
-        <div>
-          {errors[type]?.message}
-        </div>
-
+        <AlertErrorForm messageError={errors[type]?.message} />
       </div>
       {/* Password visibility toggle */}
 

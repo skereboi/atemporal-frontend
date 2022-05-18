@@ -2,21 +2,32 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import { AlertErrorForm } from '../../../../components/AlertErrorForm'
 import { InputPassword } from '../../../../components/InputPassword'
 import { useGeneralApp } from '../../../../hooks/useGeneralApp'
+import { userService } from '../../../../services/user.service'
 import { schemaCreateUser } from './schemaUser'
 
 export const CreateUsers = () => {
   const { setErrorMessage, isLoading, setIsLoading } = useGeneralApp()
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schemaCreateUser)
   })
 
   const onSubmit = async (data) => {
     setIsLoading(true)
+    const userAdmin = {
+      nombre: data.nombre,
+      email: data.email,
+      celular: data.celular,
+      password: data.password,
+      typeUser: 'admin'
+    }
 
     try {
+      await userService.createOneUser(userAdmin)
       setIsLoading(false)
+      reset()
     } catch (error) {
       setIsLoading(false)
       if (error.response.data.msg[0].type) {
@@ -40,32 +51,28 @@ export const CreateUsers = () => {
         <div className="col-md-6">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
-              <div className="col-sm-6">
+              <div className="col-12">
                 <div className="position-relative mb-4">
                   <label htmlFor="name" className="form-label fs-base">
                     Nombre completo</label>
                   <input type="text" id="name" className="form-control form-control-lg" {...register('nombre')} autoComplete="off" />
                   <div>
-                    {errors.nombre?.message}
+                    <AlertErrorForm messageError={errors.nombre?.message} />
                   </div>
                 </div>
               </div>
-              <div className="col-sm-6">
+              <div className="col-12">
                 <div className="position-relative mb-4">
                   <label htmlFor="email" className="form-label fs-base">Correo electrónico</label>
                   <input type="email" id="email" className="form-control form-control-lg" {...register('email')} autoComplete="off" />
-                  <div>
-                    {errors.email?.message}
-                  </div>
+                  <AlertErrorForm messageError={errors.email?.message}/>
                 </div>
               </div>
               <div className="col-12 mb-4">
                 <label htmlFor="celular" className="form-label fs-base">Celular</label>
                 <div className="celular-toggle">
                   <input type="celular" id="celular" className="form-control form-control-lg" {...register('celular')} autoComplete="off" />
-                  <div>
-                    {errors.celular?.message}
-                  </div>
+                  <AlertErrorForm messageError={errors.celular?.message} />
                 </div>
               </div>
               <InputPassword register={register} errors={errors} />

@@ -1,10 +1,14 @@
+/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react'
 import { userService } from '../../../../services/user.service'
 import { Link } from 'react-router-dom'
 import { Modal } from '../../../../components/Dashboard/Modal'
+import { useAuth } from '../../../../hooks/useAuth'
 
 export const ListUsers = () => {
+  const { user } = useAuth()
   const [users, setUsers] = useState([])
+  const [isDeleted, setIsDeleted] = useState(false)
 
   useEffect(() => {
     const getAllUsers = async () => {
@@ -17,7 +21,7 @@ export const ListUsers = () => {
     }
 
     getAllUsers()
-  }, [users])
+  }, [isDeleted])
   return (
     <>
       {/* Basic table */}
@@ -40,31 +44,41 @@ export const ListUsers = () => {
             </tr>
           </thead>
           {
-            users.map((u, index) => <RowTable key={u.usuario_id} {...u} index={index} />)
+            users.map((u, index) =>
+              <RowTable key={index} {...u} index={index} user={user} />)
           }
         </table>
       </div>
       {
-        users.map((u, index) => <Modal key={u.email} {...u} index={index} />)
+        users.map((u, index) =>
+          <Modal key={u.email}
+            {...u} index={index}
+            setIsDeleted={setIsDeleted}
+            isDeleted={isDeleted}
+          />
+        )
       }
     </>
   )
 }
 const RowTable = (props) => {
+  const { user, nombre, email, celular, id_usuario } = props
   return (
     <tbody>
       <tr>
-        <td>{ props.nombre }</td>
-        <td>{props.email}</td>
-        <td>{props.celular}</td>
+        <td>{ nombre }</td>
+        <td>{email}</td>
+        <td>{celular}</td>
         <td className='d-flex justify-content-around'>
-          <Link to={`editar/${props.id_usuario}`} className='btn btn-sm btn-info mr-4'>
+          <Link to={`editar/${id_usuario}`}
+            className={`btn btn-sm btn-info ${user.email === email && 'disabled'} mr-4`}>
             <i className="bx bx-edit" />
           </Link>
 
           <button
             className='btn btn-sm btn-danger'
             type="button" data-bs-toggle="modal"
+            disabled={user.email === email}
             data-bs-target={`#modal_${props.index}`}>
             <i className="bx bxs-trash" />
           </button>
