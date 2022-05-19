@@ -11,24 +11,35 @@ export const EventDiscoverPage = ({ isAdmin }) => {
   const [events, setEvents] = useState([])
   const [isRejected, setIsRejected] = useState(false)
   const [categorySelected, setCategorySelected] = useState(null)
+  const [textToFind, setTextToFind] = useState(null)
 
   // hooks
   const location = useLocation()
   const { user } = useAuth()
 
-  // Trae todas los eventos
+  // Efectos
   useEffect(() => {
     const getEvents = async () => {
       try {
-        if (categorySelected === null) {
+        const isDropDefault = ((categorySelected === null) || (categorySelected === '0'))
+        // console.log('DropdownDefault: ' + isDropDefault)
+        const isTextEmpty = ((textToFind === null) || (textToFind === ''))
+        // console.log('Text Empty: ' + isTextEmpty)
+        // Efecto por defecto
+        if (isDropDefault) {
           const dbEvents = await eventService.getAllEvents()
           setEvents(dbEvents)
-        } else if (categorySelected === '0') {
-          const dbEvents = await eventService.getAllEvents()
-          setEvents(dbEvents)
-        } else {
+        }
+        // Efecto con categoria seleccionada
+        if (!isDropDefault) {
           console.log(categorySelected, '😀')
           const dbEvents = await eventService.getEventsByCategory(parseInt(categorySelected))
+          setEvents(dbEvents)
+        }
+        // Efecto con teexto ingresado
+        if (!isTextEmpty) {
+          console.log('Text Input: ' + textToFind + ' 🤪')
+          const dbEvents = await eventService.getEventsByTextSearch(textToFind)
           setEvents(dbEvents)
         }
       } catch (error) {
@@ -36,7 +47,11 @@ export const EventDiscoverPage = ({ isAdmin }) => {
       }
     }
     getEvents()
-  }, [categorySelected, isRejected])
+  }, [categorySelected, isRejected, textToFind])
+
+  const handlerOnSubmit = (event) => {
+    event.target.preventDefault()
+  }
 
   return (
     <>
@@ -56,9 +71,9 @@ export const EventDiscoverPage = ({ isAdmin }) => {
             {
               user?.typeUser === 'general' && (
                 <div className="col-lg-7 col-md-8">
-                <form className="row gy-2">
+                <form className="row gy-2" onSubmit={handlerOnSubmit}>
                   <CategoryDropdown setCategorySelected={setCategorySelected} />
-                  <TextFinder />
+                  <TextFinder setTextToFind={setTextToFind} />
                 </form>
                 </div>
               )
