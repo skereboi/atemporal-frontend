@@ -2,10 +2,14 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import { AlertErrorForm } from '../../../components/AlertErrorForm'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useAuth } from '../../../hooks/useAuth'
 import { useGeneralApp } from '../../../hooks/useGeneralApp'
 import { whoIamService } from '../../../services/auth.service'
 import { userService } from '../../../services/user.service'
+import { schemaUpdateUser } from './schemaDetail'
+import { ClabeInterbancaria } from './ClabeInterbancari'
 export const AccountDetail = () => {
   const { isLoading, setIsLoading } = useGeneralApp()
 
@@ -24,7 +28,10 @@ export const AccountDetail = () => {
     getAccountUser()
   }, [isUpdated])
 
-  const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: user })
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schemaUpdateUser),
+    defaultValues: user
+  })
 
   const onSubmit = async (data) => {
     try {
@@ -32,8 +39,8 @@ export const AccountDetail = () => {
       console.log(data)
       await userService.updateOneUser(parseInt(user.id_usuario), data)
       setIsUpdated(!isUpdated)
-      alert('Actualizado')
       setIsLoading(false)
+      location.reload()
     } catch (error) {
       console.log(error)
       setIsLoading(false)
@@ -50,14 +57,16 @@ export const AccountDetail = () => {
         <form className="border-bottom pb-3 pb-lg-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="row pb-2">
             <div className="col-sm-12 mb-4">
-              <label htmlFor="nombre" className="form-label fs-base">Nombre</label>
+              <label htmlFor="nombre" className="form-label fs-base">
+                Nombre
+              </label>
               <input
                 type="text" id="nombre"
                 className="form-control form-control-lg"
                 { ...register('nombre')}
               />
+              <AlertErrorForm messageError={errors.nombre?.message} />
             </div>
-
             <div className="col-sm-6 mb-4">
               <label htmlFor="email" className="form-label fs-base">Correo electrónico</label>
               <input type="email"
@@ -65,6 +74,7 @@ export const AccountDetail = () => {
                 className="form-control form-control-lg"
                 {...register('email')}
               />
+              <AlertErrorForm messageError={errors.email?.message} />
             </div>
             <div className="col-sm-6 mb-4">
               <label htmlFor="phone" className="form-label fs-base">Celular <small className="text-muted">(Opcional)</small></label>
@@ -73,6 +83,7 @@ export const AccountDetail = () => {
                 className="form-control form-control-lg"
                 {...register('celular')}
               />
+              <AlertErrorForm messageError={errors.celular?.message} />
             </div>
           </div>
           <div className="d-flex mb-3">
@@ -80,6 +91,8 @@ export const AccountDetail = () => {
             <button type="submit" disabled={isLoading} className="btn btn-primary">Guardar cambios</button>
           </div>
         </form>
+        {/* Change clabe interbancaria */}
+        <ClabeInterbancaria/>
         {/* Change password account */}
         <div className="form-password mb-4">
           <h2 className="h5 text-primary pt-1 pt-lg-3 mt-4">Seguridad</h2>

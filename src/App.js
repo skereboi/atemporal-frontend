@@ -40,6 +40,7 @@ import { EditUsers } from './pages/Dashboard/Users/EditUser'
 import { EditCategory } from './pages/Dashboard/Categories/EditCategory'
 import { AproveEvents } from './pages/Dashboard/Events/AproveEvents'
 import { CreateCategories } from './pages/Dashboard/Categories/CreateAdmin'
+import { AccountPublications } from './pages/Account/AccountPublications'
 
 initAxiosInterceptors()
 createStore({
@@ -91,7 +92,8 @@ const App = () => {
                 <Route index element={<AccountDetail/>}/>
                 <Route path='cambiar-password' element={<AccountPassword/>}/>
                 <Route path='metodos-pago' element={<AccountPayment/>}/>
-                <Route path='eventos' element={<AccountEvents/>}/>
+                <Route path='eventos' element={<AccountEvents />} />
+                <Route path='publicaciones' element={<AccountPublications />} />
               </Route>
             </Route>
             {/* Private routes admin */}
@@ -115,7 +117,6 @@ const App = () => {
               <Route path="mi-cuenta" element={<AccountLayout />}>
                 <Route index element={<AccountDetail />} />
                 <Route path='cambiar-password' element={<AccountPassword />} />
-                <Route path='eventos' element={<AccountEvents />} />
               </Route>
             </Route>
           </Route>

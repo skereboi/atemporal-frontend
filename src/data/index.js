@@ -131,6 +131,13 @@ export const data = {
         },
         {
           id: 4,
+          title: 'Mis publicaciones',
+          pathname: 'publicaciones',
+          link: 'eventos',
+          icon: 'bx bx-calendar-event'
+        },
+        {
+          id: 5,
           title: 'Métodos de pago',
           pathname: 'metodos-pago',
           link: 'eventos',
@@ -155,13 +162,6 @@ export const data = {
           pathname: 'cambiar-password',
           link: 'cambiar-password',
           icon: 'bx bx-key'
-        },
-        {
-          id: 3,
-          title: 'Mis eventos',
-          pathname: 'eventos',
-          link: 'eventos',
-          icon: 'bx bx-party'
         }
       ]
     }
