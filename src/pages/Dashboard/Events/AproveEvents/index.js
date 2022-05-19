@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { EventToAprove } from '../../../../components/EventToAprove'
 import { eventService } from '../../../../services/event.service'
 
-export const AproveEventPage = () => {
+export const AproveEvents = () => {
   const [aproved, setAproved] = useState(false)
   const [eventsToAprove, setEventsToAprove] = useState([])
 

@@ -27,7 +27,7 @@ export const ListUsers = () => {
       {/* Basic table */}
       <div className="row">
         <div className="col-md-8 col-12">
-          <h1>Lista de usuarios</h1>
+          <h1>Lista de administradores</h1>
         </div>
         <div className="col-md-4 col-12 d-flex justify-content-center align-items-center">
           <Link to="crear" className='btn btn-sm btn-primary'>Agregar usuario</Link>
@@ -50,9 +50,11 @@ export const ListUsers = () => {
         </table>
       </div>
       {
-        users.map((u, index) =>
-          <Modal key={u.email}
-            {...u} index={index}
+        users.map((e, index) =>
+          <Modal key={e.email}
+            type="user"
+            {...e} index={index}
+            idToDelete={e.id_usuario}
             setIsDeleted={setIsDeleted}
             isDeleted={isDeleted}
           />

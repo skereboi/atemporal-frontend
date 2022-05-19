@@ -1,45 +1,40 @@
-import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AlertErrorForm } from '../../../../components/AlertErrorForm'
-import { InputPassword } from '../../../../components/InputPassword'
 import { useGeneralApp } from '../../../../hooks/useGeneralApp'
-import { userService } from '../../../../services/user.service'
-import { schemaCreateUser } from '../CreateAdmin/schemaUser'
+import { categoryService } from '../../../../services/category.service'
 
-export const EditUsers = () => {
+export const EditCategory = () => {
   const navigate = useNavigate()
   const { setErrorMessage, isLoading, setIsLoading } = useGeneralApp()
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
-    resolver: yupResolver(schemaCreateUser)
-  })
+  const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
   const { id } = useParams()
 
   useEffect(() => {
-    const getUser = async () => {
+    const getCategory = async () => {
       try {
-        const user = await userService.getOneUser(id)
-        reset({ ...user })
+        const category = await categoryService.getOneCategory(id)
+        reset({ ...category })
       } catch (error) {
         console.log(error)
       }
     }
-    getUser()
+    getCategory()
   }, [id])
 
   const onSubmit = async (data) => {
     setIsLoading(true)
 
     try {
-      await userService.updateOneUser(id, data)
+      await categoryService.updateOneCategory(id, data)
       setIsLoading(false)
       navigate(-1)
     } catch (error) {
       setIsLoading(false)
       if (error.response.data.msg[0].type) {
-        setErrorMessage('Revisa tu correo')
+        setErrorMessage('ERROR FRONTEND')
       } else {
         setErrorMessage(error.response.data.msg)
       }
@@ -49,7 +44,7 @@ export const EditUsers = () => {
     <>
       <div className="row mb-5 justify-content-center">
         <div className="col-md-8">
-          <h1>Editar usuario</h1>
+          <h1>Editar categoria</h1>
         </div>
         <div className="col-md-4 col-12 d-flex justify-content-center align-items-center">
           <Link to="/dashboard/usuarios" className='btn btn-sm btn-primary'>Regresar</Link>
@@ -63,30 +58,15 @@ export const EditUsers = () => {
               <div className="col-12">
                 <div className="position-relative mb-4">
                   <label htmlFor="name" className="form-label fs-base">
-                    Nombre completo</label>
+                    Nombre de categoria</label>
                   <input type="text" id="name"
                     className="form-control form-control-lg"
-                    {...register('nombre')}
+                    {...register('nombre', { required: true })}
                     autoComplete="off"
                   />
                   <AlertErrorForm messageError={errors.nombre?.message} />
                 </div>
               </div>
-              <div className="col-12">
-                <div className="position-relative mb-4">
-                  <label htmlFor="email" className="form-label fs-base">Correo electrónico</label>
-                  <input type="email" id="email" className="form-control form-control-lg" {...register('email')} autoComplete="off" />
-                  <AlertErrorForm messageError={errors.email?.message} />
-                </div>
-              </div>
-              <div className="col-12 mb-4">
-                <label htmlFor="celular" className="form-label fs-base">Celular</label>
-                <div className="celular-toggle">
-                  <input type="celular" id="celular" className="form-control form-control-lg" {...register('celular')} autoComplete="off" />
-                  <AlertErrorForm messageError={errors.celular?.message}/>
-                </div>
-              </div>
-              <InputPassword register={register} errors={errors} />
             </div>
             <button type="submit" className="btn btn-primary shadow-primary btn-lg w-100" disabled={isLoading}>Guardar cambios</button>
           </form>

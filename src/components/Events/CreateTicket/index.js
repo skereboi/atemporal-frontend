@@ -9,6 +9,7 @@ export const CreateTicket = ({ index, remove, register }) => {
         </label>
         <input
           {...register(`boletos.${index}.nombre`)}
+          placeholder='Ejemplo general'
           className="form-control"
           type="text" id="text-input"
         />
