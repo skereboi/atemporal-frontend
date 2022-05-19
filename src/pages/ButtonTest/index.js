@@ -2,7 +2,6 @@
 /* eslint-disable eol-last */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
-import Axios from 'axios'
 
 export const ButtonTest = () => {
   const [fileInputState, setFileInputState] = useState('')
