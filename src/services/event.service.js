@@ -26,5 +26,9 @@ export const eventService = {
   getEventsByCategory: async (id) => {
     const { data } = await Axios.get(`${globalConfig.url}/api/eventos/porCategoria/${id}`)
     return data
+  },
+  getEventsByTextSearch: async (textInput) => {
+    const { data } = await Axios.get(`${globalConfig.url}/api/eventos/porTexto/${textInput}`)
+    return data
   }
 }
