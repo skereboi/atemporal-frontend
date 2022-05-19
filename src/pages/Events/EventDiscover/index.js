@@ -5,6 +5,7 @@ import { CardEvent } from '../../../components/Events/CardEvent'
 import { eventService } from '../../../services/event.service'
 import { useAuth } from '../../../hooks/useAuth'
 import { useLocation } from 'react-router-dom'
+import { NothingToShow } from '../../../components/Dashboard/NothingToShow'
 
 export const EventDiscoverPage = ({ isAdmin }) => {
   // Estados
@@ -80,15 +81,25 @@ export const EventDiscoverPage = ({ isAdmin }) => {
             }
           </div>
           {/* Blog grid */}
-          <div className="row row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-md-4 gy-2">
-            {/* ALL EVENTS  */}
-            {
-            events.map((event) => (
-              <CardEvent
-                setIsRejected={setIsRejected}
-                isRejected={isRejected}
-                isAdmin={isAdmin}
-                key={event.id_evento} {...event} />))
+          <div className="row">
+          {/* ALL EVENTS  */}
+
+          {
+            events.length === 0
+              ? (
+                <NothingToShow
+                title='Jeje'
+                subtitle='No hay coincidencia con la busqueda'
+                message={textToFind || categorySelected}
+                />
+                )
+              : events.map((event) => (
+                <CardEvent
+                  setIsRejected={setIsRejected}
+                  isRejected={isRejected}
+                  isAdmin={isAdmin}
+                  key={event.id_evento} {...event}
+                />))
             }
           </div>
         {/* Pagination */}

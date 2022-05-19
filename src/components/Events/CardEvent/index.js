@@ -26,7 +26,7 @@ export const CardEvent = (props) => {
     }
   }
   return (
-    <div className="col pb-3">
+    <div className="col-4 col-md-3">
       <div className="card">
         <img src={foto_evento} className="card-img-top card-event" alt={nombre_evento} />
         <div className="card-body">
