@@ -2,7 +2,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { eventService } from '../../services/event.service'
-import { CategoryBadge } from '../CategoryBadge'
 
 export const EventToAprove = (props) => {
   const {
@@ -33,7 +32,6 @@ export const EventToAprove = (props) => {
         <div className="col-sm-8">
           <div className="card-body">
             <div className="d-flex align-items-center mb-3">
-              <CategoryBadge />
               <span className="fs-sm text-muted border-start ps-3 ms-3">
                 {fecha_evento}
               </span>

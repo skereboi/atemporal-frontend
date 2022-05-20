@@ -4,7 +4,6 @@ import { TextFinder } from '../../../components/TextFinder'
 import { CardEvent } from '../../../components/Events/CardEvent'
 import { eventService } from '../../../services/event.service'
 import { useAuth } from '../../../hooks/useAuth'
-import { useLocation } from 'react-router-dom'
 import { NothingToShow } from '../../../components/Dashboard/NothingToShow'
 import './style.scss'
 
@@ -17,7 +16,6 @@ export const EventDiscoverPage = ({ isAdmin }) => {
   const [textToFind, setTextToFind] = useState(null)
 
   // hooks
-  const location = useLocation()
   const { user } = useAuth()
 
   // Efectos
@@ -64,11 +62,7 @@ export const EventDiscoverPage = ({ isAdmin }) => {
           <div className="row align-items-end gy-3 mb-4 pb-lg-3 pb-1">
             <div className="col-lg-5 col-md-4">
               <h1 className="mb-2 mb-md-0">
-                {
-                location.pathname === '/dashboard/eventos'
-                  ? 'Aprobar eventos'
-                  : 'Descubre eventos'
-                }
+                Descubre eventos
               </h1>
             </div>
             {
@@ -96,12 +90,17 @@ export const EventDiscoverPage = ({ isAdmin }) => {
                 />
                 )
               : events.map((event) => (
-                <CardEvent
-                  setIsRejected={setIsRejected}
-                  isRejected={isRejected}
-                  isAdmin={isAdmin}
-                  key={event.id_evento} {...event}
-                />))
+                <div className="col-12 col-md-3"
+                  key={event.id_evento}
+                >
+                  <CardEvent
+                    setIsRejected={setIsRejected}
+                    isRejected={isRejected}
+                    isAdmin={isAdmin}
+                    {...event}
+                  />
+                </div>
+              ))
             }
           </div>
         {/* Pagination */}

@@ -41,6 +41,7 @@ import { EditCategory } from './pages/Dashboard/Categories/EditCategory'
 import { AproveEvents } from './pages/Dashboard/Events/AproveEvents'
 import { CreateCategories } from './pages/Dashboard/Categories/CreateAdmin'
 import { AccountPublications } from './pages/Account/AccountPublications'
+import { GetAllEventsAproved } from './pages/Dashboard/Events/GetAllEventsAproved'
 
 initAxiosInterceptors()
 createStore({
@@ -101,7 +102,7 @@ const App = () => {
               <Route element={<ContentLayoutPage/>}>
                 <Route index element={<DashboardHomePage />} />
                 <Route path='aprobar' element={<AproveEvents />} />
-                <Route path='eventos' element={<EventDiscoverPage isAdmin />} />
+                <Route path='eventos' element={<GetAllEventsAproved />} />
                 <Route path="actualizar-evento" element={<UpdateEventPage />} />
                 <Route path='usuarios'>
                   <Route index element={<ListUsers />} />

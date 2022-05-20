@@ -26,8 +26,7 @@ export const CardEvent = (props) => {
     }
   }
   return (
-    <div className="col-12 col-md-4 col-lg-3">
-      <div className="card card-event bg-dark text-light">
+    <div className="card card-event bg-dark text-light">
         <div className="img-wrapper">
           <img src={foto_evento} className="card-img-top" alt={nombre_evento} />
           <span
@@ -58,8 +57,7 @@ export const CardEvent = (props) => {
             </span>
             <p
               className="d-flex
-              align-items-center fw-bold
-             text-decoration-none"
+              align-items-center fw-bold text-decoration-none"
             >
               {nombre_organizador}
             </p>
@@ -70,6 +68,5 @@ export const CardEvent = (props) => {
           }
         </div>
       </div>
-    </div>
   )
 }

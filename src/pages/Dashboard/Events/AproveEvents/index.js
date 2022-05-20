@@ -18,9 +18,11 @@ export const AproveEvents = () => {
     <>
       <h1 className="mb-2 mb-md-0">Aprobar eventos</h1>
       {/* Events */}
-      {
-        eventsToAprove.map(e => (<EventToAprove key={e.nombre_evento} {...e} setAproved={setAproved} aproved={aproved} />))
-      }
+      <div className="row">
+        {
+          eventsToAprove.map(e => (<EventToAprove key={e.nombre_evento} {...e} setAproved={setAproved} aproved={aproved} />))
+        }
+      </div>
     </>
   )
 }
