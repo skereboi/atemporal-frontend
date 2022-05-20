@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { data } from '../../data'
 import { useAuth } from '../../hooks/useAuth'
-import { Profile } from '../Profile'
+import { MenuAuthenticated } from '../MenuAuthenticated'
 
 export const Navbar = () => {
   const { isAuthenticated } = useAuth()
@@ -12,7 +13,7 @@ export const Navbar = () => {
           Atemporal
         </Link>
         {
-          !isAuthenticated ? (<PublicButtons />) : <Profile/>
+          !isAuthenticated ? (<PublicButtons />) : <MenuAuthenticated/>
         }
       </div>
     </header>
@@ -24,13 +25,25 @@ const PublicButtons = () => {
   const location = useLocation()
   return (
     <>
-      <button type="button" className="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon" />
-      </button>
-      <Link to={location.pathname === '/iniciar-sesion' ? 'registrarse' : 'iniciar-sesion'} className="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex">
+      <ul className="navbar-nav me-auto">
+        {
+          data
+            .menuNavbar.public.options.map(
+              op =>
+                (
+                <li key={op.id} className="nav-item">
+                  <Link to={op.pathname}
+                    className={`nav-link ${location.pathname === op.pathname && 'active'}`}>
+                    {op.title}
+                  </Link>
+                </li>
+                )
+            )
+        }
+      </ul>
+      <Link to={location.pathname === '/iniciar-sesion' ? 'registrarse' : 'iniciar-sesion'} className="btn btn-primary btn-sm fs-sm rounded">
         {location.pathname === '/iniciar-sesion' ? 'Registrarse' : 'Iniciar sesión'}
       </Link>
-
     </>
   )
 }

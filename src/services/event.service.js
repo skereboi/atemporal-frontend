@@ -8,11 +8,11 @@ export const eventService = {
     return data
   },
   getAllEvents: async (esta_activo = 1) => {
-    const { data } = await Axios.get(`${globalConfig.url}/api/eventos?esta_activo=${esta_activo}`)
+    const { data } = await Axios.get(`${globalConfig.url}/eventos?esta_activo=${esta_activo}`)
     return data
   },
   getOneEvent: async (id) => {
-    const { data } = await Axios.get(`${globalConfig.url}/api/eventos/${id}`)
+    const { data } = await Axios.get(`${globalConfig.url}/eventos/${id}`)
     return data
   },
   aproveEvent: async (id) => {

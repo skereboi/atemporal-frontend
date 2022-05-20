@@ -69,6 +69,7 @@ export const data = {
       ]
     }
   },
+  // Menu al momento de crear el evento
   menuEvent: {
     title: 'Crear evento',
     subtitle: 'Publica tu evento gratis',
@@ -103,6 +104,7 @@ export const data = {
       }
     ]
   },
+  // Menu del detalle de cuenta
   menuAccount: {
     general: {
       title: 'Información de cuenta',
@@ -166,6 +168,7 @@ export const data = {
       ]
     }
   },
+  // Menu del administrador del dashboard
   menuDashboard: {
     title: 'Administrador',
     subtitle: 'Detalles',
@@ -206,5 +209,45 @@ export const data = {
         icon: 'bx bx-user-plus'
       }
     ]
+  },
+  menuNavbar: {
+    general: {
+      title: 'General',
+      subtitle: 'Atemporal',
+      options: [
+        {
+          id: 1,
+          title: 'Explorar',
+          pathname: '/eventos',
+          link: '',
+          icon: 'bx bxs-home'
+        },
+        {
+          id: 2,
+          title: 'Crear evento',
+          pathname: '/crear-evento',
+          link: '',
+          icon: 'bx bxs-home'
+        }
+      ]
+    },
+    admin: {
+      title: 'Administrador',
+      subtitle: 'Atemporal',
+      options: []
+    },
+    public: {
+      title: 'Administrador',
+      subtitle: 'Atemporal',
+      options: [
+        {
+          id: 1,
+          title: 'Explorar eventos',
+          pathname: '/eventos',
+          link: '',
+          icon: 'bx bxs-home'
+        }
+      ]
+    }
   }
 }

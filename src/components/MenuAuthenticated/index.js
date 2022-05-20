@@ -1,33 +1,57 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { data } from '../../data'
 import { useAuth } from '../../hooks/useAuth'
 import { Profile } from '../Profile'
 import './style.scss'
 
 export const MenuAuthenticated = () => {
+  const { user: { typeUser } } = useAuth()
   return (
     <div className='menu-authenticated'>
-      <div className="menu-web">
-        <OptionsMenuAuth />
-      </div>
+      {
+        typeUser === 'general' && (
+          <div className="menu-web">
+            <ul className="navbar-nav me-auto">
+              {
+                data
+                  .menuNavbar[typeUser].options.map(
+                    op =>
+                      (
+                      <li key={op.id} className="nav-item">
+                        <Link to={op.pathname}
+                          className={`nav-link ${location.pathname === op.pathname && 'active'}`}>
+                          {op.title}
+                        </Link>
+                      </li>
+                      )
+                  )
+              }
+            </ul>
+          </div>
+        )
+      }
       <Profile />
     </div>
   )
 }
-export const OptionsMenuAuth = () => {
-  const { user } = useAuth()
+
+export const MenuMobile = () => {
+  const { user: { typeUser } } = useAuth()
   return (
     <>
-      <Link to={user.typeUser === 'admin' ? 'dashboard/aprobar' : '/eventos'} className='p-4'>
-        {
-          user.typeUser === 'general' ? 'Eventos' : 'Aprobar eventos'
-        }
-      </Link>
       {
-        user.typeUser === 'general' && (<Link to='/crear-evento' className='p-4'>Crear evento</Link>)
-      }
-      {
-        user.typeUser === 'admin' && (<Link to='dashboard/eventos' className='p-4'>Eventos aprobados</Link>)
+        data
+          .menuNavbar[typeUser].options.map(
+            op => (
+              <>
+                <div className="dropdown-divider" />
+                <Link to={op.pathname} className='p-4'>
+                  {op.title}
+                </Link>
+              </>
+            )
+          )
       }
     </>
   )
