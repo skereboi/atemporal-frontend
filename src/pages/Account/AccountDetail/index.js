@@ -92,7 +92,9 @@ export const AccountDetail = () => {
           </div>
         </form>
         {/* Change clabe interbancaria */}
-        <ClabeInterbancaria/>
+        {
+          user.typeUser !== 'admin' && (<ClabeInterbancaria />)
+        }
         {/* Change password account */}
         <div className="form-password mb-4">
           <h2 className="h5 text-primary pt-1 pt-lg-3 mt-4">Seguridad</h2>
