@@ -12,6 +12,7 @@ export const EventDiscoverPage = ({ isAdmin }) => {
   const [events, setEvents] = useState([])
   const [isRejected, setIsRejected] = useState(false)
   const [categorySelected, setCategorySelected] = useState(null)
+  const [categoryName, setCategoryName] = useState(null)
   const [textToFind, setTextToFind] = useState(null)
 
   // hooks
@@ -73,7 +74,7 @@ export const EventDiscoverPage = ({ isAdmin }) => {
               user?.typeUser === 'general' && (
                 <div className="col-lg-7 col-md-8">
                 <form className="row gy-2" onSubmit={handlerOnSubmit}>
-                  <CategoryDropdown setCategorySelected={setCategorySelected} />
+                  <CategoryDropdown setCategorySelected={setCategorySelected} setCategoryName={setCategoryName} />
                   <TextFinder setTextToFind={setTextToFind} />
                 </form>
                 </div>
@@ -88,9 +89,9 @@ export const EventDiscoverPage = ({ isAdmin }) => {
             events.length === 0
               ? (
                 <NothingToShow
-                title='Jeje'
-                subtitle='No hay coincidencia con la busqueda'
-                message={textToFind || categorySelected}
+                title='¡Oh no!'
+                subtitle='Lo sentimos mucho, pero al dia de hoy no tenemos registro que coincida con la busqueda'
+                message={textToFind || categoryName}
                 />
                 )
               : events.map((event) => (
