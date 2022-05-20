@@ -6,6 +6,7 @@ import { eventService } from '../../../services/event.service'
 import { useAuth } from '../../../hooks/useAuth'
 import { useLocation } from 'react-router-dom'
 import { NothingToShow } from '../../../components/Dashboard/NothingToShow'
+import './style.scss'
 
 export const EventDiscoverPage = ({ isAdmin }) => {
   // Estados
@@ -58,7 +59,7 @@ export const EventDiscoverPage = ({ isAdmin }) => {
   return (
     <>
         {/* Page content */}
-        <section className="container mt-4 mb-lg-5 pt-lg-2 pb-5">
+        <section className="container mt-4 mb-lg-5 pt-lg-2 pb-5 event-discover">
           {/* Page title + Layout switcher + Search form */}
           <div className="row align-items-end gy-3 mb-4 pb-lg-3 pb-1">
             <div className="col-lg-5 col-md-4">
