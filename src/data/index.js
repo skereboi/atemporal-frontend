@@ -2,7 +2,10 @@
 export const data = {
   homePage: {
     home: {
-      title: '',
+      title: '¡Bievenido!',
+      action: 'Sé parte de',
+      cta: ' la comunidad más grande',
+      message: ' en eventos de Querétaro',
       categories: [
         {
           id: 1,
@@ -24,17 +27,17 @@ export const data = {
         {
           id: 1,
           title: 'Música',
-          path: 'assets/img/home/bg1.jpg'
+          pathname: 'assets/img/home/bg1.jpg'
         },
         {
           id: 2,
           title: 'Danza',
-          path: 'assets/img/home/bg2.jpg'
+          pathname: 'assets/img/home/bg2.jpg'
         },
         {
           id: 3,
           title: 'Arte',
-          path: 'assets/img/home/bg3.jpg'
+          pathname: 'assets/img/home/bg3.jpg'
         }
       ]
     },
@@ -45,7 +48,7 @@ export const data = {
         {
           id: 1,
           title: 'Busca tu evento',
-          description: 'Tenemos eventos para todo el público en general, ingresa el nombre, selecciona la categoría o simplemente lista todos los eventos.',
+          description: 'Tenemos eventos para todo el público en general, ingresa el nombre, selecciona la categoría o simplemente lista todos los eventos',
           picture: ''
         },
         {
@@ -69,6 +72,7 @@ export const data = {
       ]
     }
   },
+  // Menu al momento de crear el evento
   menuEvent: {
     title: 'Crear evento',
     subtitle: 'Publica tu evento gratis',
@@ -103,6 +107,7 @@ export const data = {
       }
     ]
   },
+  // Menu del detalle de cuenta
   menuAccount: {
     general: {
       title: 'Información de cuenta',
@@ -131,6 +136,13 @@ export const data = {
         },
         {
           id: 4,
+          title: 'Mis publicaciones',
+          pathname: 'publicaciones',
+          link: 'eventos',
+          icon: 'bx bx-calendar-event'
+        },
+        {
+          id: 5,
           title: 'Métodos de pago',
           pathname: 'metodos-pago',
           link: 'eventos',
@@ -155,17 +167,11 @@ export const data = {
           pathname: 'cambiar-password',
           link: 'cambiar-password',
           icon: 'bx bx-key'
-        },
-        {
-          id: 3,
-          title: 'Mis eventos',
-          pathname: 'eventos',
-          link: 'eventos',
-          icon: 'bx bx-party'
         }
       ]
     }
   },
+  // Menu del administrador del dashboard
   menuDashboard: {
     title: 'Administrador',
     subtitle: 'Detalles',
@@ -206,5 +212,45 @@ export const data = {
         icon: 'bx bx-user-plus'
       }
     ]
+  },
+  menuNavbar: {
+    general: {
+      title: 'General',
+      subtitle: 'Atemporal',
+      options: [
+        {
+          id: 1,
+          title: 'Explorar',
+          pathname: '/eventos',
+          link: '',
+          icon: 'bx bxs-home'
+        },
+        {
+          id: 2,
+          title: 'Crear evento',
+          pathname: '/crear-evento',
+          link: '',
+          icon: 'bx bxs-home'
+        }
+      ]
+    },
+    admin: {
+      title: 'Administrador',
+      subtitle: 'Atemporal',
+      options: []
+    },
+    public: {
+      title: 'Administrador',
+      subtitle: 'Atemporal',
+      options: [
+        {
+          id: 1,
+          title: 'Explorar eventos',
+          pathname: '/eventos',
+          link: '',
+          icon: 'bx bxs-home'
+        }
+      ]
+    }
   }
 }

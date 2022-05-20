@@ -1,17 +1,26 @@
 /* eslint-disable camelcase */
 import React from 'react'
+import { categoryService } from '../../../services/category.service'
 import { userService } from '../../../services/user.service'
 
 export const Modal = (props) => {
   const {
     index,
-    id_usuario,
+    idToDelete,
     setIsDeleted,
-    isDeleted
+    isDeleted,
+    type
   } = props
   const handlerRemove = async () => {
     try {
-      await userService.deleteOneUser(id_usuario)
+      switch (type) {
+        case 'user':
+          await userService.deleteOneUser(idToDelete)
+          break
+        case 'category':
+          await categoryService.deleteOneCategory(idToDelete)
+          break
+      }
       setIsDeleted(() => !isDeleted)
     } catch (error) {
       console.log(error)

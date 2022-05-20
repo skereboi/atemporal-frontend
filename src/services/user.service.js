@@ -7,12 +7,8 @@ export const userService = {
     const { data } = await Axios.get(`${globalConfig.url}/api/usuarios`)
     return data
   },
-  getOneUser: async () => {
-    const { data } = await Axios.get(`${globalConfig.url}/api/usuarios/me`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('TOKEN_ATEMPORAL')}`
-      }
-    })
+  getOneUser: async (id) => {
+    const { data } = await Axios.get(`${globalConfig.url}/api/usuarios/${id}`)
     return data
   },
   createOneUser: async (user) => {

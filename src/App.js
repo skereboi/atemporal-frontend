@@ -30,7 +30,6 @@ import { StateMachineProvider, createStore } from 'little-state-machine'
 import { InformationOrganizer } from './pages/Events/CreateEvent/InformationOrganizer'
 import { InformationTickets } from './pages/Events/CreateEvent/InformationTickets'
 import { InformationSummary } from './pages/Events/CreateEvent/InformationSummary'
-import { AproveEventPage } from './pages/Dashboard/Events/AproveEventPage'
 import { ContentLayoutPage } from './pages/Dashboard/ContentLayoutDashboard'
 import { initialStates } from './hooks/useLittleMachine'
 import { ButtonTest } from './pages/ButtonTest'
@@ -38,6 +37,10 @@ import { CreateUsers } from './pages/Dashboard/Users/CreateAdmin'
 import { ListCategories } from './pages/Dashboard/Categories/ListCategories'
 import { ListUsers } from './pages/Dashboard/Users/ListUsers'
 import { EditUsers } from './pages/Dashboard/Users/EditUser'
+import { EditCategory } from './pages/Dashboard/Categories/EditCategory'
+import { AproveEvents } from './pages/Dashboard/Events/AproveEvents'
+import { CreateCategories } from './pages/Dashboard/Categories/CreateAdmin'
+import { AccountPublications } from './pages/Account/AccountPublications'
 
 initAxiosInterceptors()
 createStore({
@@ -89,14 +92,15 @@ const App = () => {
                 <Route index element={<AccountDetail/>}/>
                 <Route path='cambiar-password' element={<AccountPassword/>}/>
                 <Route path='metodos-pago' element={<AccountPayment/>}/>
-                <Route path='eventos' element={<AccountEvents/>}/>
+                <Route path='eventos' element={<AccountEvents />} />
+                <Route path='publicaciones' element={<AccountPublications />} />
               </Route>
             </Route>
             {/* Private routes admin */}
             <Route path='dashboard' element={<AuthGuard typeUser='admin' />}>
               <Route element={<ContentLayoutPage/>}>
                 <Route index element={<DashboardHomePage />} />
-                <Route path='aprobar' element={<AproveEventPage />} />
+                <Route path='aprobar' element={<AproveEvents />} />
                 <Route path='eventos' element={<EventDiscoverPage isAdmin />} />
                 <Route path="actualizar-evento" element={<UpdateEventPage />} />
                 <Route path='usuarios'>
@@ -106,14 +110,13 @@ const App = () => {
                 </Route>
                 <Route path='categorias'>
                   <Route index element={<ListCategories />} />
-                  <Route path="crear" element={<CreateUsers />} />
-                  <Route path="actualizar/:id" element={<CreateUsers />} />
+                  <Route path="crear" element={<CreateCategories />} />
+                  <Route path="editar/:id" element={<EditCategory />} />
                 </Route>
               </Route>
               <Route path="mi-cuenta" element={<AccountLayout />}>
                 <Route index element={<AccountDetail />} />
                 <Route path='cambiar-password' element={<AccountPassword />} />
-                <Route path='eventos' element={<AccountEvents />} />
               </Route>
             </Route>
           </Route>

@@ -52,13 +52,20 @@ export const AccountPassword = () => {
         </form>
       </div>
       {/* Delete account */}
-      <h2 className="h5 text-primary pt-4 pt-lg-3 mt-4">Eliminar cuenta</h2>
-      <p>Al eliminar tu cuenta, este proceso es irreversible.</p>
-      <div className="form-check mb-4">
-        <input type="checkbox" id="delete-account" className="form-check-input" />
-        <label htmlFor="delete-account" className="form-check-label fs-base">Si, quiero eliminar mi cuenta.</label>
-      </div>
-      <button type="button" className="btn btn-danger">Eliminar</button>
+      {
+        user?.typeUser === 'general' && (
+          <>
+            <h2 className="h5 text-primary pt-4 pt-lg-3 mt-4">Eliminar cuenta</h2>
+            <p>Al eliminar tu cuenta, este proceso es irreversible.</p>
+            <div className="form-check mb-4">
+              <input type="checkbox" id="delete-account" className="form-check-input" />
+              <label htmlFor="delete-account" className="form-check-label fs-base">Si, quiero eliminar mi cuenta.</label>
+            </div>
+            <button type="button" className="btn btn-danger">Eliminar</button>
+          </>
+        )
+      }
+
     </>
   )
 }
