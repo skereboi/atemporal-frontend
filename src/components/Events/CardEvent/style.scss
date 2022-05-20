@@ -1,5 +1,13 @@
 .card-event {
   height: 500px;
+  transition: all 400ms ease;
+  box-shadow: 13px 23px 12px -3px rgba(196, 188, 188, 0.72);
+  -webkit-box-shadow: 13px 23px 12px -3px rgba(196, 188, 188, 0.72);
+  -moz-box-shadow: 13px 23px 12px -3px rgba(196, 188, 188, 0.72);
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   .img-wrapper {
     position: relative;
@@ -16,7 +24,6 @@
       left: 0;
       bottom: 0;
       width: 100%;
-      background: rgba(#fefefe, 0.8);
       z-index: 100;
       text-align: center;
     }

@@ -11,16 +11,20 @@ html * {
 }
 
 // Sticky footer
-html, body {
+html,
+body {
   height: 100%;
 }
+
 body {
   display: flex;
   flex-direction: column;
 }
+
 .page-wrapper {
   flex: 1 0 auto;
 }
+
 .footer {
   flex-shrink: 0;
 }
@@ -29,7 +33,10 @@ body {
 // Links
 a {
   transition: $link-transition;
-  &:focus { outline: none; }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 // Background transition for links
@@ -47,8 +54,14 @@ figure {
   height: auto;
   vertical-align: middle;
 }
-svg { max-width: 100%; }
-.dark-mode-img { display: none; }
+
+svg {
+  max-width: 100%;
+}
+
+.dark-mode-img {
+  display: none;
+}
 
 // Responsive iframes
 iframe {
@@ -59,6 +72,7 @@ iframe {
 ::selection {
   background: $user-selection-color;
 }
+
 ::-moz-selection {
   background: $user-selection-color;
 }
@@ -68,7 +82,9 @@ strong {
   font-weight: $font-weight-bold;
 }
 
-small { font-weight: inherit; }
+small {
+  font-weight: inherit;
+}
 
 // Disable button :focus outline
 button:focus {
@@ -94,6 +110,7 @@ button:focus {
   @include media-breakpoint-up(lg) {
     padding-left: 21rem;
   }
+
   @include media-breakpoint-up(xxl) {
     padding-right: 20rem;
   }

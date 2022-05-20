@@ -27,16 +27,19 @@ export const CardEvent = (props) => {
   }
   return (
     <div className="col-12 col-md-4 col-lg-3">
-      <div className="card card-event">
+      <div className="card card-event bg-dark text-light">
         <div className="img-wrapper">
           <img src={foto_evento} className="card-img-top" alt={nombre_evento} />
           <span
-            className='card-event-date fw-boldtext-dark'>
+            className='card-event-date fw-bold bg-primary text-light'>
             Fecha: {fecha_evento}
           </span>
         </div>
         <div className="card-body card-event-body">
-          <h5 className="card-title card-event-title">{nombre_evento}</h5>
+          <h5
+            className="card-title card-event-title text-light">
+            {nombre_evento}
+          </h5>
 
           <div className="card-event-data">
             <span>
@@ -44,8 +47,7 @@ export const CardEvent = (props) => {
             </span>
             <p
               className="d-flex
-              align-items-center fw-bold
-              text-dark text-decoration-none"
+              align-items-center fw-bold text-decoration-none"
             >
               {lugar}
             </p>
@@ -57,7 +59,7 @@ export const CardEvent = (props) => {
             <p
               className="d-flex
               align-items-center fw-bold
-              text-dark text-decoration-none"
+             text-decoration-none"
             >
               {nombre_organizador}
             </p>

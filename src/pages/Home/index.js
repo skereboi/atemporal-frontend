@@ -1,14 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { TypeUser } from '../../components/Auth/TypeUser'
-import HowItWorks from '../../components/Home/HowItWorks'
 import { data } from '../../data'
 
 export const Home = () => {
   return (
     <>
       <TypeUser/>
-      <section className="position-relative pt-3">
+      <section className="position-relative pt-3 vh-100">
         {/* Gradient BG */}
         <div className="position-absolute top-0 start-0 w-100 h-100 bg-gradient-primary opacity-10" />
         {/* Content */}
@@ -55,7 +54,6 @@ export const Home = () => {
           </div>
         </div>
       </section>
-      <HowItWorks/>
     </>
   )
 }
