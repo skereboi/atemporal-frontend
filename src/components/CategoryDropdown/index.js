@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { categoryService } from '../../services/category.service'
 
-export const CategoryDropdown = ({ setCategorySelected }) => {
+export const CategoryDropdown = ({ setCategorySelected, setCategoryName }) => {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
@@ -20,8 +20,14 @@ export const CategoryDropdown = ({ setCategorySelected }) => {
   }, [])
 
   const handlerOnChange = (event) => {
-    // console.log(event.target.value)
-    setCategorySelected(event.target.value)
+    const index = event.target.value
+    const name = event.target.options[index].getAttribute('nombre')
+
+    // console.log(index)
+    // console.log(name)
+
+    setCategorySelected(index)
+    setCategoryName(name)
   }
 
   return (
@@ -45,6 +51,6 @@ export const CategoryDropdown = ({ setCategorySelected }) => {
 
 const CategoryOption = (props) => {
   return (
-    <option value={props.id_categoria}>{props.nombre}</option>
+    <option value={props.id_categoria} nombre={props.nombre}>{props.nombre}</option>
   )
 }
