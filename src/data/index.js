@@ -2,7 +2,10 @@
 export const data = {
   homePage: {
     home: {
-      title: '',
+      title: '¡Bievenido!',
+      action: 'Sé parte de',
+      cta: ' la comunidad más grande',
+      message: ' en eventos de Querétaro',
       categories: [
         {
           id: 1,
@@ -24,17 +27,17 @@ export const data = {
         {
           id: 1,
           title: 'Música',
-          path: 'assets/img/home/bg1.jpg'
+          pathname: 'assets/img/home/bg1.jpg'
         },
         {
           id: 2,
           title: 'Danza',
-          path: 'assets/img/home/bg2.jpg'
+          pathname: 'assets/img/home/bg2.jpg'
         },
         {
           id: 3,
           title: 'Arte',
-          path: 'assets/img/home/bg3.jpg'
+          pathname: 'assets/img/home/bg3.jpg'
         }
       ]
     },
@@ -45,7 +48,7 @@ export const data = {
         {
           id: 1,
           title: 'Busca tu evento',
-          description: 'Tenemos eventos para todo el público en general, ingresa el nombre, selecciona la categoría o simplemente lista todos los eventos.',
+          description: 'Tenemos eventos para todo el público en general, ingresa el nombre, selecciona la categoría o simplemente lista todos los eventos',
           picture: ''
         },
         {
