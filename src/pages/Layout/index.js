@@ -12,10 +12,12 @@ export const Layout = () => {
   return (
     <>
       <Navbar />
-      {
-        errorMessage && (<ErrorHandler message={errorMessage}/>)
-      }
-      <Outlet />
+      <div className="main-app" style={{ position: 'relative' }}>
+        {
+          errorMessage && (<ErrorHandler message={errorMessage} />)
+        }
+        <Outlet />
+      </div>
       <Footer/>
     </>
   )
