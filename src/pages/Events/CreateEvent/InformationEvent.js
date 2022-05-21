@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react'
 import { useStateMachine } from 'little-state-machine'
@@ -12,13 +11,13 @@ import { FormButtons } from '../../../components/Events/FormButtons'
 import { categoryService } from '../../../services/category.service'
 import Select from 'react-select'
 import moment from 'moment'
+import { convertToBase64 } from '../../../utils'
 
 export const InformationEvent = () => {
   const [categories, setCategories] = useState([])
   const { actions, state: { createEvent } } = useStateMachine({ updateCreateEvent })
-  const [previewSource, setPreviewSource] = useState('')
 
-  const { register, handleSubmit, control, formState: { errors }, watch } = useForm({
+  const { register, handleSubmit, control, formState: { errors } } = useForm({
     resolver: yupResolver(SchemaEvent),
     defaultValues: createEvent
   })
@@ -36,22 +35,13 @@ export const InformationEvent = () => {
 
   const navigate = useNavigate()
 
-  const convertToBase64 = (file) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    // reader.onloadend = () => {
-    //   setPreviewSource(reader.result.toString())
-    // }
-    // reader.readAsDataURL(file)
-    return reader.result.toString()
-  }
-
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const { fecha_evento } = data
-    console.log(data.foto_evento[0])
+    const baseImage64 = await convertToBase64(data.foto_evento[0])
+    console.log(baseImage64, '😠')
     const formatInfo = {
       ...data,
-      foto_evento: data.foto_evento[0].name,
+      foto_evento: baseImage64,
       fecha_evento: moment(fecha_evento).format()
     }
 
@@ -177,9 +167,6 @@ export const InformationEvent = () => {
               {...register('itinerario_evento')}
             />
             {errors.itinerario_evento && (<AlertErrorForm messageError={errors.itinerario_evento.message} />)}
-          </div>
-          <div className="col-sm-12">
-            {previewSource && (<img src={previewSource} alt="chosenIMG" style={{ height: '300px' }} />)}
           </div>
         </div>
 

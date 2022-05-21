@@ -3,7 +3,7 @@ const globalConfig = {
     url: 'http://localhost:4000'
   },
   PRODUCTION: {
-    url: 'https://atemporal-backend-3lcft8473-danielcusanchez.vercel.app/'
+    url: process.env.REACT_APP_URL
   }
 }
 const MODE_CONFIG =
