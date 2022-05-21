@@ -8,7 +8,7 @@ export const eventService = {
     return data
   },
   getAllEvents: async (esta_activo = 1, esta_aprobado = 1) => {
-    const { data } = await Axios.get(`${globalConfig.url}/eventos?esta_activo=${esta_activo}?esta_aprobado=${esta_aprobado}`)
+    const { data } = await Axios.get(`${globalConfig.url}/eventos?esta_activo=${esta_activo}&esta_aprobado=${esta_aprobado}`)
     return data
   },
   getOneEvent: async (id) => {
