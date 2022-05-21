@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
-import { ShareButton } from '../../../components/ShareButton/Index'
 import { eventService } from '../../../services/event.service'
 import { Faqs } from '../../../components/Events/Faqs'
 import { WhyAtemporal } from '../../../components/Events/WhyAtemporal'
@@ -74,7 +73,7 @@ export const EventDetail = () => {
             </div>
           </div>
         </section>
-        <HowItWorks event={event}/>
+        <HowItWorks event={event} />
         <WhyAtemporal/>
         <Faqs/>
 

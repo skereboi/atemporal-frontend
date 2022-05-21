@@ -1,6 +1,11 @@
+/* eslint-disable camelcase */
 import React from 'react'
+import { useLocation } from 'react-router-dom'
+import { ShareButton } from '../../ShareButton/Index'
 
 const HowItWorks = ({ event }) => {
+  const location = useLocation()
+  const url_evento = location.pathname
   return (
     <section className="container pt-5 mt-2 mt-lg-4 mt-xl-5">
       <div className="row">
@@ -26,6 +31,7 @@ const HowItWorks = ({ event }) => {
                 </div>
               </div>
             </div>
+            <ShareButton url={url_evento} socialNetwork='instagram'/>
           </div>
         </aside>
         {/* Content */}
@@ -48,7 +54,7 @@ const HowItWorks = ({ event }) => {
             </li>
             <li className="d-flex align-items-center mb-2">
               <i className="bx bx-check-circle text-primary fs-xl me-2" />
-              {event.ubicacion_maps}
+
             </li>
           </ul>
           <h2 className="h1 pt-md-2 pt-lg-4 pt-xl-5 pb-md-3 pb-lg-4 mb-md-4">Proceso de reserva</h2>
