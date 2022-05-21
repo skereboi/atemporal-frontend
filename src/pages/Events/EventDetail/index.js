@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
+import { ShareButton } from '../../../components/ShareButton/Index'
 import { eventService } from '../../../services/event.service'
 
 export const EventDetail = () => {
@@ -105,12 +106,7 @@ export const EventDetail = () => {
                     <i className="bx bxl-facebook" />
                   </a>
                 </div> */}
-                <button className="btn btn-lg btn-outline-secondary" >
-                  <i className="bx bxl-facebook" />
-                  <a href={'https://www.facebook.com/sharer.php?u=mieventoenatemporal.com'}>
-                  Compartir
-                  </a>
-                </button>
+               <ShareButton/>
               </div>
             </div>
           </div>
