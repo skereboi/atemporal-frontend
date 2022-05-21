@@ -29,7 +29,7 @@ export const ButtonTest = () => {
   const uploadImage = async (base64EncodedImage) => {
     console.log(base64EncodedImage)
     try {
-      await fetch('http://localhost:3001/api/upload', {
+      await fetch('http://localhost:3001/api/eventos/registrar-evento', {
         method: 'POST',
         body: JSON.stringify({ data: base64EncodedImage }),
         headers: { 'Content-type': 'application/json' }
