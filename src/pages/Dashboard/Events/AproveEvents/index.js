@@ -8,9 +8,8 @@ export const AproveEvents = () => {
 
   useEffect(() => {
     const getEvents = async () => {
-      const events = await eventService.getAllEvents(0)
+      const events = await eventService.getAllEventsToAproved()
       setEventsToAprove(events)
-      console.log('eefect')
     }
     getEvents()
   }, [fetch])

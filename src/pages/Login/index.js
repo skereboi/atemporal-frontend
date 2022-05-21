@@ -21,12 +21,12 @@ export const LoginPage = () => {
   }
   const adminState = {
     email: 'danielcu@alternet.com.mx',
-    password: 'admin1234'
+    password: 'password'
   }
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schemaLogin),
-    defaultValues: generalState
+    defaultValues: adminState
   })
 
   const onSubmit = async (data) => {

@@ -7,12 +7,24 @@ export const eventService = {
     const { data } = await Axios.post(`${globalConfig.url}/api/eventos/registrar-evento`, { ...dataEvent })
     return data
   },
-  getAllEvents: async (esta_activo = 1, esta_aprobado = 1) => {
-    const { data } = await Axios.get(`${globalConfig.url}/eventos?esta_activo=${esta_activo}&esta_aprobado=${esta_aprobado}`)
+  getAllEvents: async () => {
+    const { data } = await Axios.get(`${globalConfig.url}/eventos`)
+    return data
+  },
+  getAllEventsToAproved: async () => {
+    const { data } = await Axios.get(`${globalConfig.url}/api/eventos?esta_activo=1&esta_aprobado=0`)
+    return data
+  },
+  getAllEventsAproved: async () => {
+    const { data } = await Axios.get(`${globalConfig.url}/api/eventos?esta_activo=1&esta_aprobado=1`)
+    return data
+  },
+  getAllEventsDeleted: async () => {
+    const { data } = await Axios.get(`${globalConfig.url}/api/eventos?esta_activo=0&esta_aprobado=0`)
     return data
   },
   getOneEvent: async (id) => {
-    const { data } = await Axios.get(`${globalConfig.url}/eventos/${id}`)
+    const { data } = await Axios.get(`${globalConfig.url}/api/eventos/${id}`)
     return data
   },
   aproveEvent: async (id) => {
@@ -44,3 +56,9 @@ export const eventService = {
     return data
   }
 }
+// a apr
+// 0 0 eliminado
+// 1 0 pendiente por aprobar
+// 1 1 publicado
+// 0 0 rechazado
+// 1 0 pendiente por aprobar
