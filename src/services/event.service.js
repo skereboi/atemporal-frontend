@@ -7,8 +7,8 @@ export const eventService = {
     const { data } = await Axios.post(`${globalConfig.url}/api/eventos/registrar-evento`, { ...dataEvent })
     return data
   },
-  getAllEvents: async (esta_activo = 1) => {
-    const { data } = await Axios.get(`${globalConfig.url}/eventos?esta_activo=${esta_activo}`)
+  getAllEvents: async (esta_activo = 1, esta_aprobado = 1) => {
+    const { data } = await Axios.get(`${globalConfig.url}/eventos?esta_activo=${esta_activo}?esta_aprobado=${esta_aprobado}`)
     return data
   },
   getOneEvent: async (id) => {
@@ -29,6 +29,14 @@ export const eventService = {
   },
   getEventsByTextSearch: async (textInput) => {
     const { data } = await Axios.get(`${globalConfig.url}/api/eventos/porTexto/${textInput}`)
+    return data
+  },
+  getAllByEstado: async (name) => {
+    const { data } = await Axios.get(`${globalConfig.url}/api/eventos/porEstado/${name}`)
+    return data
+  },
+  getAllByCiudad: async (name) => {
+    const { data } = await Axios.get(`${globalConfig.url}/api/eventos/porCiudad/${name}`)
     return data
   }
 }
