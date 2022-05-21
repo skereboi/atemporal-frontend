@@ -23,6 +23,10 @@ export const eventService = {
     const { data } = await Axios.put(`${globalConfig.url}/api/eventos/rechazar/${id}`)
     return data
   },
+  removeEvent: async (id) => {
+    const { data } = await Axios.delete(`${globalConfig.url}/api/eventos/${id}`)
+    return data
+  },
   getEventsByCategory: async (id) => {
     const { data } = await Axios.get(`${globalConfig.url}/api/eventos/porCategoria/${id}`)
     return data

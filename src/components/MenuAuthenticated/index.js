@@ -44,12 +44,12 @@ export const MenuMobile = () => {
         data
           .menuNavbar[typeUser].options.map(
             op => (
-              <>
+              <span key={op.id}>
                 <div className="dropdown-divider" />
                 <Link to={op.pathname} className='p-4'>
                   {op.title}
                 </Link>
-              </>
+              </span>
             )
           )
       }

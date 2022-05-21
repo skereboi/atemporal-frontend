@@ -192,7 +192,7 @@ export const data = {
       },
       {
         id: 3,
-        title: 'Eventos aprobados',
+        title: 'Eventos publicados',
         pathname: 'eventos',
         link: 'eventos',
         icon: 'bx bx-list-check'

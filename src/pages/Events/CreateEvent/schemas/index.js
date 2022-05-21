@@ -42,12 +42,13 @@ const schemaTemplateEvent = {
   ubicacion_maps:
     yup.string(),
   foto_evento:
-    yup.string()
-      .required('Campo obligatorio'),
+    yup.mixed().test('required', 'Por favor sube una foto de tu evento', (value) => {
+      return value && value.length
+    }),
   direccion:
     yup.string().required('Campo obligatorio'),
   url_video:
-    yup.string().required('Campo obligatorio'),
+    yup.string(),
   itinerario_evento:
     yup.string(),
   categorias:

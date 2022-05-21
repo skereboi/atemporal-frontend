@@ -17,6 +17,7 @@
     "bootstrap-icons": "^1.8.1",
     "little-state-machine": "^4.3.1",
     "little-state-machine-devtools": "^2.0.1",
+    "moment": "^2.29.3",
     "node-sass": "^7.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.0.0",

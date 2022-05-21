@@ -7,6 +7,7 @@ export const ButtonTest = () => {
   const [fileInputState, setFileInputState] = useState('')
   const [previewSource, setPreviewSource] = useState('')
   const [selectedFile, setSelectedFile] = useState('')
+
   const handleFileInputChange = (e) => {
     const file = e.target.files[0]
     previewFile(file)
@@ -29,7 +30,7 @@ export const ButtonTest = () => {
   const uploadImage = async (base64EncodedImage) => {
     console.log(base64EncodedImage)
     try {
-      await fetch('http://localhost:3001/api/upload', {
+      await fetch('http://localhost:4000/api/upload', {
         method: 'POST',
         body: JSON.stringify({ data: base64EncodedImage }),
         headers: { 'Content-type': 'application/json' }

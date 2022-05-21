@@ -1,14 +1,10 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { eventService } from '../../../services/event.service'
 import './style.scss'
 
 export const CardEvent = (props) => {
   const {
-    isAdmin,
-    setIsRejected,
-    isRejected,
     foto_evento,
     nombre_evento,
     lugar,
@@ -16,15 +12,7 @@ export const CardEvent = (props) => {
     fecha_evento,
     id_evento
   } = props
-  const handlerRejectEvent = async (e) => {
-    try {
-      await eventService.rejectEvent(id_evento)
-      setIsRejected(() => !isRejected)
-    } catch (error) {
-      alert('error')
-      console.log(error)
-    }
-  }
+
   return (
     <div className="card card-event bg-dark text-light">
         <div className="img-wrapper">
@@ -63,9 +51,6 @@ export const CardEvent = (props) => {
             </p>
           </div>
           <Link to={`/eventos/${id_evento}`} className="btn btn-sm btn-primary">Ver detalle</Link>
-          {
-            isAdmin && (<button className='btn btn-sm btn-danger' onClick={handlerRejectEvent}>Rechazar evento</button>)
-          }
         </div>
       </div>
   )

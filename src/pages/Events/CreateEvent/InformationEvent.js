@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react'
 import { useStateMachine } from 'little-state-machine'
 import { Controller, useForm } from 'react-hook-form'
@@ -9,42 +11,51 @@ import { AlertErrorForm } from '../../../components/AlertErrorForm'
 import { FormButtons } from '../../../components/Events/FormButtons'
 import { categoryService } from '../../../services/category.service'
 import Select from 'react-select'
-import makeAnimated from 'react-select/animated'
+import moment from 'moment'
 
 export const InformationEvent = () => {
-  // const eventState = {
-  //   nombre_evento: 'LALALA',
-  //   descripcion: 'JEJEJE',
-  //   fecha_evento: '01/01/2022',
-  //   hora_inicio: '10:00',
-  //   hora_final: '10:00',
-  //   lugar: 'jkkjjkd',
-  //   foto_evento: 'mama',
-  //   direccion: 'cuautemoc',
-  //   url_video: 'kjd'
-  // }
-
-  const animatedComponents = makeAnimated()
   const [categories, setCategories] = useState([])
   const { actions, state: { createEvent } } = useStateMachine({ updateCreateEvent })
+  const [previewSource, setPreviewSource] = useState('')
 
-  const { register, handleSubmit, control, formState: { errors } } = useForm({
+  const { register, handleSubmit, control, formState: { errors }, watch } = useForm({
     resolver: yupResolver(SchemaEvent),
     defaultValues: createEvent
   })
-  console.log('ERRORS', errors)
 
   useEffect(() => {
     const getPaymentMethods = async () => {
       const categories = await categoryService.getAllCategories()
-      setCategories(categories.map(c => ({ label: c.nombre, value: c.id_categoria })))
+      setCategories(categories.map(c => ({
+        label: c.nombre,
+        value: c.id_categoria
+      })))
     }
     getPaymentMethods()
   }, [])
 
   const navigate = useNavigate()
+
+  const convertToBase64 = (file) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    // reader.onloadend = () => {
+    //   setPreviewSource(reader.result.toString())
+    // }
+    // reader.readAsDataURL(file)
+    return reader.result.toString()
+  }
+
   const onSubmit = (data) => {
-    actions.updateCreateEvent({ payload: data })
+    const { fecha_evento } = data
+    console.log(data.foto_evento[0])
+    const formatInfo = {
+      ...data,
+      foto_evento: data.foto_evento[0].name,
+      fecha_evento: moment(fecha_evento).format()
+    }
+
+    actions.updateCreateEvent({ payload: formatInfo })
     navigate('/crear-evento/informacion-boletos')
   }
 
@@ -72,8 +83,13 @@ export const InformationEvent = () => {
             {errors.descripcion && (<AlertErrorForm messageError={errors.descripcion.message} />)}
           </div>
           <div className="col-sm-4 mb-4">
-            <label htmlFor="fecha_evento" className="form-label fs-base">Fecha de evento</label>
-            <input type="date" id="fecha_evento"
+            <label htmlFor="fecha_evento"
+              className="form-label fs-base">
+              Fecha de evento
+            </label>
+            <input
+              type="date"
+              id="fecha_evento"
               className="form-control form-control-lg"
               {...register('fecha_evento')}
             />
@@ -113,37 +129,21 @@ export const InformationEvent = () => {
             />
             {errors.ubicacion_maps && (<AlertErrorForm messageError={errors.ubicacion_maps.message} />)}
           </div>
-          <div className="col-sm-12 mb-4">
+          <div className="col-sm-12 col-md-6 mb-4">
             <label htmlFor="direccion" className="form-label fs-base">Dirección del evento</label>
-            <textarea type="text"
+            <input type="text"
               id="direccion" className="form-control form-control-lg"
               {...register('direccion')}
             />
             {errors.direccion && (<AlertErrorForm messageError={errors.direccion.message} />)}
           </div>
-          <div className="col-sm-12 col-md-4 mb-4">
+          <div className="col-sm-12 col-md-6 mb-4">
             <label htmlFor="url_video" className="form-label fs-base">Url de video youtube (Opcional)</label>
             <input type="text" id="url_video"
               className="form-control form-control-lg"
               {...register('url_video')}
             />
             {errors.url_video && (<AlertErrorForm messageError={errors.url_video.message} />)}
-          </div>
-          <div className="col-sm-12 col-md-4 mb-4">
-            <label htmlFor="itinerario_evento" className="form-label fs-base">Foto de evento</label>
-            <input type="text" id="itinerario_evento"
-              className="form-control form-control-lg"
-              {...register('foto_evento')}
-            />
-            {errors.foto_evento && (<AlertErrorForm messageError={errors.foto_evento.message} />)}
-          </div>
-          <div className="col-sm-12 col-md-4 mb-4">
-            <label htmlFor="itinerario_evento" className="form-label fs-base">Itinerario de evento (.pdf)</label>
-            <input type="text" id="itinerario_evento"
-              className="form-control form-control-lg"
-              {...register('itinerario_evento')}
-            />
-            {errors.itinerario_evento && (<AlertErrorForm messageError={errors.itinerario_evento.message} />)}
           </div>
           <div className="col-sm-12 mb-4">
             <label htmlFor="categorias" className="form-label fs-base">Selecciona las categorias a las que pertenece tu evento</label>
@@ -153,15 +153,36 @@ export const InformationEvent = () => {
               render={({ field }) =>
               <Select
                   {...field}
-                  placeholder="Selecciona tu categoria"
-                  components={animatedComponents}
+                  placeholder="Selecciona las categorias del evento"
                   isMulti
                   options={categories}
                 />}
             />
             {errors.categorias && (<AlertErrorForm messageError={errors.categorias.message} />)}
           </div>
+          <div className="col-sm-12 col-md-6 mb-4">
+            <label htmlFor="foto_evento" className="form-label fs-base">Foto de evento</label>
+            <input
+              type="file"
+              id="foto_evento"
+              className="form-control form-control-lg fw-bold"
+              {...register('foto_evento')}
+            />
+            {errors.foto_evento && (<AlertErrorForm messageError={errors.foto_evento.message} />)}
+          </div>
+          <div className="col-sm-12 col-md-6 mb-4">
+            <label htmlFor="itinerario_evento" className="form-label fs-base">Itinerario de evento (.pdf)</label>
+            <input type="text" id="itinerario_evento"
+              className="form-control form-control-lg"
+              {...register('itinerario_evento')}
+            />
+            {errors.itinerario_evento && (<AlertErrorForm messageError={errors.itinerario_evento.message} />)}
+          </div>
+          <div className="col-sm-12">
+            {previewSource && (<img src={previewSource} alt="chosenIMG" style={{ height: '300px' }} />)}
+          </div>
         </div>
+
         <FormButtons backPage="/crear-evento"/>
       </form>
     </>
