@@ -7,6 +7,10 @@ export const eventService = {
     const { data } = await Axios.post(`${globalConfig.url}/api/eventos/registrar-evento`, { ...dataEvent })
     return data
   },
+  getAllEventsPublic: async () => {
+    const { data } = await Axios.get(`${globalConfig.url}/api/eventos?esta_activo=1&esta_aprobado=1`)
+    return data
+  },
   getAllEvents: async () => {
     const { data } = await Axios.get(`${globalConfig.url}/eventos`)
     return data
@@ -31,7 +35,7 @@ export const eventService = {
     const { data } = await Axios.put(`${globalConfig.url}/api/eventos/aprobar/${id}`)
     return data
   },
-  rejectEvent: async (id) => {
+  rejectEvent: async (id) => { // Pasa a por aprobar
     const { data } = await Axios.put(`${globalConfig.url}/api/eventos/rechazar/${id}`)
     return data
   },
