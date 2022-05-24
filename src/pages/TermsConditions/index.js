@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.scss'
 
 export const TermsConditionsPage = () => {
   return (
@@ -14,6 +15,7 @@ export const TermsConditionsPage = () => {
               <img src="assets/img/home/bg1.jpg" alt="Video preview" />
             </a>
           </div>
+          <div className="texto-justificado">
           <h3 className="h3">1. Aceptación de estos términos</h3>
           <h4 className="h4">1.1 Qué es qué.</h4>
           <p className="mb-4 pb-2">Los productos, características y ofertas de Atemporal están disponibles (a) en línea a través de varias propiedades de Atemporal, incluidos sin limitación Atemporal, (b) fuera de la plataforma, incluidos, entre otros, los servicios de RFID, gestión de acceso, patrocinio y marketing o distribución; y (c) a través de aplicaciones móviles, páginas web, interfaces de programación de aplicaciones y subdominios (&#34;Aplicaciones&#34;). (a), (b) y (c) se denominan colectivamente &#34;Propiedades de Atemporal&#34; o nuestros &#34;Servicios&#34;. Estos Términos se aplican a cualquier Sitio en el que se publican; donde en su lugar se publican otros términos o acuerdos, dichos términos o acuerdos se aplican en la medida en que entren en conflicto con estos Términos. El material, incluidos, sin limitación, la información, los datos, el texto, el contenido editorial, los elementos de diseño, el aspecto, el formato, los gráficos, las imágenes, las fotografías, los vídeos, la música, los sonidos y otro tipo de contenido incluido o entregado a través de los Servicios o puesto a disposición de otro modo por Atemporal en relación con los Servicios es el &#34;Contenido del sitio&#34; (o &#34;Contenido&#34;). Cualquier material (incluidas las categorías anteriores) que contribuyas, proporciones, publiques o pongas a disposición mediante los Servicios es &#34;Tu contenido&#34;.</p>
@@ -170,7 +172,7 @@ export const TermsConditionsPage = () => {
 
           <h3 className="h3">27. Cláusulas adicionales para Usuarios en ciertas ubicaciones</h3>
           <p className="mb-4 pb-2">Atemporal es una empresa global que ofrece a los Organizadores y Consumidores la oportunidad de beneficiarse de nuestros Servicios en todo el mundo. Para permitir que cada Usuario aproveche al máximo nuestros Servicios y la ley aplicable, es posible que ciertas disposiciones adicionales incluidas en esta Sección te sean aplicables.</p>
-
+          </div>
         </div>
       </div>
     </section>
