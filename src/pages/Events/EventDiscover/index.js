@@ -28,7 +28,7 @@ export const EventDiscoverPage = ({ isAdmin }) => {
         // console.log('Text Empty: ' + isTextEmpty)
         // Efecto por defecto
         if (isDropDefault) {
-          const dbEvents = await eventService.getAllEvents()
+          const dbEvents = await eventService.getAllEventsPublic()
           setEvents(dbEvents)
         }
         // Efecto con categoria seleccionada

@@ -15,7 +15,10 @@ export const CardEventDashboard = (props) => {
     foto_evento,
     id_evento,
     setFetched,
-    fetch
+    fetch,
+    fromPublicados,
+    fromEliminados,
+    fromAprobados
   } = props
 
   // useEffect(() => {
@@ -29,6 +32,7 @@ export const CardEventDashboard = (props) => {
 
   const handlerAproveEvent = async (e) => {
     try {
+      console.log(fromPublicados)
       await eventService.aproveEvent(id_evento)
       setFetched(() => !fetch)
     } catch (error) {
@@ -77,20 +81,20 @@ export const CardEventDashboard = (props) => {
               <b>
                 Lugar:
               </b>
-              {lugar}
+              {' ' + lugar}
             </p>
             <p>
               <b>
                 Descripcion:
               </b>
-              {descripcion}
+              {' ' + descripcion}
             </p>
             <hr className="my-4" />
             <p>
               <b>
                 Organizador:
               </b>
-              {nombre_organizador}
+              {' ' + nombre_organizador}
             </p>
           </div>
           <div className="card-actions">
@@ -101,15 +105,15 @@ export const CardEventDashboard = (props) => {
               <i className="bx bx-info-square fs-lg" />
             </Link>
 
-            <button onClick={handlerAproveEvent} className="btn btn-success btn-sm">
+            <button onClick={handlerAproveEvent} disabled={fromPublicados} className="btn btn-success btn-sm">
               <i className="bx bx-like fs-lg" />
             </button>
 
-            <button onClick={handlerRejectEvent} className="btn btn-warning btn-sm">
+            <button onClick={handlerRejectEvent} disabled={fromAprobados} className="btn btn-warning btn-sm">
               <i className="bx bx-dislike fs-lg" />
             </button>
 
-            <button onClick={handlerRemoveEvent} className="btn btn-danger btn-sm">
+            <button onClick={handlerRemoveEvent} disabled={fromEliminados} className="btn btn-danger btn-sm">
               <i className="bx bx-trash fs-lg" />
             </button>
           </div>

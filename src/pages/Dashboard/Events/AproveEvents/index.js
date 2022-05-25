@@ -15,7 +15,9 @@ export const AproveEvents = () => {
   }, [fetch])
   return (
     <>
-      <h1 className="mb-2 mb-md-0">Aprobar eventos</h1>
+      <h1 className="mb-2 mb-md-0">Eventos por aprobar</h1>
+      <hr className="opacity-100" />
+      <br />
       {/* Events */}
       <div className="container-fluid">
         <div className="row">
@@ -30,7 +32,9 @@ export const AproveEvents = () => {
                   <CardEventDashboard
                     {...e}
                     setFetched={setFetched}
-                    fetch={fetch} />
+                    fetch={fetch}
+                    fromPublicados={0}
+                    fromAprobados={1} />
                 </div>
                 ))
           }

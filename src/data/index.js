@@ -199,13 +199,20 @@ export const data = {
       },
       {
         id: 4,
+        title: 'Eventos eliminados',
+        pathname: 'eliminados',
+        link: 'eliminados',
+        icon: 'bx bx-trash'
+      },
+      {
+        id: 5,
         title: 'Categorias',
         pathname: 'categorias',
         link: 'categorias',
         icon: 'bx bx-category'
       },
       {
-        id: 5,
+        id: 6,
         title: 'Usuarios',
         pathname: 'usuarios',
         link: 'usuarios',
