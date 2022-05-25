@@ -29,9 +29,9 @@ const HowItWorks = ({ event }) => {
                   <div className="h2 d-flex align-items-center mb-4">$79<del className="text-muted fs-xl fw-normal ms-2">99</del></div>
                   <a href="#" className="btn btn-primary btn-lg shadow-primary">Comprar boletos</a>
                 </div>
+                <ShareButton url={url_evento} socialNetwork='facebook'/>
               </div>
             </div>
-            <ShareButton url={url_evento} socialNetwork='instagram'/>
           </div>
         </aside>
         {/* Content */}

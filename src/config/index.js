@@ -7,6 +7,6 @@ const globalConfig = {
   }
 }
 const MODE_CONFIG =
-  process.env.NODE_ENV === 'PRODUCTION' ? 'PRODUCTION' : 'DEV'
+  process.env.REACT_APP_NODE_ENV === 'PRODUCTION' ? 'PRODUCTION' : 'DEV'
 
 export default globalConfig[MODE_CONFIG]
