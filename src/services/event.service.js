@@ -8,7 +8,7 @@ export const eventService = {
     return data
   },
   getAllEventsPublic: async () => {
-    const { data } = await Axios.get(`${globalConfig.url}/api/eventos?esta_activo=1&esta_aprobado=1`)
+    const { data } = await Axios.get(`${globalConfig.url}/eventos?esta_activo=1&esta_aprobado=1`)
     return data
   },
   getAllEvents: async () => {
@@ -28,7 +28,7 @@ export const eventService = {
     return data
   },
   getOneEvent: async (id) => {
-    const { data } = await Axios.get(`${globalConfig.url}/api/eventos/${id}`)
+    const { data } = await Axios.get(`${globalConfig.url}/eventos/${id}`)
     return data
   },
   aproveEvent: async (id) => {
