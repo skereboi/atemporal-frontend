@@ -43,6 +43,9 @@ import { CreateCategories } from './pages/Dashboard/Categories/CreateAdmin'
 import { AccountPublications } from './pages/Account/AccountPublications'
 import { ListEventsAproved } from './pages/Dashboard/Events/ListEventsAproved'
 import { ListEventsDeleted } from './pages/Dashboard/Events/ListEventsDeleted'
+import { ListPayments } from './pages/Dashboard/PaymentMethods/ListPayments'
+import { CreatePayments } from './pages/Dashboard/PaymentMethods/CreatePayment'
+import { EditPayment } from './pages/Dashboard/PaymentMethods/EditPayment'
 
 initAxiosInterceptors()
 createStore({
@@ -118,6 +121,11 @@ const App = () => {
                   <Route index element={<ListCategories />} />
                   <Route path="crear" element={<CreateCategories />} />
                   <Route path="editar/:id" element={<EditCategory />} />
+                </Route>
+                <Route path='metodos-pago'>
+                  <Route index element={<ListPayments />} />
+                  <Route path="crear" element={<CreatePayments />} />
+                  <Route path="editar/:id" element={<EditPayment />} />
                 </Route>
               </Route>
               <Route path="mi-cuenta" element={<AccountLayout />}>

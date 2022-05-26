@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { CardEventDashboard } from '../../../../components/Dashboard/CardEventDashboard'
+import { NothingToShow } from '../../../../components/Dashboard/NothingToShow'
 import { eventService } from '../../../../services/event.service'
 
 export const AproveEvents = () => {
@@ -21,6 +22,9 @@ export const AproveEvents = () => {
       {/* Events */}
       <div className="container-fluid">
         <div className="row">
+          {
+            eventsToAprove.length === 0 && (<NothingToShow />)
+          }
           {
             eventsToAprove
               .map(e =>

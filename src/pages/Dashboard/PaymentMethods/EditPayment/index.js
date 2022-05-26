@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AlertErrorForm } from '../../../../components/AlertErrorForm'
 import { useGeneralApp } from '../../../../hooks/useGeneralApp'
-import { categoryService } from '../../../../services/category.service'
+import { paymentService } from '../../../../services/payment.service'
 
-export const EditCategory = () => {
+export const EditPayment = () => {
   const navigate = useNavigate()
   const { setErrorMessage, isLoading, setIsLoading } = useGeneralApp()
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
@@ -13,22 +13,22 @@ export const EditCategory = () => {
   const { id } = useParams()
 
   useEffect(() => {
-    const getCategory = async () => {
+    const getPayment = async () => {
       try {
-        const category = await categoryService.getOneCategory(id)
-        reset({ ...category })
+        const payment = await paymentService.getOnePayment(id)
+        reset({ ...payment })
       } catch (error) {
         console.log(error)
       }
     }
-    getCategory()
+    getPayment()
   }, [id])
 
   const onSubmit = async (data) => {
     setIsLoading(true)
 
     try {
-      await categoryService.updateOneCategory(id, data)
+      await paymentService.updateOnePayment(id, data)
       setIsLoading(false)
       navigate(-1)
     } catch (error) {
@@ -44,10 +44,10 @@ export const EditCategory = () => {
     <>
       <div className="row mb-5 justify-content-center">
         <div className="col-md-8">
-          <h1>Editar categoria</h1>
+          <h1>Editar método de pago</h1>
         </div>
         <div className="col-md-4 col-12 d-flex justify-content-center align-items-center">
-          <Link to="/dashboard/categorias" className='btn btn-sm btn-primary'>Regresar</Link>
+          <Link to="/dashboard/metodos-pago" className='btn btn-sm btn-primary'>Regresar</Link>
         </div>
       </div>
 
@@ -58,7 +58,7 @@ export const EditCategory = () => {
               <div className="col-12">
                 <div className="position-relative mb-4">
                   <label htmlFor="name" className="form-label fs-base">
-                    Nombre de categoria</label>
+                    Nombre del método de pago</label>
                   <input type="text" id="name"
                     className="form-control form-control-lg"
                     {...register('nombre', { required: true })}

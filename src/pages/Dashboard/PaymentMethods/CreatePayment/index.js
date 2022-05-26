@@ -1,35 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AlertErrorForm } from '../../../../components/AlertErrorForm'
 import { useGeneralApp } from '../../../../hooks/useGeneralApp'
-import { categoryService } from '../../../../services/category.service'
+import { paymentService } from '../../../../services/payment.service'
 
-export const EditCategory = () => {
+export const CreatePayments = () => {
   const navigate = useNavigate()
   const { setErrorMessage, isLoading, setIsLoading } = useGeneralApp()
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
-
-  const { id } = useParams()
-
-  useEffect(() => {
-    const getCategory = async () => {
-      try {
-        const category = await categoryService.getOneCategory(id)
-        reset({ ...category })
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getCategory()
-  }, [id])
 
   const onSubmit = async (data) => {
     setIsLoading(true)
 
     try {
-      await categoryService.updateOneCategory(id, data)
+      await paymentService.createOnePayment(data)
       setIsLoading(false)
+      reset()
       navigate(-1)
     } catch (error) {
       setIsLoading(false)
@@ -44,13 +31,12 @@ export const EditCategory = () => {
     <>
       <div className="row mb-5 justify-content-center">
         <div className="col-md-8">
-          <h1>Editar categoria</h1>
+          <h1>Crear método de pago</h1>
         </div>
         <div className="col-md-4 col-12 d-flex justify-content-center align-items-center">
-          <Link to="/dashboard/categorias" className='btn btn-sm btn-primary'>Regresar</Link>
+          <Link to="/dashboard/metodos-pago" className='btn btn-sm btn-primary'>Regresar</Link>
         </div>
       </div>
-
       <div className="row justify-content-center">
         <div className="col-md-6">
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -58,17 +44,15 @@ export const EditCategory = () => {
               <div className="col-12">
                 <div className="position-relative mb-4">
                   <label htmlFor="name" className="form-label fs-base">
-                    Nombre de categoria</label>
-                  <input type="text" id="name"
-                    className="form-control form-control-lg"
-                    {...register('nombre', { required: true })}
-                    autoComplete="off"
-                  />
-                  <AlertErrorForm messageError={errors.nombre?.message} />
+                    Nombre del método</label>
+                  <input type="text" id="name" className="form-control form-control-lg" {...register('nombre', { required: true })} autoComplete="off" />
+                  <div>
+                    <AlertErrorForm messageError={errors.nombre?.message} />
+                  </div>
                 </div>
               </div>
             </div>
-            <button type="submit" className="btn btn-primary shadow-primary btn-lg w-100" disabled={isLoading}>Guardar cambios</button>
+            <button type="submit" className="btn btn-primary shadow-primary btn-lg w-100" disabled={isLoading}>Crear método</button>
           </form>
         </div>
       </div>

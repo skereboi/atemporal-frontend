@@ -213,6 +213,13 @@ export const data = {
       },
       {
         id: 6,
+        title: 'Métodos de pago',
+        pathname: 'metodos-pago',
+        link: 'metodos-pago',
+        icon: 'bx bx-credit-card'
+      },
+      {
+        id: 7,
         title: 'Usuarios',
         pathname: 'usuarios',
         link: 'usuarios',
