@@ -7,10 +7,10 @@ import './style.scss'
 export const AsideMenu = () => {
   const { user } = useAuth()
   return (
-    <aside className="border-end pb-5 mt-n5">
-      <div className="aside-menu top-0 mb-5">
+    <aside className="aside-menu border-end pb-5 mt-n5">
+      <div className="top-0">
         <div className="text-center pt-5">
-          <div className="d-table position-relative mx-auto mt-2 mt-lg-4 pt-5 mb-3">
+          <div className="d-table position-relative mx-auto mb-3">
             <b>Administrador</b>
           </div>
           <h2 className="h5 mb-1">
