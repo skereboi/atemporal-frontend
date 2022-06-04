@@ -185,6 +185,24 @@ export const InformationSummary = () => {
                       />
                       {errors.ubicacion_maps && (<AlertErrorForm messageError={errors.ubicacion_maps.message} />)}
                     </div>
+                    <div className="col-sm-12 col-md-6 mb-4">
+                      <label htmlFor="direccion" className="form-label fs-base">Ciudad</label>
+                      <input type="text"
+                        id="direccion" className="form-control form-control-lg"
+                        {...register('ciudad')}
+                        disabled
+                      />
+                      {errors.direccion && (<AlertErrorForm messageError={errors.direccion.message} />)}
+                    </div>
+                    <div className="col-sm-12 col-md-6 mb-4">
+                      <label htmlFor="direccion" className="form-label fs-base">Estado</label>
+                      <input type="text"
+                        id="direccion" className="form-control form-control-lg"
+                        {...register('estado')}
+                        disabled
+                      />
+                      {errors.direccion && (<AlertErrorForm messageError={errors.direccion.message} />)}
+                    </div>
                     <div className="col-sm-12 mb-4">
                       <label htmlFor="direccion" className="form-label fs-base">Dirección del evento</label>
                       <textarea type="text"

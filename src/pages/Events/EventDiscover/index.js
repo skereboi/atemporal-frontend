@@ -23,9 +23,7 @@ export const EventDiscoverPage = ({ isAdmin }) => {
     const getEvents = async () => {
       try {
         const isDropDefault = ((categorySelected === null) || (categorySelected === '0'))
-        // console.log('DropdownDefault: ' + isDropDefault)
         const isTextEmpty = ((textToFind === null) || (textToFind === ''))
-        // console.log('Text Empty: ' + isTextEmpty)
         // Efecto por defecto
         if (isDropDefault) {
           const dbEvents = await eventService.getAllEventsPublic()
@@ -33,13 +31,11 @@ export const EventDiscoverPage = ({ isAdmin }) => {
         }
         // Efecto con categoria seleccionada
         if (!isDropDefault) {
-          console.log(categorySelected, '😀')
           const dbEvents = await eventService.getEventsByCategory(parseInt(categorySelected))
           setEvents(dbEvents)
         }
         // Efecto con teexto ingresado
         if (!isTextEmpty) {
-          console.log('Text Input: ' + textToFind + ' 🤪')
           const dbEvents = await eventService.getEventsByTextSearch(textToFind)
           setEvents(dbEvents)
         }
@@ -65,16 +61,12 @@ export const EventDiscoverPage = ({ isAdmin }) => {
                 Descubre eventos
               </h1>
             </div>
-            {
-              user?.typeUser === 'general' && (
-                <div className="col-lg-7 col-md-8">
-                <form className="row gy-2" onSubmit={handlerOnSubmit}>
-                  <CategoryDropdown setCategorySelected={setCategorySelected} setCategoryName={setCategoryName} />
-                  <TextFinder setTextToFind={setTextToFind} />
-                </form>
-                </div>
-              )
-            }
+            <div className="col-lg-7 col-md-8">
+              <form className="row gy-2" onSubmit={handlerOnSubmit}>
+                <CategoryDropdown setCategorySelected={setCategorySelected} setCategoryName={setCategoryName} />
+                <TextFinder setTextToFind={setTextToFind} />
+              </form>
+            </div>
           </div>
           {/* Blog grid */}
           <div className="row">

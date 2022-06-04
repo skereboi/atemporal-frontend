@@ -4,7 +4,7 @@ import globalConfig from '../config'
 
 export const categoryService = {
   getAllCategories: async () => {
-    const { data } = await Axios.get(`${globalConfig.url}/api/categorias/`)
+    const { data } = await Axios.get(`${globalConfig.url}/categorias/`)
     return data
   },
   getOneCategory: async (id) => {

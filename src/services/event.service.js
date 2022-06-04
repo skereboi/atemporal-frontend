@@ -44,11 +44,11 @@ export const eventService = {
     return data
   },
   getEventsByCategory: async (id) => {
-    const { data } = await Axios.get(`${globalConfig.url}/api/eventos/porCategoria/${id}`)
+    const { data } = await Axios.get(`${globalConfig.url}/eventos/porCategoria/${id}`)
     return data
   },
   getEventsByTextSearch: async (textInput) => {
-    const { data } = await Axios.get(`${globalConfig.url}/api/eventos/porTexto/${textInput}`)
+    const { data } = await Axios.get(`${globalConfig.url}/eventos/porTexto/${textInput}`)
     return data
   },
   getAllByEstado: async (name) => {

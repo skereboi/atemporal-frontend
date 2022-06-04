@@ -19,7 +19,10 @@ export const InformationEvent = () => {
 
   const { register, handleSubmit, control, formState: { errors } } = useForm({
     resolver: yupResolver(SchemaEvent),
-    defaultValues: createEvent
+    defaultValues: {
+      ...createEvent,
+      fecha_evento: createEvent.fecha_evento && (moment(createEvent.fecha_evento).format('MMMM Do YYYY, h:mm:ss a'))
+    }
   })
 
   useEffect(() => {
@@ -38,11 +41,13 @@ export const InformationEvent = () => {
   const onSubmit = async (data) => {
     const { fecha_evento } = data
     const baseImage64 = await convertToBase64(data.foto_evento[0])
+    const baseFile64 = await convertToBase64(data.itinerario_evento[0])
     console.log(baseImage64, '😠')
     const formatInfo = {
       ...data,
       foto_evento: baseImage64,
-      fecha_evento: moment(fecha_evento).format()
+      itinerario_evento: baseFile64,
+      fecha_evento: fecha_evento && (moment(fecha_evento).format())
     }
 
     actions.updateCreateEvent({ payload: formatInfo })
@@ -120,6 +125,22 @@ export const InformationEvent = () => {
             {errors.ubicacion_maps && (<AlertErrorForm messageError={errors.ubicacion_maps.message} />)}
           </div>
           <div className="col-sm-12 col-md-6 mb-4">
+            <label htmlFor="direccion" className="form-label fs-base">Ciudad</label>
+            <input type="text"
+              id="direccion" className="form-control form-control-lg"
+              {...register('ciudad')}
+            />
+            {errors.direccion && (<AlertErrorForm messageError={errors.direccion.message} />)}
+          </div>
+          <div className="col-sm-12 col-md-6 mb-4">
+            <label htmlFor="direccion" className="form-label fs-base">Estado</label>
+            <input type="text"
+              id="direccion" className="form-control form-control-lg"
+              {...register('estado')}
+            />
+            {errors.direccion && (<AlertErrorForm messageError={errors.direccion.message} />)}
+          </div>
+          <div className="col-sm-12 col-md-6 mb-4">
             <label htmlFor="direccion" className="form-label fs-base">Dirección del evento</label>
             <input type="text"
               id="direccion" className="form-control form-control-lg"
@@ -161,9 +182,11 @@ export const InformationEvent = () => {
             {errors.foto_evento && (<AlertErrorForm messageError={errors.foto_evento.message} />)}
           </div>
           <div className="col-sm-12 col-md-6 mb-4">
-            <label htmlFor="itinerario_evento" className="form-label fs-base">Itinerario de evento (.pdf)</label>
-            <input type="text" id="itinerario_evento"
-              className="form-control form-control-lg"
+            <label htmlFor="foto_evento" className="form-label fs-base">Itinerario de evento (.pdf)</label>
+            <input
+              type="file"
+              id="foto_evento"
+              className="form-control form-control-lg fw-bold"
               {...register('itinerario_evento')}
             />
             {errors.itinerario_evento && (<AlertErrorForm messageError={errors.itinerario_evento.message} />)}

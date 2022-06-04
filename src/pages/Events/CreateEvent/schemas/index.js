@@ -23,8 +23,14 @@ const schemaTemplateEvent = {
   descripcion:
     yup.string()
       .required('Campo obligatorio'),
+  ciudad:
+    yup.string()
+      .required('Campo obligatorio'),
+  estado:
+    yup.string()
+      .required('Campo obligatorio'),
   fecha_evento:
-    yup.date()
+    yup.string()
       .required('Campo obligatorio'),
   hora_inicio:
     yup.string()
@@ -50,7 +56,15 @@ const schemaTemplateEvent = {
   url_video:
     yup.string(),
   itinerario_evento:
-    yup.string(),
+    yup.mixed()
+      .test('type', 'Por favor sube el itinerario en formato PDF', (value) => {
+        if (!value.length) return true
+        return value && (value[0].type === 'application/pdf')
+      })
+      .test('fileSize', 'El archivo es pesado. Máximo 2M', (value) => {
+        if (!value.length) return true
+        return value[0].size <= 2000000
+      }),
   categorias:
     yup.array()
       .of(yup.object({
