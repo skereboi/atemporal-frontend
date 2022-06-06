@@ -48,13 +48,13 @@ export const InformationSummary = () => {
           tipo_cobro: data.tipo_cobro,
           foto_evento: data.foto_evento,
           itinerario_evento: baseFile64,
-          ciudad: data.ciudad,
-          estado: {
-            id: data.estado.value
-          }
+          ciudad: data.ciudad
         },
         ticket: [...data.boletos],
-        categorias: [...data.categorias.map(c => ({ id: c.value }))]
+        categorias: [...data.categorias.map(c => ({ id: c.value }))],
+        estado: {
+          id: data.estado.value
+        }
       }
       await eventService.createOneEvent(eventData)
       setIsLoading(false)
