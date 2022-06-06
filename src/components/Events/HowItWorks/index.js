@@ -26,7 +26,10 @@ const HowItWorks = ({ event }) => {
                     </li>
                   </ul>
                   <p className='text-muted'>Desde</p>
-                  <div className="h2 d-flex align-items-center mb-4">$79<del className="text-muted fs-xl fw-normal ms-2">99</del></div>
+                  <div className="h2 d-flex align-items-center mb-4">
+                    ${event.boletos[1].precio}
+                    <del className="text-muted fs-xl fw-normal ms-2">99</del>
+                  </div>
                   <a href="#" className="btn btn-primary btn-lg shadow-primary">Comprar boletos</a>
                 </div>
                 <ShareButton url={url_evento} socialNetwork='facebook'/>
@@ -36,25 +39,25 @@ const HowItWorks = ({ event }) => {
         </aside>
         {/* Content */}
         <div className="col-xl-7 col-lg-8 col-md-7 order-md-1 mb-5">
-          <h2 className="h1 pb-md-2 pb-lg-3">Descripción de evento</h2>
+          <h2 className="h1 pb-md-2 pb-lg-3">{event.nombre_evento}</h2>
           <p className="pb-4 mb-3">
             {
               event.descripcion
             }
           </p>
-          <h3 className="mb-4">Lugar</h3>
+          <h3 className="mb-4">Detalle de ubicación</h3>
           <ul className="list-unstyled mb-5">
             <li className="d-flex align-items-center mb-2">
-              <i className="bx bx-check-circle text-primary fs-xl me-2" />
-              {event.lugar}
+              <b>Ciudad:</b>{event.ciudad}
             </li>
             <li className="d-flex align-items-center mb-2">
-              <i className="bx bx-check-circle text-primary fs-xl me-2" />
-              {event.direccion}
+              <b>Estado:</b>{event.estado}
             </li>
             <li className="d-flex align-items-center mb-2">
-              <i className="bx bx-check-circle text-primary fs-xl me-2" />
-
+              <b>Lugar:</b>{event.lugar}
+            </li>
+            <li className="d-flex align-items-center mb-2">
+              <b>Dirección:</b>{event.direccion}
             </li>
           </ul>
           <h2 className="h1 pt-md-2 pt-lg-4 pt-xl-5 pb-md-3 pb-lg-4 mb-md-4">Proceso de reserva</h2>

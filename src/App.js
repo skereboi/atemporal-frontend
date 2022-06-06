@@ -46,6 +46,7 @@ import { ListEventsDeleted } from './pages/Dashboard/Events/ListEventsDeleted'
 import { ListPayments } from './pages/Dashboard/PaymentMethods/ListPayments'
 import { CreatePayments } from './pages/Dashboard/PaymentMethods/CreatePayment'
 import { EditPayment } from './pages/Dashboard/PaymentMethods/EditPayment'
+import { RevisionPage } from './pages/Events/RevisionPage'
 
 initAxiosInterceptors()
 createStore({
@@ -80,6 +81,8 @@ const App = () => {
             <Route path="cambiar-password/:idCode" element={<ChangePasswordPage />} />
             <Route path='eventos' element={<EventDiscoverPage />} />
             <Route path='eventos/:idEvento' element={<EventDetail />} />
+            <Route path='eventos/revision' element={<RevisionPage />} />
+
             <Route path='buttontest' element={<ButtonTest />} />
             {/* Private routes general user */}
             <Route element={<AuthGuard typeUser='general' />}>

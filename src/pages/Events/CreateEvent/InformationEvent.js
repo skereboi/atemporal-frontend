@@ -39,10 +39,9 @@ export const InformationEvent = () => {
   const navigate = useNavigate()
 
   const onSubmit = async (data) => {
-    const { fecha_evento } = data
+    const { fecha_evento, itinerario_evento } = data
     const baseImage64 = await convertToBase64(data.foto_evento[0])
-    const baseFile64 = await convertToBase64(data.itinerario_evento[0])
-    console.log(baseImage64, '😠')
+    const baseFile64 = itinerario_evento && await convertToBase64(data.itinerario_evento[0])
     const formatInfo = {
       ...data,
       foto_evento: baseImage64,
@@ -50,6 +49,7 @@ export const InformationEvent = () => {
       fecha_evento: fecha_evento && (moment(fecha_evento).format())
     }
 
+    console.log(formatInfo)
     actions.updateCreateEvent({ payload: formatInfo })
     navigate('/crear-evento/informacion-boletos')
   }
@@ -125,20 +125,20 @@ export const InformationEvent = () => {
             {errors.ubicacion_maps && (<AlertErrorForm messageError={errors.ubicacion_maps.message} />)}
           </div>
           <div className="col-sm-12 col-md-6 mb-4">
-            <label htmlFor="direccion" className="form-label fs-base">Ciudad</label>
-            <input type="text"
-              id="direccion" className="form-control form-control-lg"
-              {...register('ciudad')}
-            />
-            {errors.direccion && (<AlertErrorForm messageError={errors.direccion.message} />)}
-          </div>
-          <div className="col-sm-12 col-md-6 mb-4">
             <label htmlFor="direccion" className="form-label fs-base">Estado</label>
             <input type="text"
               id="direccion" className="form-control form-control-lg"
               {...register('estado')}
             />
-            {errors.direccion && (<AlertErrorForm messageError={errors.direccion.message} />)}
+            {errors.estado && (<AlertErrorForm messageError={errors.estado.message} />)}
+          </div>
+          <div className="col-sm-12 col-md-6 mb-4">
+            <label htmlFor="direccion" className="form-label fs-base">Ciudad</label>
+            <input type="text"
+              id="direccion" className="form-control form-control-lg"
+              {...register('ciudad')}
+            />
+            {errors.ciudad && (<AlertErrorForm messageError={errors.ciudad.message} />)}
           </div>
           <div className="col-sm-12 col-md-6 mb-4">
             <label htmlFor="direccion" className="form-label fs-base">Dirección del evento</label>
