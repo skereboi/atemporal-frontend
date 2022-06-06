@@ -57,10 +57,6 @@ const schemaTemplateEvent = {
     yup.string(),
   itinerario_evento:
     yup.mixed()
-      .test('type', 'Por favor sube el itinerario en formato PDF', (value) => {
-        if (!value.length) return true
-        return value && (value[0].type === 'application/pdf')
-      })
       .test('fileSize', 'El archivo es pesado. Máximo 2M', (value) => {
         if (!value.length) return true
         return value[0].size <= 2000000

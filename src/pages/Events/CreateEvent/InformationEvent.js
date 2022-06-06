@@ -50,11 +50,18 @@ export const InformationEvent = () => {
   const onSubmit = async (data) => {
     const { fecha_evento, itinerario_evento } = data
     const baseImage64 = await convertToBase64(data.foto_evento[0])
-
-    const formatInfo = {
+    let formatInfo = {
       ...data,
       foto_evento: baseImage64,
       fecha_evento: fecha_evento && (moment(fecha_evento).format())
+    }
+
+    if (itinerario_evento[0]) {
+      const baseFile64 = itinerario_evento && await convertToBase64(itinerario_evento[0])
+      formatInfo = {
+        ...formatInfo,
+        itinerario_evento: baseFile64
+      }
     }
 
     console.log(formatInfo)

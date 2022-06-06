@@ -3,7 +3,7 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { ShareButton } from '../../ShareButton/Index'
 
-const HowItWorks = ({ event }) => {
+export const RegisterToEvent = ({ event }) => {
   const location = useLocation()
   const url_evento = location.pathname
   return (
@@ -21,18 +21,31 @@ const HowItWorks = ({ event }) => {
                     <li className="d-flex align-items-center mb-2">
                       <i className="bx bx-calendar-event fs-xl text-muted me-2 pe-1" />
                       {
-                        event.tipo_cobro === 1 && ('Evento de pago')
+                        event.tipo_cobro === 1 ? ('Evento de pago') : 'Evento gratuito'
                       }
                     </li>
                   </ul>
-                  <p className='text-muted'>Desde</p>
-                  <div className="h2 d-flex align-items-center mb-4">
+                  {
+                    event.tipo_cobro === 1 && (<p className='text-muted'>Desde</p>)
+                  }
+                  {
+                    event.tipo_cobro === 1 && (
+                      <div className="h2 d-flex align-items-center mb-4">
+                        $
+                        {
+                          Math.min(...event.boletos.map(e => e.precio))
+                        }
+                        <del className="text-muted fs-xl fw-normal ms-2">
+                          ${Math.min(...event.boletos.map(e => e.precio)) + 100}
+                        </del>
+                      </div>
+                    )
+                  }
+                  <a href="#" className="btn btn-primary btn-lg shadow-primary">
                     {
-                      JSON.stringify(event.boletos)
+                      event.tipo_cobro === 1 ? 'Comprar boletos' : 'Registrarse en el evento'
                     }
-                    <del className="text-muted fs-xl fw-normal ms-2">99</del>
-                  </div>
-                  <a href="#" className="btn btn-primary btn-lg shadow-primary">Comprar boletos</a>
+                  </a>
                 </div>
                 <ShareButton url={url_evento} socialNetwork='facebook'/>
               </div>
@@ -125,5 +138,3 @@ const HowItWorks = ({ event }) => {
     </section>
   )
 }
-
-export default HowItWorks

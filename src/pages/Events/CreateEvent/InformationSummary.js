@@ -27,17 +27,13 @@ export const InformationSummary = () => {
     try {
       setIsLoading(true)
 
-      const { itinerario_evento } = data
-
-      const baseFile64 = itinerario_evento && await convertToBase64(data.itinerario_evento[0])
-
       const eventData = {
         event: {
           nombre_organizador: data.nombre_organizador,
           celular_principal: data.celular_principal,
           celular_secundario: data.celular_secundario,
           nombre_evento: data.nombre_evento,
-          fecha_evento: '28-08-22',
+          fecha_evento: data.fecha_evento,
           hora_inicio: data.hora_inicio,
           hora_final: data.hora_final,
           lugar: data.lugar,
@@ -47,7 +43,7 @@ export const InformationSummary = () => {
           url_video: data.url_video,
           tipo_cobro: data.tipo_cobro,
           foto_evento: data.foto_evento,
-          itinerario_evento: baseFile64,
+          itinerario_evento: data.itinerario_evento,
           ciudad: data.ciudad
         },
         ticket: [...data.boletos],
@@ -65,8 +61,8 @@ export const InformationSummary = () => {
       if (!error.response) {
         setErrorMessage('⚠️ Servicios desconectados, estamos en mantenimiento ⚠️')
       }
-      if (error.response.data.msg[0].type) {
-        setErrorMessage('Revisa tu correo')
+      if (error.response.data.msg) {
+        setErrorMessage('Revisa los campos')
       } else {
         setErrorMessage(error.response.data.msg)
       }

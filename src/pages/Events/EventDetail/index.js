@@ -4,7 +4,7 @@ import { Navigate, useParams } from 'react-router-dom'
 import { eventService } from '../../../services/event.service'
 import { Faqs } from '../../../components/Events/Faqs'
 import { WhyAtemporal } from '../../../components/Events/WhyAtemporal'
-import HowItWorks from '../../../components/Events/HowItWorks'
+import { RegisterToEvent } from '../../../components/Events/RegisterToEvent'
 
 export const EventDetail = () => {
   const categorias = [1, 2, 3, 4]
@@ -73,7 +73,7 @@ export const EventDetail = () => {
             </div>
           </div>
         </section>
-        <HowItWorks event={event} />
+        <RegisterToEvent event={event} />
         <WhyAtemporal/>
         <Faqs/>
 
