@@ -19,15 +19,17 @@ const HowItWorks = ({ event }) => {
                   <h4 className="mb-4">Disponibilidad</h4>
                   <ul className="list-unstyled pb-3">
                     <li className="d-flex align-items-center mb-2">
-                      <i className="bx bx-infinite fs-xl text-muted me-2 pe-1" />
+                      <i className="bx bx-calendar-event fs-xl text-muted me-2 pe-1" />
                       {
-                        event.tipo_cobro === 1 && ('Evento de paga')
+                        event.tipo_cobro === 1 && ('Evento de pago')
                       }
                     </li>
                   </ul>
                   <p className='text-muted'>Desde</p>
                   <div className="h2 d-flex align-items-center mb-4">
-                    ${event.boletos[1].precio}
+                    {
+                      JSON.stringify(event.boletos)
+                    }
                     <del className="text-muted fs-xl fw-normal ms-2">99</del>
                   </div>
                   <a href="#" className="btn btn-primary btn-lg shadow-primary">Comprar boletos</a>

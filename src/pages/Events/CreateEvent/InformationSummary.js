@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { useStateMachine } from 'little-state-machine'
@@ -12,6 +13,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FormButtons } from '../../../components/Events/FormButtons'
 import { eventService } from '../../../services/event.service'
 import { useGeneralApp } from '../../../hooks/useGeneralApp'
+import { convertToBase64 } from '../../../utils'
 export const InformationSummary = () => {
   const { setErrorMessage, setIsLoading } = useGeneralApp()
   const navigate = useNavigate()
@@ -24,6 +26,10 @@ export const InformationSummary = () => {
   const onSubmit = async (data) => {
     try {
       setIsLoading(true)
+
+      const { itinerario_evento } = data
+
+      const baseFile64 = itinerario_evento && await convertToBase64(data.itinerario_evento[0])
 
       const eventData = {
         event: {
@@ -41,7 +47,7 @@ export const InformationSummary = () => {
           url_video: data.url_video,
           tipo_cobro: data.tipo_cobro,
           foto_evento: data.foto_evento,
-          itinerario_evento: data.itinerario_evento,
+          itinerario_evento: baseFile64,
           ciudad: data.ciudad,
           estado: {
             id: data.estado.value
