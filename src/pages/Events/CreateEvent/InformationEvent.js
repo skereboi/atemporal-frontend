@@ -12,9 +12,12 @@ import { categoryService } from '../../../services/category.service'
 import Select from 'react-select'
 import moment from 'moment'
 import { convertToBase64 } from '../../../utils'
+import { stateService } from '../../../services/state.services'
+import './style.scss'
 
 export const InformationEvent = () => {
   const [categories, setCategories] = useState([])
+  const [states, setStates] = useState([])
   const { actions, state: { createEvent } } = useStateMachine({ updateCreateEvent })
 
   const { register, handleSubmit, control, formState: { errors } } = useForm({
@@ -26,14 +29,20 @@ export const InformationEvent = () => {
   })
 
   useEffect(() => {
-    const getPaymentMethods = async () => {
+    const getInitialCatalogs = async () => {
       const categories = await categoryService.getAllCategories()
       setCategories(categories.map(c => ({
         label: c.nombre,
         value: c.id_categoria
       })))
+
+      const states = await stateService.getAllStates()
+      setStates(states.map(c => ({
+        label: c.nombre,
+        value: c.id_estado
+      })))
     }
-    getPaymentMethods()
+    getInitialCatalogs()
   }, [])
 
   const navigate = useNavigate()
@@ -125,10 +134,17 @@ export const InformationEvent = () => {
             {errors.ubicacion_maps && (<AlertErrorForm messageError={errors.ubicacion_maps.message} />)}
           </div>
           <div className="col-sm-12 col-md-6 mb-4">
-            <label htmlFor="direccion" className="form-label fs-base">Estado</label>
-            <input type="text"
-              id="direccion" className="form-control form-control-lg"
-              {...register('estado')}
+            <label htmlFor="estado" className="form-label fs-base">Selecciona el estado</label>
+            <Controller
+              name="estado"
+              control={control}
+              render={({ field }) =>
+                <Select
+                  {...field}
+                  className='state-input'
+                  placeholder="Selecciona estado"
+                  options={states}
+                />}
             />
             {errors.estado && (<AlertErrorForm messageError={errors.estado.message} />)}
           </div>

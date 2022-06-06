@@ -43,7 +43,9 @@ export const InformationSummary = () => {
           foto_evento: data.foto_evento,
           itinerario_evento: data.itinerario_evento,
           ciudad: data.ciudad,
-          estado: data.estado
+          estado: {
+            id: data.estado.value
+          }
         },
         ticket: [...data.boletos],
         categorias: [...data.categorias.map(c => ({ id: c.value }))]

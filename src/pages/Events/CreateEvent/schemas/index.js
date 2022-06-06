@@ -26,9 +26,9 @@ const schemaTemplateEvent = {
   ciudad:
     yup.string()
       .required('Campo obligatorio'),
-  estado:
-    yup.string()
-      .required('Campo obligatorio'),
+  estado: yup.object({
+    id: yup.string()
+  }).required('Campo obligatorio'), // estado:{id:1}
   fecha_evento:
     yup.string()
       .required('Campo obligatorio'),
