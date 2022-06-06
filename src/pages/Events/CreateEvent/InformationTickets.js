@@ -78,7 +78,7 @@ export const InformationTickets = () => {
                   control={control}
                   render={({ field }) =>
                     <Select
-                      {...field}
+                      {...field} register
                       placeholder="Métodos de pago"
                       components={animatedComponents}
                       isMulti
