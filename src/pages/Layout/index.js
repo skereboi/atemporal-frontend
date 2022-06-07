@@ -6,7 +6,7 @@ import { Navbar } from '../../components/Navbar'
 import { useGeneralApp } from '../../hooks/useGeneralApp'
 import { useScrollToTop } from '../../hooks/useScrollToTop'
 
-export const Layout = () => {
+export const Layout = ({ type = 'user' }) => {
   useScrollToTop()
   const { errorMessage } = useGeneralApp()
   return (
@@ -18,7 +18,9 @@ export const Layout = () => {
         }
         <Outlet />
       </div>
-      <Footer/>
+      {
+        type === 'user' && (<Footer />)
+      }
     </>
   )
 }

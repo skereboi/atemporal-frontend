@@ -106,9 +106,11 @@ const App = () => {
                 <Route path='publicaciones' element={<AccountPublications />} />
               </Route>
             </Route>
-            {/* Private routes admin */}
+          </Route>
+          {/* Private routes admin */}
+          <Route element={<Layout type='admin'/>}>
             <Route path='dashboard' element={<AuthGuard typeUser='admin' />}>
-              <Route element={<ContentLayoutPage/>}>
+              <Route element={<ContentLayoutPage />}>
                 <Route index element={<DashboardHomePage />} />
                 <Route path='aprobar'>
                   <Route index element={<AproveEvents />} />
