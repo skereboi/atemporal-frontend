@@ -72,7 +72,7 @@ const App = () => {
       <Routes>
         <Route path='/'>
           {/* Public routes */}
-          <Route element={<Layout />}>
+          <Route element={<Layout type='user' />}>
             <Route index element={<Home />} />
             <Route path='aviso-privacidad' element={<NoticePrivacyPage />} />
             <Route path='terminos-condiciones' element={<TermsConditionsPage />} />
