@@ -9,7 +9,7 @@ export const AccountEvents = () => {
       <div className="pb-5 mb-lg-2 mt-md-0">
         <div className="ps-md-3 ps-lg-0 mt-md-2 pt-md-4 pb-md-2">
           <div className="d-sm-flex align-items-center justify-content-between pt-xl-1 mb-3 pb-3">
-            <h1 className="h2 mb-sm-0">Mis eventos</h1>
+            <h1 className="h2 mb-sm-0">Mis reservaciones</h1>
             <select className="form-select" style={{ maxWidth: '15rem' }}>
               <option value="Published">Ordenar</option>
               <option value="Category">Más reciente</option>

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { AlertErrorForm } from '../../AlertErrorForm'
 import { ShareButton } from '../../ShareButton/Index'
 import Select from 'react-select'
@@ -29,8 +29,18 @@ export const RegisterToEvent = ({ event }) => {
                     </li>
                   </ul>
                   {
-                    event.tipo_cobro === 1 && (<p className='text-muted'>Desde</p>)
+                    event.tipo_cobro === 1 && (
+                      <>
+                        <p className='text-muted'>Desde</p>
+                        <del className="text-muted fs-xl fw-normal ms-2">
+                          Antes
+                          ${Math.min(...event.boletos.map(e => e.precio)) + 100} MXN
+                        </del>
+                      </>
+
+                    )
                   }
+
                   {
                     event.tipo_cobro === 1 && (
                       <div className="h2 d-flex align-items-center mb-4">
@@ -38,9 +48,8 @@ export const RegisterToEvent = ({ event }) => {
                         {
                           Math.min(...event.boletos.map(e => e.precio))
                         }
-                        <del className="text-muted fs-xl fw-normal ms-2">
-                          ${Math.min(...event.boletos.map(e => e.precio)) + 100}
-                        </del>
+                        MXN
+
                       </div>
                     )
                   }
@@ -149,6 +158,7 @@ export const RegisterToEvent = ({ event }) => {
 
 const ModalReserve = ({ event }) => {
   const { watch, register, handleSubmit, control, formState: { errors } } = useForm()
+  const navigate = useNavigate()
   const tipoBoleto = watch('boleto')
   const onSubmit = async (data) => {
     try {
@@ -157,25 +167,14 @@ const ModalReserve = ({ event }) => {
         cantidad: parseInt(data.cantidad),
         id_evento: event.id_evento
       }
-      const { msg } = await reservationService.createReservation(dataToRegister)
-      alert(msg)
-      console.log(msg)
+      await reservationService.createReservation(dataToRegister)
+      navigate(`/reserva/${event.id_evento}`)
       location.reload()
     } catch (error) {
       console.log(error)
     }
   }
-  const ticketsAvailable = (ticket) => {
-    if (ticket.cantidad <= 0) {
-      return false
-    } else {
-      console.log(ticket)
-      return {
-        label: `${ticket.nombre} - $ ${ticket.precio}`,
-        value: ticket.id_boleto
-      }
-    }
-  }
+
   return (
     <div className="modal fade" id="modalReserve" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">

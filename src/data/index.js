@@ -129,8 +129,8 @@ export const data = {
         },
         {
           id: 3,
-          title: 'Mis eventos',
-          pathname: 'eventos',
+          title: 'Mis reservaciones',
+          pathname: 'reservaciones',
           link: 'eventos',
           icon: 'bx bx-party'
         },

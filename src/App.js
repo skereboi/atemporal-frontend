@@ -47,6 +47,7 @@ import { ListPayments } from './pages/Dashboard/PaymentMethods/ListPayments'
 import { CreatePayments } from './pages/Dashboard/PaymentMethods/CreatePayment'
 import { EditPayment } from './pages/Dashboard/PaymentMethods/EditPayment'
 import { RevisionPage } from './pages/Events/RevisionPage'
+import { RegisteredAttendancePage } from './pages/Events/RegisteredAttendance'
 
 initAxiosInterceptors()
 createStore({
@@ -82,6 +83,7 @@ const App = () => {
             <Route path='eventos' element={<EventDiscoverPage />} />
             <Route path='eventos/:idEvento' element={<EventDetail />} />
             <Route path='eventos/revision' element={<RevisionPage />} />
+            <Route path='reserva/:idEvento' element={<RegisteredAttendancePage />} />
 
             <Route path='buttontest' element={<ButtonTest />} />
             {/* Private routes general user */}
@@ -100,7 +102,7 @@ const App = () => {
                 <Route index element={<AccountDetail/>}/>
                 <Route path='cambiar-password' element={<AccountPassword/>}/>
                 <Route path='metodos-pago' element={<AccountPayment/>}/>
-                <Route path='eventos' element={<AccountEvents />} />
+                <Route path='reservaciones' element={<AccountEvents />} />
                 <Route path='publicaciones' element={<AccountPublications />} />
               </Route>
             </Route>
