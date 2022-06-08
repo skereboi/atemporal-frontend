@@ -7,7 +7,7 @@ import Select from 'react-select'
 import { useGeneralApp } from '../../../hooks/useGeneralApp'
 
 export const ModalReservation = ({ event }) => {
-  const { isLoading, setIsLoading } = useGeneralApp()
+  const { setErrorMessage, isLoading, setIsLoading } = useGeneralApp()
   const { watch, register, handleSubmit, control, formState: { errors } } = useForm()
   const navigate = useNavigate()
   const tipoBoleto = watch('boleto')
@@ -27,6 +27,7 @@ export const ModalReservation = ({ event }) => {
     } catch (error) {
       setIsLoading(false)
       console.log(error)
+      setErrorMessage(error.response.data.msg)
     }
   }
 
@@ -47,6 +48,7 @@ export const ModalReservation = ({ event }) => {
     } catch (error) {
       setIsLoading(false)
       console.log(error)
+      setErrorMessage(error.response.data.msg)
     }
   }
 
