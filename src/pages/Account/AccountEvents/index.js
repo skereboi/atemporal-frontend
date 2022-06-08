@@ -7,7 +7,7 @@ export const AccountEvents = () => {
   useEffect(() => {
     const getAllReservations = async () => {
       try {
-        const { reservaciones } = await reservationService.getAllReservationsById()
+        const reservaciones = await reservationService.getAllReservationsById()
         setReservations(reservaciones)
       } catch (error) {
         console.log(error)
