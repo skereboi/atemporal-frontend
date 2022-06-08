@@ -19,7 +19,8 @@ export const ModalReservation = ({ event }) => {
         cantidad: parseInt(data.cantidad),
         id_evento: event.id_evento
       }
-      await reservationService.createReservation(dataToRegister)
+      // await reservationService.createReservation(dataToRegister)
+      console.log(`/reserva/${event.id_evento}`)
       navigate(`/reserva/${event.id_evento}`)
       setIsLoading(false)
       // location.reload()
