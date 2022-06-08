@@ -1,10 +1,11 @@
+/* eslint-disable camelcase */
 import React from 'react'
 
-export const EventDetailCard = ({ type }) => {
+export const EventDetailCard = ({ type, codigo_qr, nombre, descripcion }) => {
   return (
     <div className="card border-0 shadow-sm overflow-hidden mb-4">
       <div className="row g-0">
-        <img src="https://definicion.de/wp-content/uploads/2009/09/concierto.jpg"
+        <img src={type === 'reservacion' ? `${codigo_qr}` : '' }
           className="col-sm-4 bg-repeat-0 bg-position-center bg-size-cover"
           alt='evento'
         />

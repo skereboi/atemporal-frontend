@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { EventDetailCard } from '../../../components/Dashboard/EventDetailCard'
+import { reservationService } from '../../../services/reservation.service'
 
 export const AccountEvents = () => {
-  const arr = [1, 2, 3]
+  const [reservations, setReservations] = useState([])
+  useEffect(() => {
+    const getAllReservations = async () => {
+      try {
+        const { reservaciones } = await reservationService.getAllReservationsById()
+        setReservations(reservaciones)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    getAllReservations()
+  }, [])
   return (
     <>
       {/* Account collections */}
@@ -17,7 +30,12 @@ export const AccountEvents = () => {
             </select>
           </div>
           {
-            arr.map(e => (<EventDetailCard type="event" key={e} />))
+            reservations.map(reservation => (
+              <EventDetailCard
+                type="reservacion"
+                key={reservation.id}
+                {...reservation} />)
+            )
           }
         </div>
       </div>
