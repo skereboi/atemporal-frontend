@@ -37,6 +37,7 @@ export const ModalReservation = ({ event }) => {
         cantidad: null,
         id_evento: event.id_evento
       }
+      console.log(dataToRegister)
       await reservationService.createReservation(dataToRegister)
       navigate(`/reserva/${event.id_evento}`)
       setIsLoading(false)

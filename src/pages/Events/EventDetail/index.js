@@ -7,7 +7,6 @@ import { WhyAtemporal } from '../../../components/Events/WhyAtemporal'
 import { RegisterToEvent } from '../../../components/Events/RegisterToEvent'
 
 export const EventDetail = () => {
-  const categorias = [1, 2, 3, 4]
   const { idEvento } = useParams()
   const [event, setEvent] = useState({})
   useEffect(() => {
@@ -38,7 +37,12 @@ export const EventDetail = () => {
             {/* Badges */}
             <div className="d-flex pt-3 pb-4 py-sm-4 pt-lg-5">
               {
-                categorias.map(c => (<span key={c} className="badge bg-success fs-sm me-2">Categoria {c}</span>))
+                event.categorias?.map(c => (
+                  <span key={c}
+                    className="badge bg-success fs-sm me-2">
+                    {c.nombre}
+                  </span>)
+                )
               }
             </div>
             {/* Title */}

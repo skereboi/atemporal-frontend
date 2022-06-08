@@ -1,6 +1,7 @@
 .style-error {
   position: absolute !important;
   left: 30% !important;
-  top: 30% !important;
+  bottom: 0 !important;
+  height: 120px;
   z-index: 1000 !important;
 }

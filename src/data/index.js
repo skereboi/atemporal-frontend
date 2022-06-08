@@ -2,7 +2,7 @@
 export const data = {
   homePage: {
     home: {
-      title: '¡Bievenido!',
+      title: '¡Bienvenido!',
       action: 'Sé parte de',
       cta: ' la comunidad más grande',
       message: ' en eventos de Querétaro',

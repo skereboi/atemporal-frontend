@@ -4,6 +4,7 @@ import { TypeUser } from '../../components/Auth/TypeUser'
 import { data } from '../../data'
 
 export const Home = () => {
+  console.log(process.env.REACT_APP_URL)
   return (
     <>
       <TypeUser/>
@@ -22,9 +23,6 @@ export const Home = () => {
                 </span>
                 {data.homePage.home.message}
               </h1>
-              {
-                JSON.stringify(process.env.REACT_APP_URL)
-              }
             </div>
             <div className="col-lg-7">
               <div id="carouselHome" className="carousel slide" data-bs-ride="carousel">

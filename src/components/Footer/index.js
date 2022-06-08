@@ -18,7 +18,7 @@ export const Footer = () => {
             <div id="footer-links" className="row">
               <div className="col-lg-4">
                 <h6 className="mb-2">
-                  <a href="#useful-links" className="d-block text-dark dropdown-toggle d-lg-none py-2" data-bs-toggle="collapse">Useful Links</a>
+                  <a href="#useful-links" className="d-block text-dark dropdown-toggle d-lg-none py-2" data-bs-toggle="collapse">Legal</a>
                 </h6>
                 <div id="useful-links" className="collapse d-lg-block" data-bs-parent="#footer-links">
                   <ul className="nav flex-column mb-2 mb-lg-0">
