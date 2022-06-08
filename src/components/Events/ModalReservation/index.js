@@ -109,7 +109,7 @@ export const ModalReservation = ({ event }) => {
                   <>
                     <p>Da clic en registrar para asistir al evento</p>
                     <div className="modal- d-flex justify-content-between p-4">
-                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button type="button" id='cerrar' className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                       <button type="button" disabled={isLoading} onClick={handlerReserservation} className="btn btn-primary">Registrarse</button>
                     </div>
                   </>
