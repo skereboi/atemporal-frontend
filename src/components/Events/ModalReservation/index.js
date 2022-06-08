@@ -19,11 +19,11 @@ export const ModalReservation = ({ event }) => {
         cantidad: parseInt(data.cantidad),
         id_evento: event.id_evento
       }
-      // await reservationService.createReservation(dataToRegister)
-      console.log(`/reserva/${event.id_evento}`)
+      console.log(dataToRegister)
+      await reservationService.createReservation(dataToRegister)
+      document.getElementById('cerrar').click()
       navigate(`/reserva/${event.id_evento}`)
       setIsLoading(false)
-      // location.reload()
     } catch (error) {
       setIsLoading(false)
       console.log(error)
@@ -40,9 +40,10 @@ export const ModalReservation = ({ event }) => {
       }
       console.log(dataToRegister)
       await reservationService.createReservation(dataToRegister)
+      console.log(`/reserva/${event.id_evento}`)
+      document.getElementById('cerrar').click()
       navigate(`/reserva/${event.id_evento}`)
       setIsLoading(false)
-      location.reload()
     } catch (error) {
       setIsLoading(false)
       console.log(error)
@@ -99,7 +100,7 @@ export const ModalReservation = ({ event }) => {
 
                     </div>
                     <div className="modal- d-flex justify-content-between p-4">
-                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button type="button" id='cerrar' className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                       <button disabled={isLoading} type="submit" className="btn btn-primary">Pagar</button>
                     </div>
                   </form>
