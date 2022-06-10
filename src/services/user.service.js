@@ -23,5 +23,9 @@ export const userService = {
   deleteOneUser: async (id) => {
     const { data } = await Axios.delete(`${globalConfig.url}/api/usuarios/${id}`)
     return data
+  },
+  getAllPublicationsAproved: async () => {
+    const { data } = await Axios.get(`${globalConfig.url}/api/usuarios/publicaciones/aprobadas`)
+    return data
   }
 }

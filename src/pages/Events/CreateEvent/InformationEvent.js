@@ -10,7 +10,6 @@ import { AlertErrorForm } from '../../../components/AlertErrorForm'
 import { FormButtons } from '../../../components/Events/FormButtons'
 import { categoryService } from '../../../services/category.service'
 import Select from 'react-select'
-import moment from 'moment'
 import { convertToBase64 } from '../../../utils'
 import { stateService } from '../../../services/state.services'
 import './style.scss'
@@ -22,10 +21,7 @@ export const InformationEvent = () => {
 
   const { register, handleSubmit, control, formState: { errors } } = useForm({
     resolver: yupResolver(SchemaEvent),
-    defaultValues: {
-      ...createEvent,
-      fecha_evento: createEvent.fecha_evento && (moment(createEvent.fecha_evento).format('MMMM Do YYYY, h:mm:ss a'))
-    }
+    defaultValues: createEvent
   })
 
   useEffect(() => {
@@ -48,12 +44,11 @@ export const InformationEvent = () => {
   const navigate = useNavigate()
 
   const onSubmit = async (data) => {
-    const { fecha_evento, itinerario_evento } = data
+    const { itinerario_evento } = data
     const baseImage64 = await convertToBase64(data.foto_evento[0])
     let formatInfo = {
       ...data,
-      foto_evento: baseImage64,
-      fecha_evento: fecha_evento && (moment(fecha_evento).format())
+      foto_evento: baseImage64
     }
 
     if (itinerario_evento[0]) {

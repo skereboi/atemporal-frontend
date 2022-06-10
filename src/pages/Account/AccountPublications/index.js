@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { EventDetailCard } from '../../../components/Dashboard/EventDetailCard'
+import { userService } from '../../../services/user.service'
 
 export const AccountPublications = () => {
-  const arr = [1, 2, 3, 4, 5]
+  const [publications, setPublications] = useState([])
+  useEffect(() => {
+    const getAllReservations = async () => {
+      try {
+        const reservaciones = await userService.getAllPublicationsAproved()
+        setPublications(reservaciones)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    getAllReservations()
+  }, [])
   return (
     <>
       {/* Account collections */}
@@ -17,7 +30,7 @@ export const AccountPublications = () => {
             </select>
           </div>
           {
-            arr.map(e => (<EventDetailCard type="publication" key={e}/>))
+            publications.map(pub => (<EventDetailCard type="publicacion" key={pub.evento.id_evento}/>))
           }
 
         </div>

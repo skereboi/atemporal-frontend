@@ -30,7 +30,7 @@ const schemaTemplateEvent = {
     id: yup.string()
   }).required('Campo obligatorio'), // estado:{id:1}
   fecha_evento:
-    yup.string()
+    yup.date()
       .required('Campo obligatorio'),
   hora_inicio:
     yup.string()
@@ -57,9 +57,8 @@ const schemaTemplateEvent = {
     yup.string(),
   itinerario_evento:
     yup.mixed()
-      .test('fileSize', 'El archivo es pesado. Máximo 2M', (value) => {
-        if (!value.length) return true
-        return value[0].size <= 2000000
+      .test('required', 'Por favor sube el itinerario del evento', (value) => {
+        return value && value.length
       }),
   categorias:
     yup.array()

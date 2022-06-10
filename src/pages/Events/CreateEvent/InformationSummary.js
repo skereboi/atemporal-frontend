@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import React from 'react'
 import { useStateMachine } from 'little-state-machine'
 import { clearAction } from './actions'
 import { initialStates } from '../../../hooks/useLittleMachine'
@@ -13,7 +13,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FormButtons } from '../../../components/Events/FormButtons'
 import { eventService } from '../../../services/event.service'
 import { useGeneralApp } from '../../../hooks/useGeneralApp'
-import { convertToBase64 } from '../../../utils'
+import moment from 'moment'
 export const InformationSummary = () => {
   const { setErrorMessage, setIsLoading } = useGeneralApp()
   const navigate = useNavigate()
@@ -33,7 +33,7 @@ export const InformationSummary = () => {
           celular_principal: data.celular_principal,
           celular_secundario: data.celular_secundario,
           nombre_evento: data.nombre_evento,
-          fecha_evento: data.fecha_evento,
+          fecha_evento: moment(data.fecha_evento).format(),
           hora_inicio: data.hora_inicio,
           hora_final: data.hora_final,
           lugar: data.lugar,

@@ -16,7 +16,14 @@ export const EventDetailCard = ({ type, codigo_qr, evento = {} }) => {
             <h2 className="h4 pb-1 mb-2">
               {evento.nombre_evento}
             </h2>
-            <a href={evento.itinerario_evento} className="btn btn-secondary my-4">Consultar itinerario</a>
+            {
+              type === 'reservacion' &&
+              (
+                <a href={evento.itinerario_evento} className="btn btn-secondary my-4">
+                  Consultar itinerario
+                </a>
+              )
+            }
             <div className="d-flex">
               <Link to={`/eventos/${evento.id_evento}`} className="btn btn-outline-primary px-3 px-lg-4 me-3">
                 <i className={`bx ${type === 'publication' ? 'bx-edit' : 'bx-detail'} fs-xl me-xl-2`} />

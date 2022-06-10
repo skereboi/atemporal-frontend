@@ -33,7 +33,7 @@ export const AccountEvents = () => {
             reservations.map(reservation => (
               <EventDetailCard
                 type="reservacion"
-                key={reservation.id}
+                key={reservation.id_evento}
                 {...reservation} />)
             )
           }
