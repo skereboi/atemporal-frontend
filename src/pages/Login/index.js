@@ -26,7 +26,7 @@ export const LoginPage = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schemaLogin),
-    defaultValues: adminState
+    defaultValues: {}
   })
 
   const onSubmit = async (data) => {

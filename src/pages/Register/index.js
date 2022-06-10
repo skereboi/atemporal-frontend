@@ -23,7 +23,7 @@ export const RegisterPage = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schemaRegister),
-    defaultValues: initialState
+    defaultValues: {}
   })
 
   const onSubmit = async (data) => {
