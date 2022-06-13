@@ -22,7 +22,7 @@ export const RecoverPasswordPage = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(recoverPasswordSchema),
-    defaultValues: generalState
+    defaultValues: {}
   })
 
   const onSubmit = async (data) => {
@@ -70,7 +70,13 @@ export const RecoverPasswordPage = () => {
                         <div className="position-relative mb-4">
                           <label htmlFor="email" className="form-label fs-base">Ingresa el correo electrónico</label>
                           <p>Si existe tu cuenta te llegará un correo con un enlace de recuperación.</p>
-                          <input type="email" id="email" className="form-control form-control-lg" {...register('email')} autoComplete="off" />
+                          <input
+                            type="email"
+                            id="email"
+                            placeholder='Ingresa tu email'
+                            className="form-control form-control-lg"
+                            {...register('email')} autoComplete="off"
+                          />
                           <div>
                             {errors.email?.message}
                           </div>

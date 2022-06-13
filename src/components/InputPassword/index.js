@@ -19,6 +19,7 @@ export const InputPassword = ({
             type={show ? 'password' : 'text'}
             {...register(type)}
             autoComplete="off"
+            placeholder='Ingresa tu contraseña'
           />
           <label className="password-toggle-btn" onClick={() => setShow(!show)}>
             {show

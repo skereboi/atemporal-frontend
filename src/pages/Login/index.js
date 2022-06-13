@@ -86,6 +86,7 @@ export const LoginPage = () => {
                     className="form-control form-control-lg"
                     {...register('email')}
                     autoComplete="off"
+                    placeholder='Ingresa tu email'
                   />
                   <AlertErrorForm messageError={errors.email?.message} />
                 </div>

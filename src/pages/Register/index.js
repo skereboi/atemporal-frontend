@@ -63,7 +63,12 @@ export const RegisterPage = () => {
                 <div className="position-relative mb-4">
                   <label htmlFor="name" className="form-label fs-base">
                     Nombre completo</label>
-                  <input type="text" id="name" className="form-control form-control-lg" {...register('nombre')} autoComplete="off"/>
+                  <input
+                    type="text"
+                    id="name"
+                    placeholder='Ingresa tu nombre completo'
+                    className="form-control form-control-lg"
+                    {...register('nombre')} autoComplete="off" />
                   <div>
                     {errors.nombre?.message}
                   </div>
@@ -72,16 +77,25 @@ export const RegisterPage = () => {
               <div className="col-sm-6">
                 <div className="position-relative mb-4">
                   <label htmlFor="email" className="form-label fs-base">Correo electrónico</label>
-                  <input type="email" id="email" className="form-control form-control-lg" {...register('email')} autoComplete="off"/>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder='Ingresa tu email'
+                    className="form-control form-control-lg" {...register('email')} autoComplete="off" />
                   <div>
                     {errors.email?.message}
                   </div>
                 </div>
               </div>
               <div className="col-12 mb-4">
-                <label htmlFor="celular" className="form-label fs-base">Celular</label>
+                <label htmlFor="celular"
+                  className="form-label fs-base">Celular</label>
                 <div className="celular-toggle">
-                  <input type="celular" id="celular" className="form-control form-control-lg" {...register('celular')} autoComplete="off" />
+                  <input
+                    type="celular"
+                    id="celular"
+                    placeholder='Ingresa tu celular'
+                    className="form-control form-control-lg" {...register('celular')} autoComplete="off" />
                   <div>
                     {errors.celular?.message}
                   </div>
